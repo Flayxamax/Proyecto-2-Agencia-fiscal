@@ -38,7 +38,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        calendarPanel1 = new com.github.lgooddatepicker.components.CalendarPanel();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,7 +127,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 150, 27));
-        getContentPane().add(calendarPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setText("Siguiente");
@@ -211,7 +209,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.github.lgooddatepicker.components.CalendarPanel calendarPanel1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
