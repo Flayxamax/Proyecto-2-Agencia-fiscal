@@ -30,34 +30,34 @@ public class ReporteTramite extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        tablaTramite = new javax.swing.JTable();
+        datePickerDesde = new com.github.lgooddatepicker.components.DatePicker();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
+        datePickerHasta = new com.github.lgooddatepicker.components.DatePicker();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboTramite = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        textoNombre = new javax.swing.JTextField();
+        botonRegresar = new javax.swing.JButton();
+        botonReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Reporte de trámites realizados");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 66, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel2.setText("Módulo de reportes");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 12, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Tramite");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTramite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -73,10 +73,10 @@ public class ReporteTramite extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaTramite);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, 39));
-        getContentPane().add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 158, -1, -1));
+        getContentPane().add(datePickerDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 158, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Nombre");
@@ -85,39 +85,40 @@ public class ReporteTramite extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Desde");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 126, -1, -1));
-        getContentPane().add(datePicker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 158, -1, -1));
+        getContentPane().add(datePickerHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Hasta");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 126, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licencia" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 156, 96, -1));
+        comboTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licencia" }));
+        comboTramite.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(comboTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 110, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Tipo tramite");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 118, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 150, 27));
+        getContentPane().add(textoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 150, 27));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Regresar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, -1, -1));
+        botonRegresar.setText("Regresar");
+        botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Generar reporte");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonReporte.setText("Generar reporte");
+        botonReporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, -1, -1));
+        getContentPane().add(botonReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,11 +157,11 @@ public class ReporteTramite extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.github.lgooddatepicker.components.DatePicker datePicker1;
-    private com.github.lgooddatepicker.components.DatePicker datePicker2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton botonRegresar;
+    private javax.swing.JButton botonReporte;
+    private javax.swing.JComboBox<String> comboTramite;
+    private com.github.lgooddatepicker.components.DatePicker datePickerDesde;
+    private com.github.lgooddatepicker.components.DatePicker datePickerHasta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -169,7 +170,7 @@ public class ReporteTramite extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaTramite;
+    private javax.swing.JTextField textoNombre;
     // End of variables declaration//GEN-END:variables
 }

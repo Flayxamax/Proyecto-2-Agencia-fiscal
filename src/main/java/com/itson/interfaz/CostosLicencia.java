@@ -26,55 +26,76 @@ public class CostosLicencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        labelModuloLicencias = new javax.swing.JLabel();
+        comboVigencia = new javax.swing.JComboBox<>();
+        labelVigencia = new javax.swing.JLabel();
+        comboDiscapacitado = new javax.swing.JComboBox<>();
+        labelDiscapacitado = new javax.swing.JLabel();
+        comboRegresar = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
+        tablaCostosLicencia = new javax.swing.JScrollPane();
+        tablaPrecioLicencia = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Módulo de Licencias");
+        labelModuloLicencias.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        labelModuloLicencias.setText("Módulo de Licencias");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Año", "2 Años", "3 Años", " " }));
+        comboVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Año", "2 Años", "3 Años", " " }));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Vigencia");
+        labelVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelVigencia.setText("Vigencia");
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        comboDiscapacitado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboDiscapacitado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        comboDiscapacitado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                comboDiscapacitadoActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("¿Es discapacitado?");
+        labelDiscapacitado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelDiscapacitado.setText("¿Es discapacitado?");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/itson/dominio/imagenes/Screenshot 2023-03-25 203749.png"))); // NOI18N
-        jLabel4.setText("jLabel4");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        comboRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboRegresar.setText("Regresar");
+        comboRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                comboRegresarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Aceptar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonAceptar.setText("Aceptar");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonAceptarActionPerformed(evt);
             }
         });
+
+        tablaCostosLicencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        tablaPrecioLicencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablaPrecioLicencia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"1 Año",  new Double(600.0),  new Double(200.0)},
+                {"2 Años",  new Double(900.0),  new Double(500.0)},
+                {"3 Años",  new Double(1100.0),  new Double(700.0)}
+            },
+            new String [] {
+                "Vigencia", "Costo normal", "Costo discapacitado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tablaCostosLicencia.setViewportView(tablaPrecioLicencia);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,68 +105,66 @@ public class CostosLicencia extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addComponent(jLabel2)
+                        .addComponent(labelVigencia)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comboVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(133, 133, 133))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(238, 238, 238)
-                        .addComponent(jButton1)
+                        .addComponent(comboRegresar)
                         .addGap(26, 26, 26)
-                        .addComponent(jButton2))
+                        .addComponent(botonAceptar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(labelModuloLicencias))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDiscapacitado)
+                            .addComponent(tablaCostosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(labelModuloLicencias)
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(comboVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVigencia))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                    .addComponent(labelDiscapacitado)
+                    .addComponent(comboDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addComponent(tablaCostosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(comboRegresar)
+                    .addComponent(botonAceptar))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void comboDiscapacitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDiscapacitadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_comboDiscapacitadoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void comboRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_comboRegresarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,13 +203,15 @@ public class CostosLicencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JComboBox<String> comboDiscapacitado;
+    private javax.swing.JButton comboRegresar;
+    private javax.swing.JComboBox<String> comboVigencia;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelDiscapacitado;
+    private javax.swing.JLabel labelModuloLicencias;
+    private javax.swing.JLabel labelVigencia;
+    private javax.swing.JScrollPane tablaCostosLicencia;
+    private javax.swing.JTable tablaPrecioLicencia;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,50 +26,41 @@ public class ConsultaPersona extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        labelBuscarParametros = new javax.swing.JLabel();
+        labelModuloConsulta = new javax.swing.JLabel();
+        botonRegresar = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        tablaMostrarPersonas = new javax.swing.JTable();
+        botonBuscar = new javax.swing.JButton();
+        campoTextoNombre = new javax.swing.JTextField();
+        campoTextoRFC = new javax.swing.JTextField();
+        botonSiguiente = new javax.swing.JButton();
+        datePícker = new com.github.lgooddatepicker.components.DatePicker();
+        labelRFC = new javax.swing.JLabel();
+        labelNombreCompleto = new javax.swing.JLabel();
+        labelFecha = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Buscar parametros:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 129, -1, -1));
+        labelBuscarParametros.setText("Buscar parametros:");
+        labelBuscarParametros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        getContentPane().add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 129, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Módulo de consultas");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(194, 12, -1, -1));
+        labelModuloConsulta.setText("Modulo de consulta a personas");
+        labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        getContentPane().add(labelModuloConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        botonRegresar.setText("Regresar");
+        botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                botonRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 150, 27));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Personas");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 78, -1, -1));
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Regresar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
 
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +69,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
         });
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMostrarPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -94,83 +85,82 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaMostrarPersonas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 676, 50));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 740, 50));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonBuscar.setText("Buscar");
+        botonBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 140, -1, -1));
+        getContentPane().add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        campoTextoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                campoTextoNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 27));
+        getContentPane().add(campoTextoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 380, 27));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        campoTextoRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                campoTextoRFCActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 150, 27));
+        getContentPane().add(campoTextoRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, 27));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        botonSiguiente.setText("Siguiente");
+        botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                botonSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 150, 27));
+        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, -1, -1));
+        getContentPane().add(datePícker, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 180, 30));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Siguiente");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, -1, -1));
+        labelRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelRFC.setText("RFC");
+        getContentPane().add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+
+        labelNombreCompleto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelNombreCompleto.setText("Nombre completo");
+        getContentPane().add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+
+        labelFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelFecha.setText("Fecha");
+        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 700, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonBuscarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void campoTextoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_campoTextoNombreActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void campoTextoRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoRFCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_campoTextoRFCActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botonSiguienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,18 +199,20 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonRegresar;
+    private javax.swing.JButton botonSiguiente;
+    private javax.swing.JTextField campoTextoNombre;
+    private javax.swing.JTextField campoTextoRFC;
+    private com.github.lgooddatepicker.components.DatePicker datePícker;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel labelBuscarParametros;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelModuloConsulta;
+    private javax.swing.JLabel labelNombreCompleto;
+    private javax.swing.JLabel labelRFC;
+    private javax.swing.JTable tablaMostrarPersonas;
     // End of variables declaration//GEN-END:variables
 }

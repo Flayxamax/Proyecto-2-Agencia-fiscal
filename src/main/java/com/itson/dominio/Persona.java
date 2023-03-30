@@ -22,12 +22,10 @@ public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Integer id;
+    @Column(name ="rfc")
+    private Integer rfc;
     
-    @Basic 
-    @Column(name = "RFC")
-    private String rfc;
+   
     
     @Basic
     @Column (name = "Nombre")
@@ -48,19 +46,12 @@ public class Persona implements Serializable {
     @Column (name = "Fecha_Nacimiento")
     @Temporal(TemporalType.DATE)
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getRfc() {
+    public Integer getRfc() {
         return rfc;
     }
 
-    public void setRfc(String rfc) {
+    public void setRfc(Integer rfc) {
         this.rfc = rfc;
     }
 
@@ -100,7 +91,7 @@ public class Persona implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (rfc != null ? rfc.hashCode() : 0);
         return hash;
     }
 
@@ -111,7 +102,7 @@ public class Persona implements Serializable {
             return false;
         }
         Persona other = (Persona) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.rfc == null && other.rfc != null) || (this.rfc != null && !this.rfc.equals(other.rfc))) {
             return false;
         }
         return true;
@@ -119,7 +110,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", rfc=" + rfc + ", nombre=" + nombre + ", apellido_paterno=" + apellido_paterno + ", apellido_materno=" + apellido_materno + ", telefono=" + telefono + '}';
+        return "Persona{" + "id=" + rfc + ", rfc=" + rfc + ", nombre=" + nombre + ", apellido_paterno=" + apellido_paterno + ", apellido_materno=" + apellido_materno + ", telefono=" + telefono + '}';
     }
 
 }

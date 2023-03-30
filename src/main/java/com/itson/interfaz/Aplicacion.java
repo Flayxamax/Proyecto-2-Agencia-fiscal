@@ -26,13 +26,13 @@ public class Aplicacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        labelOperacion = new javax.swing.JLabel();
+        botonPlacas = new javax.swing.JButton();
+        botonLicencias = new javax.swing.JButton();
+        labelAgencia = new javax.swing.JLabel();
+        botonReportes = new javax.swing.JButton();
+        botonConsultas = new javax.swing.JButton();
+        botonPersonas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -41,49 +41,49 @@ public class Aplicacion extends javax.swing.JFrame {
         setFocusTraversalPolicyProvider(true);
         setUndecorated(true);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Selecccione la operación a realizar");
+        labelOperacion.setText("Selecccione la operación a realizar");
+        labelOperacion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Módulo de placas");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonPlacas.setText("Módulo de placas");
+        botonPlacas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonPlacasActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Módulo de licencias");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonLicencias.setText("Módulo de licencias");
+        botonLicencias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonLicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonLicenciasActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setText("Agencía Fiscal");
+        labelAgencia.setText("Agencía Fiscal");
+        labelAgencia.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Módulo de reportes");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonReportes.setText("Módulo de reportes");
+        botonReportes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonReportesActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton4.setText("Módulo de consultas");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonConsultas.setText("Módulo de consultas");
+        botonConsultas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonConsultasActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton5.setText("Inserción de personas");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonPersonas.setText("Inserción de personas");
+        botonPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonPersonasActionPerformed(evt);
             }
         });
 
@@ -96,63 +96,63 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
+                            .addComponent(labelAgencia)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(botonReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonPlacas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonConsultas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(439, 439, 439)
-                                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(botonPersonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(73, 73, 73))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelOperacion)
+                            .addComponent(botonLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel3)
-                .addGap(43, 43, 43)
-                .addComponent(jLabel2)
+                .addGap(28, 28, 28)
+                .addComponent(labelAgencia)
+                .addGap(40, 40, 40)
+                .addComponent(labelOperacion)
                 .addGap(29, 29, 29)
-                .addComponent(jButton2)
+                .addComponent(botonLicencias)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5))
+                    .addComponent(botonPlacas)
+                    .addComponent(botonPersonas))
                 .addGap(21, 21, 21)
-                .addComponent(jButton4)
+                .addComponent(botonConsultas)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(botonReportes)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLicenciasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonLicenciasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPlacasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonPlacasActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonReportesActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void botonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botonConsultasActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_botonPersonasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,13 +190,13 @@ public class Aplicacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton botonConsultas;
+    private javax.swing.JButton botonLicencias;
+    private javax.swing.JButton botonPersonas;
+    private javax.swing.JButton botonPlacas;
+    private javax.swing.JButton botonReportes;
+    private javax.swing.JLabel labelAgencia;
+    private javax.swing.JLabel labelOperacion;
     // End of variables declaration//GEN-END:variables
 
 }
