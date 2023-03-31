@@ -29,7 +29,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         labelBuscarParametros = new javax.swing.JLabel();
         labelModuloConsulta = new javax.swing.JLabel();
         botonRegresar = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMostrarPersonas = new javax.swing.JTable();
         botonBuscar = new javax.swing.JButton();
@@ -61,13 +60,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
-
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
 
         tablaMostrarPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,10 +134,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonRegresarActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonBuscarActionPerformed
@@ -205,7 +193,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private javax.swing.JTextField campoTextoNombre;
     private javax.swing.JTextField campoTextoRFC;
     private com.github.lgooddatepicker.components.DatePicker datePícker;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBuscarParametros;

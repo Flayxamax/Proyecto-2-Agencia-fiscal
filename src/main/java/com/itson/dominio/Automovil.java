@@ -1,54 +1,50 @@
 package com.itson.dominio;
-import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  *
  * @author aracelyC
  */
 @Entity
-public class Automovil implements Serializable {
+@PrimaryKeyJoinColumn(name = "id_vehiculo_automovil")
+@Table(name = "vehiculo_automovil")
+public class Automovil extends Vehiculo {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_automovil", nullable = false)
     private Long id;
-    
-    
+
+    @OneToMany(mappedBy = "automovil")
+    private Placa placa;
+
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public Placa getPlaca() {
+        return placa;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Automovil)) {
-            return false;
-        }
-        Automovil other = (Automovil) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.itson.dominio.Automovil[ id=" + id + " ]";
+    public void setPlaca(Placa placa) {
+        this.placa = placa;
     }
     
+    
+
 }

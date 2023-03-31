@@ -1,12 +1,18 @@
-
 package com.itson.dominio;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,41 +20,40 @@ import javax.persistence.Table;
  * @author aracelyC
  */
 @Entity
-@Table(name = "Vehiculo")
-public class Vehiculo implements Serializable {
+@Table(name = "vehiculo")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Vehiculo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
-    
-    @Basic
-    @Column (name = "Modelo")
-    private String modelo;
-    
-    @Basic
-    @Column (name = "Serie")
-    private String serie;
-    
-    @Basic
-    @Column (name = "Color")
-    private String color;
-    
-    @Basic 
-    @Column (name = "Linea")
-    private String linea;
-    
-    @Basic 
-    @Column (name = "Marca")
-    private String marca;
-    
+    @Column(name = "id_vehiculo", nullable = false)
+    private Long id;
 
-    public Integer getId() {
+    @Column(name = "Modelo", nullable = false, length = 10)
+    private String modelo;
+
+    @Column(name = "Serie", nullable = false, length = 100)
+    private String serie;
+
+    @Column(name = "Color", nullable = false, length = 100)
+    private String color;
+
+    @Column(name = "Linea", nullable = false, length = 100)
+    private String linea;
+
+    @Column(name = "Marca", nullable = false, length = 100)
+    private String marca;
+
+    @ManyToOne
+    @JoinColumn(name = "id_persona", nullable = false)
+    private Persona persona;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,25 +96,13 @@ public class Vehiculo implements Serializable {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+
+    public Persona getPersona() {
+        return persona;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vehiculo)) {
-            return false;
-        }
-        Vehiculo other = (Vehiculo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     @Override
@@ -117,6 +110,4 @@ public class Vehiculo implements Serializable {
         return "Vehiculo{" + "id=" + id + ", modelo=" + modelo + ", serie=" + serie + ", color=" + color + ", linea=" + linea + ", marca=" + marca + '}';
     }
 
-    
-    
 }
