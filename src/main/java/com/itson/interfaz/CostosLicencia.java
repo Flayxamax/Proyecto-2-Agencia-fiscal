@@ -143,8 +143,8 @@ public class CostosLicencia extends javax.swing.JFrame {
                     .addComponent(labelDiscapacitado)
                     .addComponent(comboDiscapacitado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addComponent(tablaCostosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addComponent(tablaCostosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboRegresar)
                     .addComponent(botonAceptar))
@@ -207,7 +207,6 @@ public class CostosLicencia extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboDiscapacitado;
     private javax.swing.JButton comboRegresar;
     private javax.swing.JComboBox<String> comboVigencia;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelDiscapacitado;
     private javax.swing.JLabel labelModuloLicencias;
     private javax.swing.JLabel labelVigencia;

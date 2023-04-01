@@ -44,6 +44,11 @@ public class Automovil extends Vehiculo {
     public void setPlaca(Placa placa) {
         this.placa = placa;
     }
+
+    @Override
+    public String toString() {
+        return "Automovil{" + "id=" + id + ", placa=" + placa + '}';
+    }
     
     
 

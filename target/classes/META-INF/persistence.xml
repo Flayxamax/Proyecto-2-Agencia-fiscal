@@ -8,6 +8,8 @@
     <class>com.itson.dominio.Tramite</class>
     <class>com.itson.dominio.Placa</class>
     <class>com.itson.dominio.Licencia</class>
+    <class>com.itson.dominio1.NewEntity</class>
+    <class>com.itson.dominio1.Persona</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agencia?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
