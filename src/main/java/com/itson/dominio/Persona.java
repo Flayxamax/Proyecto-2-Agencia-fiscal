@@ -2,7 +2,7 @@ package com.itson.dominio;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,17 +46,31 @@ public class Persona implements Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar fechaNacimiento;
 
-    @OneToMany(mappedBy = "persona")
-    private Vehiculo vehiculo;
+    @OneToMany(mappedBy = "persona", targetEntity = Vehiculo.class)
+    private List<Vehiculo> vehiculo;
 
-    @OneToMany(mappedBy = "persona")
-    private Tramite tramite;
+    @OneToMany(mappedBy = "persona", targetEntity = Tramite.class)
+    private List<Tramite> tramite;
+
+    public Persona() {
+    }
+
+    public Persona(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, int year, int month, int day) {
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.telefono = telefono;
+        this.fechaNacimiento = Calendar.getInstance();
+        this.fechaNacimiento.set(Calendar.YEAR, year);
+        this.fechaNacimiento.set(Calendar.MONTH, month);
+        this.fechaNacimiento.set(Calendar.DAY_OF_MONTH, day);
+    }
 
     public String getRfc() {
         return rfc;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
@@ -109,19 +123,19 @@ public class Persona implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Vehiculo getVehiculo() {
+    public List<Vehiculo> getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(Vehiculo vehiculo) {
+    public void setVehiculo(List<Vehiculo> vehiculo) {
         this.vehiculo = vehiculo;
     }
 
-    public Tramite getTramite() {
+    public List<Tramite> getTramite() {
         return tramite;
     }
 
-    public void setTramite(Tramite tramite) {
+    public void setTramite(List<Tramite> tramite) {
         this.tramite = tramite;
     }
 

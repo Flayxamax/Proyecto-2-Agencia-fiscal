@@ -1,5 +1,6 @@
 package com.itson.dominio;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,8 +25,8 @@ public class Automovil extends Vehiculo {
     @Column(name = "id_automovil", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "automovil")
-    private Placa placa;
+    @OneToMany(mappedBy = "automovil", targetEntity = Placa.class)
+    private List<Placa> placa;
 
     @Override
     public Long getId() {
@@ -35,14 +36,6 @@ public class Automovil extends Vehiculo {
     @Override
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Placa getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(Placa placa) {
-        this.placa = placa;
     }
 
     @Override

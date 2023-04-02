@@ -4,6 +4,10 @@
  */
 package com.itson.interfaz;
 
+import com.itson.implementaciones.PersonaDAO;
+import interfaces.IPersonaDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author arace
@@ -35,52 +39,50 @@ public class Aplicacion extends javax.swing.JFrame {
         botonPersonas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(153, 0, 153));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusTraversalPolicyProvider(true);
-        setUndecorated(true);
 
-        labelOperacion.setText("Selecccione la operación a realizar");
         labelOperacion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelOperacion.setText("Selecccione la operación a realizar");
 
-        botonPlacas.setText("Módulo de placas");
         botonPlacas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonPlacas.setText("Módulo de placas");
         botonPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPlacasActionPerformed(evt);
             }
         });
 
-        botonLicencias.setText("Módulo de licencias");
         botonLicencias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonLicencias.setText("Módulo de licencias");
         botonLicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonLicenciasActionPerformed(evt);
             }
         });
 
-        labelAgencia.setText("Agencía Fiscal");
         labelAgencia.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        labelAgencia.setText("Agencía Fiscal");
 
-        botonReportes.setText("Módulo de reportes");
         botonReportes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonReportes.setText("Módulo de reportes");
         botonReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReportesActionPerformed(evt);
             }
         });
 
-        botonConsultas.setText("Módulo de consultas");
         botonConsultas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonConsultas.setText("Módulo de consultas");
         botonConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConsultasActionPerformed(evt);
             }
         });
 
-        botonPersonas.setText("Inserción de personas");
         botonPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonPersonas.setText("Inserción de personas");
         botonPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPersonasActionPerformed(evt);
@@ -132,6 +134,7 @@ public class Aplicacion extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLicenciasActionPerformed
@@ -151,43 +154,45 @@ public class Aplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_botonConsultasActionPerformed
 
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
-        // TODO add your handling code here:
+        IPersonaDAO a = new PersonaDAO();
+        a.insertarPersonas();
+        JOptionPane.showMessageDialog(null, "Se insertaron 20 personas exitosamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonPersonasActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Aplicacion().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Aplicacion().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConsultas;

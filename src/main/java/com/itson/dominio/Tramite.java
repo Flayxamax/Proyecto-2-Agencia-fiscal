@@ -62,14 +62,6 @@ public abstract class Tramite implements Serializable {
         this.id = id;
     }
 
-    public TipoTramite getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoTramite tipo) {
-        this.tipo = tipo;
-    }
-
     public Calendar getFechaEmision() {
         return fechaEmision;
     }
