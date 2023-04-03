@@ -4,17 +4,40 @@
  */
 package com.itson.interfaz;
 
+import com.itson.dominio.Persona;
+import com.itson.implementaciones.PersonaDAO;
+import interfaces.IPersonaDAO;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ildex
  */
 public class ConsultaPersona extends javax.swing.JFrame {
 
+    IPersonaDAO a = new PersonaDAO();
+
     /**
      * Creates new form BusquedaLicencia
      */
     public ConsultaPersona() {
         initComponents();
+    }
+
+    public void agregarPersonas(List<Persona> personas) {
+        DefaultTableModel modelo = (DefaultTableModel) tblMostrarP.getModel();
+        for (Persona persona : personas) {
+            Object[] fila = {persona.getRfc(), persona.getNombre(), persona.getApellidoPaterno(), persona.getApellidoMaterno(), persona.getFechaNacimiento(), persona.getTelefono()};
+            modelo.addRow(fila);
+        }
+    }
+
+    public void consultarPersonas(String rfc, String nombre, LocalDate fechaNacimiento) {
+        List<Persona> personas = a.buscarPersonas(rfc, nombre, fechaNacimiento);
+        agregarPersonas(personas);
     }
 
     /**
@@ -30,12 +53,12 @@ public class ConsultaPersona extends javax.swing.JFrame {
         labelModuloConsulta = new javax.swing.JLabel();
         botonRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaMostrarPersonas = new javax.swing.JTable();
-        botonBuscar = new javax.swing.JButton();
-        campoTextoNombre = new javax.swing.JTextField();
-        campoTextoRFC = new javax.swing.JTextField();
+        tblMostrarP = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         botonSiguiente = new javax.swing.JButton();
-        datePícker = new com.github.lgooddatepicker.components.DatePicker();
+        dateFechaN = new com.github.lgooddatepicker.components.DatePicker();
         labelRFC = new javax.swing.JLabel();
         labelNombreCompleto = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
@@ -61,48 +84,66 @@ public class ConsultaPersona extends javax.swing.JFrame {
         });
         getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
 
-        tablaMostrarPersonas.setModel(new javax.swing.table.DefaultTableModel(
+        tblMostrarP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Seleccionar", "RFC", "Nombre(s)", "Apellido Paterno", "Apellido Materno", "Télefono"
+                "RFC", "Nombre(s)", "Apellido Paterno", "Apellido Materno", "Fecha nacimiento", "Télefono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane1.setViewportView(tablaMostrarPersonas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 740, 50));
-
-        botonBuscar.setText("Buscar");
-        botonBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        getContentPane().add(botonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, -1, -1));
+        tblMostrarP.setColumnSelectionAllowed(true);
+        tblMostrarP.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblMostrarP);
+        tblMostrarP.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tblMostrarP.getColumnModel().getColumnCount() > 0) {
+            tblMostrarP.getColumnModel().getColumn(0).setResizable(false);
+            tblMostrarP.getColumnModel().getColumn(1).setResizable(false);
+            tblMostrarP.getColumnModel().getColumn(2).setResizable(false);
+            tblMostrarP.getColumnModel().getColumn(3).setResizable(false);
+            tblMostrarP.getColumnModel().getColumn(4).setResizable(false);
+            tblMostrarP.getColumnModel().getColumn(5).setResizable(false);
+        }
 
-        campoTextoNombre.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 90));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTextoNombreActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(campoTextoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 380, 27));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 190, -1, -1));
 
-        campoTextoRFC.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTextoRFCActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(campoTextoRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, 27));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 380, 27));
+
+        txtRFC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRFCActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, 27));
 
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -112,7 +153,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, -1, -1));
-        getContentPane().add(datePícker, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 180, 30));
+        getContentPane().add(dateFechaN, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 280, 30));
 
         labelRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelRFC.setText("RFC");
@@ -128,23 +169,27 @@ public class ConsultaPersona extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 700, 40));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonRegresarActionPerformed
 
-    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonBuscarActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String RFC = txtRFC.getText();
+        String NombreCompleto = txtNombre.getText();
+        LocalDate fechaN = dateFechaN.getDate();
+        consultarPersonas(RFC, NombreCompleto, fechaN);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void campoTextoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoNombreActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTextoNombreActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void campoTextoRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoRFCActionPerformed
+    private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTextoRFCActionPerformed
+    }//GEN-LAST:event_txtRFCActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
         // TODO add your handling code here:
@@ -187,12 +232,10 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSiguiente;
-    private javax.swing.JTextField campoTextoNombre;
-    private javax.swing.JTextField campoTextoRFC;
-    private com.github.lgooddatepicker.components.DatePicker datePícker;
+    private javax.swing.JButton btnBuscar;
+    private com.github.lgooddatepicker.components.DatePicker dateFechaN;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBuscarParametros;
@@ -200,6 +243,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private javax.swing.JLabel labelModuloConsulta;
     private javax.swing.JLabel labelNombreCompleto;
     private javax.swing.JLabel labelRFC;
-    private javax.swing.JTable tablaMostrarPersonas;
+    private javax.swing.JTable tblMostrarP;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

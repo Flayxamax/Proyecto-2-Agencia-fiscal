@@ -6,17 +6,25 @@ package com.itson.implementaciones;
 
 import com.itson.dominio.Persona;
 import interfaces.IPersonaDAO;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.swing.JOptionPane;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
  * @author ildex
  */
-public class PersonaDAO implements IPersonaDAO{
+public class PersonaDAO implements IPersonaDAO {
 
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
@@ -28,13 +36,13 @@ public class PersonaDAO implements IPersonaDAO{
         Persona persona3 = new Persona("GARA9907039K9", "Gabriela", "Ramírez", "Sánchez", "6445555555", 1999, Calendar.JULY, 3);
         Persona persona4 = new Persona("VALC7807153Z2", "Verónica", "Alcántara", "López", "6441112233", 1978, Calendar.JULY, 15);
         Persona persona5 = new Persona("CASR8306297R7", "Carlos", "Santos", "Rodríguez", "6444445566", 1983, Calendar.JUNE, 29);
-        Persona persona6 = new Persona("JIMG9406056S5", "Jimena", "Gómez", "Torres", "6442223344", 1994, Calendar.JUNE, 5);
+        Persona persona6 = new Persona("JIMG9406056S5", "Jimena", "Gómez", "Torres", "6442223344", 1994, Calendar.FEBRUARY, 4);
         Persona persona7 = new Persona("MOLP7705147H6", "María", "Olivera", "Pérez", "6446667777", 1977, Calendar.MAY, 14);
         Persona persona8 = new Persona("ALOT8911224W8", "Alfonso", "López", "Téllez", "6447778888", 1989, Calendar.NOVEMBER, 22);
-        Persona persona9 = new Persona("CARF8107019X1", "Carolina", "Fuentes", "Herrera", "6442223333", 1981, Calendar.JULY, 1);
-        Persona persona10 = new Persona("RICM8902163J4", "Ricardo", "Martínez", "Castañeda", "6446667777", 1989, Calendar.FEBRUARY, 16);
+        Persona persona9 = new Persona("CARF8107019X1", "Carlos", "Fuentes", "Herrera", "6442223333", 1981, Calendar.JULY, 1);
+        Persona persona10 = new Persona("RICM8902163J4", "Ricardo", "Martínez", "Castañeda", "6446667977", 1989, Calendar.FEBRUARY, 16);
         Persona persona11 = new Persona("LALP7103239N0", "Laura", "López", "Pérez", "6445551212", 1971, Calendar.MARCH, 23);
-        Persona persona12 = new Persona("MANP8704127T0", "Manuel", "Pérez", "Ramírez", "6444443322", 1987, Calendar.APRIL, 12);
+        Persona persona12 = new Persona("MANP8704127T0", "María", "Pérez", "Ramírez", "6444443322", 1987, Calendar.APRIL, 12);
         Persona persona13 = new Persona("JOSE8210254V7", "José", "Sánchez", "González", "6443332211", 1982, Calendar.OCTOBER, 25);
         Persona persona14 = new Persona("ISAP7903056F8", "Isabel", "Sandoval", "Pérez", "6448889999", 1979, Calendar.MARCH, 5);
         Persona persona15 = new Persona("ERIJ8906093Z8", "Eric", "Jiménez", "Pérez", "6441112222", 1989, Calendar.JUNE, 9);
@@ -51,5 +59,44 @@ public class PersonaDAO implements IPersonaDAO{
             em.persist(persona);
         }
         em.getTransaction().commit();
+        em.close();
     }
+
+    @Override
+    public long contarPersonas() {
+        Query query = em.createQuery("select count(p) from Persona p");
+        return (long) query.getSingleResult();
+    }
+
+    @Override
+    public List<Persona> buscarPersonas(String rfc, String nombre, LocalDate fechaNacimiento) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);
+        Root<Persona> root = cq.from(Persona.class);
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (nombre != null) {
+            String[] espacio = nombre.split("\\s+");
+            for (String part : espacio) {
+                predicates.add(cb.or(
+                        cb.like(root.get("nombre"), "%" + part + "%"),
+                        cb.like(root.get("apellidoPaterno"), "%" + part + "%"),
+                        cb.like(root.get("apellidoMaterno"), "%" + part + "%")
+                ));
+            }
+        }
+
+        if (rfc != null) {
+            predicates.add(cb.like(root.get("rfc"), "%" + rfc + "%"));
+        }
+
+        if (fechaNacimiento != null) {
+            predicates.add(cb.equal(root.get("fechaNacimiento"), fechaNacimiento));
+        }
+
+        cq.select(root).where(predicates.toArray(new Predicate[]{}));
+        TypedQuery<Persona> query = em.createQuery(cq);
+        return query.getResultList();
+    }
+
 }

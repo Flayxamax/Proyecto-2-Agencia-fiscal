@@ -4,10 +4,17 @@
  */
 package interfaces;
 
+import com.itson.dominio.Persona;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.List;
+
 /**
  *
  * @author ildex
  */
 public interface IPersonaDAO {
     public void insertarPersonas();
+    public long contarPersonas();
+    public List<Persona> buscarPersonas(String rfc, String nombre, LocalDate fechaNacimiento);
 }
