@@ -6,10 +6,14 @@ package com.itson.implementaciones;
 
 import com.itson.dominio.Persona;
 import interfaces.IPersonaDAO;
+import java.security.Key;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -98,5 +102,6 @@ public class PersonaDAO implements IPersonaDAO {
         TypedQuery<Persona> query = em.createQuery(cq);
         return query.getResultList();
     }
+    
 
 }

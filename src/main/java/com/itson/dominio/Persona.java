@@ -1,9 +1,11 @@
 package com.itson.dominio;
 
+import com.itson.proyectobda.Encriptacion;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +27,7 @@ public class Persona implements Serializable {
     @Id
     @Column(name = "id_persona", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Convert (converter = Encriptacion.class)
     private Long id;
 
     @Column(name = "RFC", nullable = false, length = 13)
