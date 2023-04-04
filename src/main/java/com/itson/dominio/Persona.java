@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import com.itson.proyectobda.Encriptacion;
 /**
  *
  * @author aracelyC
@@ -146,5 +146,5 @@ public class Persona implements Serializable {
     public String toString() {
         return "Persona{" + "id=" + id + ", rfc=" + rfc + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", telefono=" + telefono + '}';
     }
-
+  
 }

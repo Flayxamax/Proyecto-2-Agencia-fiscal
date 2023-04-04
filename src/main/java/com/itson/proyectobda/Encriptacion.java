@@ -13,20 +13,20 @@ import javax.persistence.Converter;
 @Converter(autoApply = true)
 public class Encriptacion implements AttributeConverter<String, String> {
 
-    private static final String SECRET_KEY = "itson";
-    private static final BasicTextEncryptor TEXT_ENCRYPTOR = new BasicTextEncryptor();
+    private static final String CLAVE = "itson";
+    private static final BasicTextEncryptor ENCRIPTAR_NOMBRE = new BasicTextEncryptor();
 
     static {
-        TEXT_ENCRYPTOR.setPassword(SECRET_KEY);
+        ENCRIPTAR_NOMBRE.setPassword(CLAVE);
     }
 
     @Override
-    public String convertToDatabaseColumn(String attribute) {
-        return TEXT_ENCRYPTOR.encrypt(attribute);
+    public String convertToDatabaseColumn(String atributo) {
+        return ENCRIPTAR_NOMBRE.encrypt(atributo);
     }
 
     @Override
-    public String convertToEntityAttribute(String dbData) {
-        return TEXT_ENCRYPTOR.decrypt(dbData);
+    public String convertToEntityAttribute(String dato) {
+        return ENCRIPTAR_NOMBRE.decrypt(dato);
     }
 }
