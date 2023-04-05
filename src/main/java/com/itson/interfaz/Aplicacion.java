@@ -138,7 +138,7 @@ public class Aplicacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLicenciasActionPerformed
-        ConsultaPersona v = new ConsultaPersona();
+        ConsultaLicencia v = new ConsultaLicencia();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_botonLicenciasActionPerformed
@@ -152,7 +152,9 @@ public class Aplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_botonReportesActionPerformed
 
     private void botonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasActionPerformed
-        // TODO add your handling code here:
+        ConsultaPersona v = new ConsultaPersona();
+        v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonConsultasActionPerformed
 
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed

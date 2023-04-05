@@ -7,8 +7,6 @@ package com.itson.interfaz;
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
 import interfaces.IPersonaDAO;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,15 +26,15 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }
 
     public void agregarPersonas(List<Persona> personas) {
-        DefaultTableModel modelo = (DefaultTableModel) tblMostrarP.getModel();
+        DefaultTableModel tabla = (DefaultTableModel) tblMostrarP.getModel();
         for (Persona persona : personas) {
             Object[] fila = {persona.getRfc(), persona.getNombre(), persona.getApellidoPaterno(), persona.getApellidoMaterno(), persona.getFechaNacimiento(), persona.getTelefono()};
-            modelo.addRow(fila);
+            tabla.addRow(fila);
         }
     }
 
-    public void consultarPersonas(String rfc, String nombre, LocalDate fechaNacimiento) {
-        List<Persona> personas = a.buscarPersonas(rfc, nombre, fechaNacimiento);
+    public void consultarPersonas(String rfc, String nombre, Integer ano) {
+        List<Persona> personas = a.buscarPersonas(rfc, nombre, ano);
         agregarPersonas(personas);
     }
 
@@ -55,21 +53,20 @@ public class ConsultaPersona extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMostrarP = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
+        txtAno = new javax.swing.JTextField();
         txtRFC = new javax.swing.JTextField();
         botonSiguiente = new javax.swing.JButton();
-        dateFechaN = new com.github.lgooddatepicker.components.DatePicker();
         labelRFC = new javax.swing.JLabel();
         labelNombreCompleto = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        txtNombre = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelBuscarParametros.setText("Buscar parametros:");
         labelBuscarParametros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 129, -1, -1));
+        getContentPane().add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         labelModuloConsulta.setText("Modulo de consulta a personas");
         labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -82,7 +79,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 botonRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
         tblMostrarP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +117,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
             tblMostrarP.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 970, 90));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 970, 130));
 
         btnBuscar.setText("Buscar");
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -129,21 +126,21 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 190, -1, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, -1, -1));
 
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+        txtAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
+                txtAnoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 380, 27));
+        getContentPane().add(txtAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 100, 27));
 
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRFCActionPerformed(evt);
             }
         });
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 150, 27));
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 150, 27));
 
         botonSiguiente.setText("Siguiente");
         botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -152,21 +149,26 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 botonSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 380, -1, -1));
-        getContentPane().add(dateFechaN, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 280, 30));
+        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, -1));
 
-        labelRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelRFC.setText("RFC");
-        getContentPane().add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+        labelRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
-        labelNombreCompleto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelNombreCompleto.setText("Nombre completo");
-        getContentPane().add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        labelNombreCompleto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
 
+        labelFecha.setText("Año nacimiento");
         labelFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelFecha.setText("Fecha");
-        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, -1, -1));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 700, 40));
+        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, -1, -1));
+
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 380, 27));
 
         pack();
         setLocationRelativeTo(null);
@@ -174,18 +176,26 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         // TODO add your handling code here:
+        Aplicacion a = new Aplicacion();
+        a.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String RFC = txtRFC.getText();
-        String NombreCompleto = txtNombre.getText();
-        LocalDate fechaN = dateFechaN.getDate();
-        consultarPersonas(RFC, NombreCompleto, fechaN);
+        String NombreCompleto = txtAno.getText();
+        Integer ano;
+        if (txtAno.getText().isEmpty()) {
+            ano = 0;
+        } else {
+            ano = Integer.valueOf(txtAno.getText());
+        }
+        consultarPersonas(RFC, NombreCompleto, ano);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+    private void txtAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
+    }//GEN-LAST:event_txtAnoActionPerformed
 
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
@@ -195,48 +205,50 @@ public class ConsultaPersona extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConsultaPersona().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ConsultaPersona().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton btnBuscar;
-    private com.github.lgooddatepicker.components.DatePicker dateFechaN;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBuscarParametros;
     private javax.swing.JLabel labelFecha;
@@ -244,6 +256,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private javax.swing.JLabel labelNombreCompleto;
     private javax.swing.JLabel labelRFC;
     private javax.swing.JTable tblMostrarP;
+    private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables

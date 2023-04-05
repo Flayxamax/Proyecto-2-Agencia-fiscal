@@ -48,7 +48,7 @@ public abstract class Tramite implements Serializable {
     private Calendar fechaEmision;
 
     @Column(name = "Costo", nullable = false)
-    private Integer costo;
+    private Double costo;
 
     @ManyToOne
     @JoinColumn(name = "id_persona", nullable = false)
@@ -70,11 +70,19 @@ public abstract class Tramite implements Serializable {
         this.fechaEmision = fechaEmision;
     }
 
-    public Integer getCosto() {
+    public TipoTramite getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoTramite tipo) {
+        this.tipo = tipo;
+    }
+
+    public Double getCosto() {
         return costo;
     }
 
-    public void setCosto(Integer costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
 

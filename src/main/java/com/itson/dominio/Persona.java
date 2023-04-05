@@ -1,6 +1,5 @@
 package com.itson.dominio;
 
-import com.itson.proyectobda.Encriptacion;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
@@ -14,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import com.itson.proyectobda.Encriptacion;
+
 /**
  *
  * @author aracelyC
@@ -27,18 +26,20 @@ public class Persona implements Serializable {
     @Id
     @Column(name = "id_persona", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Convert (converter = Encriptacion.class)
     private Long id;
 
     @Column(name = "RFC", nullable = false, length = 13)
     private String rfc;
-
+    
+    @Convert(converter = Encriptacion.class)
     @Column(name = "Nombre", nullable = false, length = 100)
     private String nombre;
 
+    @Convert(converter = Encriptacion.class)
     @Column(name = "Apellido_Paterno", nullable = false, length = 100)
     private String apellidoPaterno;
-
+    
+    @Convert(converter = Encriptacion.class)
     @Column(name = "Apellido_Materno", nullable = false, length = 100)
     private String apellidoMaterno;
 
@@ -58,16 +59,16 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, int year, int month, int day) {
+    public Persona(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, int anio, int mes, int dia) {
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.telefono = telefono;
         this.fechaNacimiento = Calendar.getInstance();
-        this.fechaNacimiento.set(Calendar.YEAR, year);
-        this.fechaNacimiento.set(Calendar.MONTH, month);
-        this.fechaNacimiento.set(Calendar.DAY_OF_MONTH, day);
+        this.fechaNacimiento.set(Calendar.YEAR, anio);
+        this.fechaNacimiento.set(Calendar.MONTH, mes);
+        this.fechaNacimiento.set(Calendar.DAY_OF_MONTH, dia);
     }
 
     public String getRfc() {
@@ -146,5 +147,5 @@ public class Persona implements Serializable {
     public String toString() {
         return "Persona{" + "id=" + id + ", rfc=" + rfc + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", telefono=" + telefono + '}';
     }
-  
+
 }

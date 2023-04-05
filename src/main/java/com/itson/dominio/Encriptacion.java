@@ -1,5 +1,5 @@
 
-package com.itson.proyectobda;
+package com.itson.dominio;
 import org.jasypt.util.text.BasicTextEncryptor;
 
 import javax.persistence.AttributeConverter;
@@ -10,10 +10,10 @@ import javax.persistence.Converter;
  */
 
 
-@Converter(autoApply = true)
+@Converter(autoApply = false)
 public class Encriptacion implements AttributeConverter<String, String> {
 
-    private static final String CLAVE = "itson";
+    private static final String CLAVE = "itsonnainariagen";
     private static final BasicTextEncryptor ENCRIPTAR_NOMBRE = new BasicTextEncryptor();
 
     static {

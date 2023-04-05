@@ -29,12 +29,20 @@ public class Licencia extends Tramite {
     @Column(name = "id_licencia", nullable = false)
     private Long id;
 
-    @Column(name = "Tipo", nullable = false)
+    @Column(name = "Tipo", nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoLicencia tipo;
 
     @Column(name = "Vigencia", nullable = false)
     private Integer vigencia;
+
+    public Licencia() {
+    }
+
+    public Licencia(TipoLicencia tipo, Integer vigencia) {
+        this.tipo = tipo;
+        this.vigencia = vigencia;
+    }
 
     public Long getId() {
         return id;

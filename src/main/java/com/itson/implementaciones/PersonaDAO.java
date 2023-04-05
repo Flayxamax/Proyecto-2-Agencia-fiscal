@@ -4,16 +4,13 @@
  */
 package com.itson.implementaciones;
 
+import com.itson.dominio.Encriptacion;
 import com.itson.dominio.Persona;
 import interfaces.IPersonaDAO;
-import java.security.Key;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.List;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -73,16 +70,16 @@ public class PersonaDAO implements IPersonaDAO {
     }
 
     @Override
-    public List<Persona> buscarPersonas(String rfc, String nombre, LocalDate fechaNacimiento) {
+    public List<Persona> buscarPersonas(String rfc, String nombre, Integer ano) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);
         Root<Persona> root = cq.from(Persona.class);
-        List<Predicate> predicates = new ArrayList<>();
+        List<Predicate> parametros = new ArrayList<>();
 
         if (nombre != null) {
             String[] espacio = nombre.split("\\s+");
             for (String part : espacio) {
-                predicates.add(cb.or(
+                parametros.add(cb.or(
                         cb.like(root.get("nombre"), "%" + part + "%"),
                         cb.like(root.get("apellidoPaterno"), "%" + part + "%"),
                         cb.like(root.get("apellidoMaterno"), "%" + part + "%")
@@ -91,17 +88,38 @@ public class PersonaDAO implements IPersonaDAO {
         }
 
         if (rfc != null) {
-            predicates.add(cb.like(root.get("rfc"), "%" + rfc + "%"));
+            parametros.add(cb.like(root.get("rfc"), "%" + rfc + "%"));
         }
 
-        if (fechaNacimiento != null) {
-            predicates.add(cb.equal(root.get("fechaNacimiento"), fechaNacimiento));
+        if (ano != 0) {
+            parametros.add(cb.equal(cb.function("YEAR", Integer.class, root.get("fechaNacimiento")), ano));
         }
 
-        cq.select(root).where(predicates.toArray(new Predicate[]{}));
+        cq.select(root).where(parametros.toArray(new Predicate[]{}));
         TypedQuery<Persona> query = em.createQuery(cq);
         return query.getResultList();
     }
-    
 
+    @Override
+    public Persona buscarPersonasRFC(String rfc) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);
+        Root<Persona> root = cq.from(Persona.class);
+        List<Predicate> parametros = new ArrayList<>();
+
+        if (rfc != null) {
+            parametros.add(cb.equal(root.get("rfc"), rfc));
+        }
+
+        cq.select(root).where(parametros.toArray(new Predicate[]{}));
+        TypedQuery<Persona> query = em.createQuery(cq);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public boolean validarPersonaRFC(String rfc) {
+        TypedQuery<Long> query = em.createQuery("select count(p) from Persona p where p.rfc = :rfc", Long.class);
+        query.setParameter("rfc", rfc);
+        return query.getSingleResult() > 0;
+    }
 }

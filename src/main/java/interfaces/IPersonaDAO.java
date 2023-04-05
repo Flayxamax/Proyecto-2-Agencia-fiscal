@@ -6,7 +6,6 @@ package interfaces;
 
 import com.itson.dominio.Persona;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -16,5 +15,7 @@ import java.util.List;
 public interface IPersonaDAO {
     public void insertarPersonas();
     public long contarPersonas();
-    public List<Persona> buscarPersonas(String rfc, String nombre, LocalDate fechaNacimiento);
+    public List<Persona> buscarPersonas(String rfc, String nombre, Integer ano);
+    public Persona buscarPersonasRFC(String rfc);
+    public boolean validarPersonaRFC(String rfc);
 }
