@@ -128,7 +128,9 @@ public class CostosPlacas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        Aplicacion v = new Aplicacion();
+        v.setVisible(true);
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed

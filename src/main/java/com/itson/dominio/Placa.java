@@ -35,7 +35,7 @@ public class Placa extends Tramite {
     @Column(name = "id_placa", nullable = false)
     private Long id;
 
-    @Column(name = "Estado", nullable = false)
+    @Column(name = "Estado", nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoPlaca tipo;
 
@@ -74,6 +74,14 @@ public class Placa extends Tramite {
     public void setAutomovil(Automovil automovil) {
         this.automovil = automovil;
     }
+    public Placa(){
+        
+    }
+    public Placa(TipoPlaca tipo, Automovil automovil){
+        this.tipo = tipo;
+        this.automovil = automovil;
+    }
+   
 
     @Override
     public String toString() {

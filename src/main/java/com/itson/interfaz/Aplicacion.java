@@ -144,7 +144,10 @@ public class Aplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_botonLicenciasActionPerformed
 
     private void botonPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPlacasActionPerformed
-        // TODO add your handling code here:
+      this.setVisible(false);
+      CostosPlacas v = new CostosPlacas();
+      v.setVisible(true);
+   
     }//GEN-LAST:event_botonPlacasActionPerformed
 
     private void botonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportesActionPerformed

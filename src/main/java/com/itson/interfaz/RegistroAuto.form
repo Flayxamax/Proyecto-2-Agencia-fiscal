@@ -39,15 +39,15 @@
                           <Component id="textoModelo" max="32767" attributes="0"/>
                           <Component id="textoSerie" pref="187" max="32767" attributes="0"/>
                           <Component id="textoColor" max="32767" attributes="0"/>
-                          <Component id="textoLicencia" max="32767" attributes="0"/>
+                          <Component id="textoLinea" max="32767" attributes="0"/>
                           <Component id="textoMarca" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonRegresar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonRegristrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -83,7 +83,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labelLinea" min="-2" max="-2" attributes="0"/>
-                  <Component id="textoLicencia" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="textoLinea" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,8 +92,8 @@
               </Group>
               <EmptySpace pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonRegristrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
@@ -110,15 +110,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoModelo">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoModeloActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textoSerie">
     </Component>
     <Component class="javax.swing.JTextField" name="textoColor">
     </Component>
-    <Component class="javax.swing.JTextField" name="textoLicencia">
+    <Component class="javax.swing.JTextField" name="textoLinea">
     </Component>
     <Component class="javax.swing.JTextField" name="textoMarca">
     </Component>
@@ -162,7 +159,7 @@
         <Property name="text" type="java.lang.String" value="Marca"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="botonRegristrar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -170,10 +167,10 @@
         <Property name="text" type="java.lang.String" value="Registrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegristrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="botonRegresar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -181,7 +178,7 @@
         <Property name="text" type="java.lang.String" value="Regresar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegresarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
