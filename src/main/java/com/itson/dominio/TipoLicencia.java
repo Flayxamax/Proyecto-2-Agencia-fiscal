@@ -9,6 +9,6 @@ package com.itson.dominio;
  * @author ildex
  */
 public enum TipoLicencia {
-    NORMAL,
-    DISCAPACITADO
+    Normal,
+    Discapacitado
 }

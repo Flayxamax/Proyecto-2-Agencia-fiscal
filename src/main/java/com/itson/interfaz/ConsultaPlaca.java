@@ -1,10 +1,7 @@
-
 package com.itson.interfaz;
 
-import com.itson.dominio.Automovil;
 import com.itson.dominio.Persona;
-import com.itson.dominio.Placa;
-import com.itson.dominio.TipoPlaca;
+import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,12 +15,69 @@ import javax.swing.JOptionPane;
  * @author aracelyC
  */
 public class ConsultaPlaca extends javax.swing.JFrame {
+
     PersonaDAO a = new PersonaDAO();
+    LicenciaDAO b = new LicenciaDAO();
+
     /**
      * Creates new form ConsultaPlaca
      */
     public ConsultaPlaca() {
         initComponents();
+    }
+
+    private Persona extraerDatosFormulario() {
+        String RFC = txtRFC.getText();
+        Persona persona = a.buscarPersonasRFC(RFC);
+        return persona;
+    }
+
+    private void insertarDatospersona() {
+        Persona persona = this.extraerDatosFormulario();
+        lblNombre.setText("Nombre: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
+        Calendar fechaNacimiento = persona.getFechaNacimiento();
+        Date date = fechaNacimiento.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaN = sdf.format(date);
+        lblFecha.setText("Fecha de nacimiento: " + fechaN);
+
+        LocalDate fechaNacimientoLocal = LocalDate.of(fechaNacimiento.get(Calendar.YEAR),
+                fechaNacimiento.get(Calendar.MONTH) + 1,
+                fechaNacimiento.get(Calendar.DAY_OF_MONTH));
+        LocalDate fechaActual = LocalDate.now();
+        int edad = Period.between(fechaNacimientoLocal, fechaActual).getYears();
+        lblEdadI.setText(String.valueOf(edad));
+        if (b.validarLicenciaVigente(persona.getRfc()) == true) {
+            lblLicencia.setText("Licencia: Vigente");
+        } else {
+            lblLicencia.setText("Licencia: No vigente");
+        }
+    }
+
+    private boolean validarEdad() {
+        boolean mayorEdad = false;
+        String eda = lblEdadI.getText();
+        int edad = Integer.parseInt(eda);
+        return mayorEdad = edad >= 18;
+    }
+
+    private void validaDatosPersona() {
+        if (txtRFC.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No has ingresado un RFC a consultar", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (a.validarPersonaRFC(txtRFC.getText()) != true) {
+            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (this.validarEdad() == true) {
+            if (b.validarLicenciaVigente(txtRFC.getText()) == true) {
+                CostosPlacas v = new CostosPlacas(txtRFC.getText());
+                v.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "No tiene o no se encontró una licencia vigente para la persona con el RFC: "+txtRFC.getText(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -36,29 +90,24 @@ public class ConsultaPlaca extends javax.swing.JFrame {
     private void initComponents() {
 
         labelModuloConsulta = new javax.swing.JLabel();
-        textoRFC = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        comboTipoPlaca = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         botonSiguiente = new javax.swing.JButton();
-        comboTipoAuto = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        textoNombre = new javax.swing.JTextField();
-        textoEdad = new javax.swing.JTextField();
-        textoFechaN = new javax.swing.JTextField();
+        lblNombre = new javax.swing.JLabel();
+        lblEdad = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        lblEdadI = new javax.swing.JLabel();
+        lblLicencia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         labelModuloConsulta.setText("Modulo de Placas");
 
-        textoRFC.addActionListener(new java.awt.event.ActionListener() {
+        txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoRFCActionPerformed(evt);
+                txtRFCActionPerformed(evt);
             }
         });
 
@@ -67,13 +116,6 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
-            }
-        });
-
-        comboTipoPlaca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vigente", "No Vigente" }));
-        comboTipoPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTipoPlacaActionPerformed(evt);
             }
         });
 
@@ -88,27 +130,19 @@ public class ConsultaPlaca extends javax.swing.JFrame {
             }
         });
 
-        comboTipoAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nuevo", "Usado" }));
-        comboTipoAuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboTipoAutoActionPerformed(evt);
-            }
-        });
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNombre.setText("Nombre: ");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Tipo de placa");
+        lblEdad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEdad.setText("Edad: ");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Tipo de automovil");
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFecha.setText("Fecha de nacimiento: ");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("Nombre: ");
+        lblEdadI.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setText("Edad: ");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Fecha de nacimiento: ");
+        lblLicencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLicencia.setText("Licencia:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,140 +152,73 @@ public class ConsultaPlaca extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textoEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                                .addComponent(botonSiguiente)
-                                .addGap(45, 45, 45))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textoFechaN, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(lblLicencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonSiguiente)
+                        .addGap(41, 41, 41))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(comboTipoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEdad)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblEdadI, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblNombre)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(comboTipoPlaca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(textoRFC, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                    .addComponent(jLabel2))
+                                .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(168, 168, 168)
-                                .addComponent(labelModuloConsulta)))
-                        .addContainerGap())))
+                                .addComponent(labelModuloConsulta))
+                            .addComponent(lblFecha))
+                        .addGap(45, 204, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonSiguiente)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelModuloConsulta)
                         .addGap(51, 51, 51)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar))
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textoRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnBuscar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addGap(9, 9, 9)
-                                .addComponent(comboTipoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboTipoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(11, 11, 11)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(textoEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(botonSiguiente))
-                                .addGap(2, 2, 2))
-                            .addComponent(jLabel5))
-                        .addGap(45, 45, 45))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(textoFechaN, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblNombre)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(lblEdadI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblEdad))
+                                .addGap(45, 45, 45))
+                            .addComponent(lblFecha))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLicencia)))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textoRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoRFCActionPerformed
+    private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textoRFCActionPerformed
+    }//GEN-LAST:event_txtRFCActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String RFC = textoRFC.getText();
-        Persona persona = a.buscarPersonasRFC(RFC);
-        textoNombre.setText(persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
-        Calendar fechaNacimiento = persona.getFechaNacimiento();
-        Date date = fechaNacimiento.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaN = sdf.format(date);
-        textoFechaN.setText(fechaN);
-        
-
-        LocalDate fechaNacimientoLocal = LocalDate.of(fechaNacimiento.get(Calendar.YEAR),
-            fechaNacimiento.get(Calendar.MONTH) + 1,
-            fechaNacimiento.get(Calendar.DAY_OF_MONTH));
-        LocalDate fechaActual = LocalDate.now();
-        int edad = Period.between(fechaNacimientoLocal, fechaActual).getYears();
-        textoEdad.setText(String.valueOf(edad));
+        this.insertarDatospersona();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-        if (textoRFC.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No has ingresado un RFC a consultar", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }else if (a.validarPersonaRFC(textoRFC.getText()) != true) {
-            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
-        String eda = textoEdad.getText();
-        int edad = Integer.parseInt(eda);
-        if (edad >= 18) {
-            CostosLicencia v = new CostosLicencia(textoRFC.getText());
-            v.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        this.validaDatosPersona();
     }//GEN-LAST:event_botonSiguienteActionPerformed
-
-    private void comboTipoPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoPlacaActionPerformed
-       Placa placa = new Placa();
-       placa = (Placa) comboTipoPlaca.getSelectedItem();
-       if(placa == null){
-            JOptionPane.showMessageDialog(null, "Los datos no coinciden o no existen");
-        } 
-        
-        
-    }//GEN-LAST:event_comboTipoPlacaActionPerformed
-
-    private void comboTipoAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoAutoActionPerformed
-        Automovil auto =  new Automovil();
-        auto = (Automovil) comboTipoAuto.getSelectedItem();
-        if(auto == null){
-            JOptionPane.showMessageDialog(null, "Los datos no coinciden o no existen");
-        }
-    }//GEN-LAST:event_comboTipoAutoActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -291,19 +258,13 @@ public class ConsultaPlaca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JComboBox<String
-    > comboTipoAuto;
-    private javax.swing.JComboBox comboTipoPlaca;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel labelModuloConsulta;
-    private javax.swing.JTextField textoEdad;
-    private javax.swing.JTextField textoFechaN;
-    private javax.swing.JTextField textoNombre;
-    private javax.swing.JTextField textoRFC;
+    private javax.swing.JLabel lblEdad;
+    private javax.swing.JLabel lblEdadI;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblLicencia;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

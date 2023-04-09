@@ -4,17 +4,50 @@
  */
 package com.itson.interfaz;
 
+import com.itson.dominio.CostoTramite;
+import com.itson.dominio.Persona;
+import com.itson.implementaciones.LicenciaDAO;
+import com.itson.implementaciones.PersonaDAO;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author arace
  */
 public class CostosPlacas extends javax.swing.JFrame {
 
+    PersonaDAO a = new PersonaDAO();
+    CostoTramite b = new CostoTramite();
+    LicenciaDAO c = new LicenciaDAO();
+    private final String rfc;
+
     /**
      * Creates new form CostosPlacas
+     *
+     * @param rfc
      */
-    public CostosPlacas() {
+    public CostosPlacas(String rfc) {
         initComponents();
+        this.rfc = rfc;
+        this.insertarDatosPersona();
+        this.insertarDatosTablaCosto();
+    }
+
+    private void insertarDatosPersona() {
+        Persona persona = this.a.buscarPersonasRFC(rfc);
+        lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
+        if (c.validarLicenciaVigente(persona.getRfc()) == true) {
+            lblLicenciaVigencia.setText("Licencia: Vigente");
+        } else {
+            lblLicenciaVigencia.setText("Licencia: No vigente");
+        }
+    }
+
+    private void insertarDatosTablaCosto() {
+        DefaultTableModel tblCosto = (DefaultTableModel) tblPrecioPlaca.getModel();
+        tblPrecioPlaca.setModel(tblCosto);
+        tblCosto.addRow(new Object[]{"Placas vehículo nuevo", b.placaNuevo});
+        tblCosto.addRow(new Object[]{"Placas vehículo usado", b.placaUsado});
     }
 
     /**
@@ -27,59 +60,90 @@ public class CostosPlacas extends javax.swing.JFrame {
     private void initComponents() {
 
         labelModuloPlacas = new javax.swing.JLabel();
-        comboTipoCarro = new javax.swing.JComboBox<>();
         labelTipoCarro = new javax.swing.JLabel();
         botonRegresar = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
         ScrollCostos = new javax.swing.JScrollPane();
-        tablaPrecioPlacas = new javax.swing.JTable();
+        tblPrecioPlaca = new javax.swing.JTable();
+        lblPersona = new javax.swing.JLabel();
+        lblLicenciaVigencia = new javax.swing.JLabel();
+        btnVehiculoNuevo = new javax.swing.JButton();
+        btnVehiculoUsado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        labelModuloPlacas.setText("Módulo de placas para automóviles");
         labelModuloPlacas.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        labelModuloPlacas.setText("Módulo de placas para automóviles");
 
-        comboTipoCarro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Auto nuevo", "Auto usado" }));
-        comboTipoCarro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        labelTipoCarro.setText("Seleccione su tipo de carro");
         labelTipoCarro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelTipoCarro.setText("Seleccione su tipo de carro");
 
-        botonRegresar.setText("Regresar");
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonRegresar.setText("Regresar");
         botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegresarActionPerformed(evt);
             }
         });
 
-        botonAceptar.setText("Aceptar\n");
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonAceptar.setText("Aceptar\n");
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
             }
         });
 
-        tablaPrecioPlacas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tablaPrecioPlacas.setModel(new javax.swing.table.DefaultTableModel(
+        tblPrecioPlaca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblPrecioPlaca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Placas auto nuevo",  new Double(1500.0)},
-                {"Placas auto usado",  new Double(1000.0)}
+
             },
             new String [] {
                 "Tramite", "Costo normal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        ScrollCostos.setViewportView(tablaPrecioPlacas);
+        tblPrecioPlaca.getTableHeader().setReorderingAllowed(false);
+        ScrollCostos.setViewportView(tblPrecioPlaca);
+        if (tblPrecioPlaca.getColumnModel().getColumnCount() > 0) {
+            tblPrecioPlaca.getColumnModel().getColumn(0).setResizable(false);
+            tblPrecioPlaca.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        lblLicenciaVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        btnVehiculoNuevo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVehiculoNuevo.setText("Vehículo nuevo");
+        btnVehiculoNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVehiculoNuevoActionPerformed(evt);
+            }
+        });
+
+        btnVehiculoUsado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVehiculoUsado.setText("Vehículo usado");
+        btnVehiculoUsado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVehiculoUsadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,22 +152,28 @@ public class CostosPlacas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelTipoCarro)
+                            .addComponent(lblLicenciaVigencia)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(botonRegresar)
                         .addGap(65, 65, 65)
                         .addComponent(botonAceptar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelModuloPlacas, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelTipoCarro)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboTipoCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelModuloPlacas)
+                            .addComponent(lblPersona)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(103, 103, 103)
+                        .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(btnVehiculoNuevo)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnVehiculoUsado)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,13 +181,19 @@ public class CostosPlacas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(labelModuloPlacas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelTipoCarro)
-                    .addComponent(comboTipoCarro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
-                .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(32, 32, 32)
+                .addComponent(lblLicenciaVigencia)
+                .addGap(18, 18, 18)
+                .addComponent(lblPersona)
+                .addGap(8, 8, 8)
+                .addComponent(labelTipoCarro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVehiculoNuevo)
+                    .addComponent(btnVehiculoUsado))
+                .addGap(18, 18, 18)
+                .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonRegresar)
                     .addComponent(botonAceptar))
@@ -125,60 +201,74 @@ public class CostosPlacas extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
-        this.setVisible(false);
         Aplicacion v = new Aplicacion();
         v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonAceptarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnVehiculoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoNuevoActionPerformed
+        RegistroAuto v = new RegistroAuto(rfc);
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVehiculoNuevoActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CostosPlacas().setVisible(true);
-            }
-        });
-    }
+    private void btnVehiculoUsadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoUsadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVehiculoUsadoActionPerformed
+
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CostosPlacas().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollCostos;
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonRegresar;
-    private javax.swing.JComboBox<String> comboTipoCarro;
+    private javax.swing.JButton btnVehiculoNuevo;
+    private javax.swing.JButton btnVehiculoUsado;
     private javax.swing.JLabel labelModuloPlacas;
     private javax.swing.JLabel labelTipoCarro;
-    private javax.swing.JTable tablaPrecioPlacas;
+    private javax.swing.JLabel lblLicenciaVigencia;
+    private javax.swing.JLabel lblPersona;
+    private javax.swing.JTable tblPrecioPlaca;
     // End of variables declaration//GEN-END:variables
 }

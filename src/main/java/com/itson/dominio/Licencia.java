@@ -5,6 +5,7 @@
 package com.itson.dominio;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "id_tramite_licencia")
+@DiscriminatorValue("Licencia")
 @Table(name = "tramite_licencia")
 public class Licencia extends Tramite {
 

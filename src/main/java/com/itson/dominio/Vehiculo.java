@@ -1,10 +1,7 @@
 package com.itson.dominio;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +28,7 @@ public abstract class Vehiculo implements Serializable {
     private Long id;
 
     @Column(name = "Modelo", nullable = false, length = 10)
-    private String modelo;
+    private Integer modelo;
 
     @Column(name = "Serie", nullable = false, length = 100)
     private String serie;
@@ -48,7 +45,7 @@ public abstract class Vehiculo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_persona", nullable = false)
     private Persona persona;
-
+    
     public Long getId() {
         return id;
     }
@@ -57,11 +54,11 @@ public abstract class Vehiculo implements Serializable {
         this.id = id;
     }
 
-    public String getModelo() {
+    public Integer getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
+    public void setModelo(Integer modelo) {
         this.modelo = modelo;
     }
 
@@ -109,5 +106,4 @@ public abstract class Vehiculo implements Serializable {
     public String toString() {
         return "Vehiculo{" + "id=" + id + ", modelo=" + modelo + ", serie=" + serie + ", color=" + color + ", linea=" + linea + ", marca=" + marca + '}';
     }
-
 }

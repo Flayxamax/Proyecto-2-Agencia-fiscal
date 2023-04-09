@@ -4,11 +4,13 @@
  */
 package interfaces;
 
+import com.itson.dominio.Automovil;
+import com.itson.dominio.Persona;
+
 /**
  *
  * @author ildex
  */
-public interface ILicenciaDAO {
-    public void insertarTramiteLicencia(String rfc, Double costo, int vigencia, int estadoDiscapacidad);
-    public boolean validarLicenciaVigente(String rfc);
+public interface IVehiculoDAO {
+    public void registrarVehiculoPersona(Automovil auto, Persona persona);
 }

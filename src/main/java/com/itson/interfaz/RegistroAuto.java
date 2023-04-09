@@ -5,28 +5,53 @@
 package com.itson.interfaz;
 
 import com.itson.dominio.Automovil;
+import com.itson.dominio.CostoTramite;
 import com.itson.dominio.Persona;
-import com.itson.dominio.Vehiculo;
-import java.sql.Connection;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import com.itson.implementaciones.PersonaDAO;
+import com.itson.implementaciones.PlacaDAO;
+import com.itson.implementaciones.VehiculoDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author arace
  */
 public class RegistroAuto extends javax.swing.JFrame {
-    EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
-    EntityManager em = emFactory.createEntityManager();
-    
+
+    private final String rfc;
+    PersonaDAO a = new PersonaDAO();
+    VehiculoDAO b = new VehiculoDAO();
+    PlacaDAO c = new PlacaDAO();
+    CostoTramite d = new CostoTramite();
+
     /**
      * Creates new form RegistroPlacas
+     * @param rfc
      */
-    public RegistroAuto(java.awt.Frame parent, Vehiculo vh) {
+    public RegistroAuto(String rfc) {
         initComponents();
-        
+        this.rfc = rfc;
+        this.insertarDatosPersona();
+    }
+
+    private void insertarDatosPersona() {
+        Persona persona = this.a.buscarPersonasRFC(rfc);
+        lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno()+c.generarPlaca());
+    }
+
+    private Automovil extraerDatosFormulario() {
+        String serie = txtSerie.getText();
+        String marca = txtMarca.getText();
+        String linea = txtLinea.getText();
+        String color = txtColor.getText();
+        Integer modelo = Integer.valueOf(txtModelo.getText());
+        Automovil auto = new Automovil();
+        auto.setSerie(serie);
+        auto.setMarca(marca);
+        auto.setLinea(linea);
+        auto.setColor(color);
+        auto.setModelo(modelo);
+        return auto;
     }
 
     /**
@@ -39,11 +64,11 @@ public class RegistroAuto extends javax.swing.JFrame {
     private void initComponents() {
 
         labelRegistro = new javax.swing.JLabel();
-        textoModelo = new javax.swing.JTextField();
-        textoSerie = new javax.swing.JTextField();
-        textoColor = new javax.swing.JTextField();
-        textoLinea = new javax.swing.JTextField();
-        textoMarca = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
+        txtSerie = new javax.swing.JTextField();
+        txtColor = new javax.swing.JTextField();
+        txtLinea = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
         labelModelo = new javax.swing.JLabel();
         labelSerie = new javax.swing.JLabel();
         labelColor = new javax.swing.JLabel();
@@ -51,26 +76,45 @@ public class RegistroAuto extends javax.swing.JFrame {
         labelMarca = new javax.swing.JLabel();
         botonRegristrar = new javax.swing.JButton();
         botonRegresar = new javax.swing.JButton();
+        lblPersona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelRegistro.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         labelRegistro.setText("Registro Auto");
+        getContentPane().add(labelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 27, -1, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 350, 25));
+        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 350, 25));
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 350, 25));
+        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 350, 25));
+
+        txtMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMarcaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 350, 25));
 
         labelModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelModelo.setText("Modelo");
+        getContentPane().add(labelModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         labelSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelSerie.setText("Serie");
+        getContentPane().add(labelSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
 
         labelColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelColor.setText("Color");
+        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
         labelLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelLinea.setText("Linea");
+        getContentPane().add(labelLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         labelMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelMarca.setText("Marca");
+        getContentPane().add(labelMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         botonRegristrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonRegristrar.setText("Registrar");
@@ -79,6 +123,7 @@ public class RegistroAuto extends javax.swing.JFrame {
                 botonRegristrarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonRegristrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, -1));
 
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonRegresar.setText("Regresar");
@@ -87,106 +132,38 @@ public class RegistroAuto extends javax.swing.JFrame {
                 botonRegresarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelModelo)
-                            .addComponent(labelSerie)
-                            .addComponent(labelColor)
-                            .addComponent(labelLinea)
-                            .addComponent(labelMarca))
-                        .addGap(131, 131, 131)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoModelo)
-                            .addComponent(textoSerie, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(textoColor)
-                            .addComponent(textoLinea)
-                            .addComponent(textoMarca)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(botonRegresar)
-                        .addGap(40, 40, 40)
-                        .addComponent(botonRegristrar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(labelRegistro)
-                .addGap(83, 83, 83))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(labelRegistro)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelModelo))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelSerie))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelColor)
-                    .addComponent(textoColor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelLinea)
-                    .addComponent(textoLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMarca)
-                    .addComponent(textoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonRegristrar)
-                    .addComponent(botonRegresar))
-                .addGap(30, 30, 30))
-        );
+        lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        getContentPane().add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegristrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegristrarActionPerformed
-      EntityManager em = emFactory.createEntityManager();
-
-        em.getTransaction().begin();
-
-        Vehiculo vh = new Vehiculo(){};
-        
-        vh.setModelo(textoModelo.getText());
-        vh.setSerie(textoSerie.getText());
-        vh.setColor(textoColor.getText());
-        vh.setLinea(textoLinea.getText());
-        vh.setMarca(textoMarca.getText());
-
-        // Guarda la entidad en la base de datos
-        em.persist(vh);
-
-        // Confirma la transacción
-        em.getTransaction().commit();
-
-        // Cierra el EntityManager
-        em.close();
-
-   
-    
-           
-       
+        Persona persona = a.buscarPersonasRFC(rfc);
+        Automovil auto = this.extraerDatosFormulario();
+        Double costo = d.placaNuevo;
+        String placa = c.generarPlaca();
+        b.registrarVehiculoPersona(auto, persona);
+        c.insertarTramitePlacasNuevo(persona, auto, placa, costo);
+        JOptionPane.showMessageDialog(null, "Se ha registrado el vehiculo:\n"
+                + "Placa: "+placa+""
+                        + "No. Serie: "+auto.getSerie()+"\n"
+                                + "Marca: "+auto.getMarca()+"\n"
+                                        + "Linea: "+auto.getLinea()+"\n"
+                                                + "Color: "+auto.getColor()+"\n"
+                                                        + "Modelo: "+auto.getModelo()+"", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonRegristrarActionPerformed
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonRegresarActionPerformed
+
+    private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMarcaActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -233,11 +210,12 @@ public class RegistroAuto extends javax.swing.JFrame {
     private javax.swing.JLabel labelModelo;
     private javax.swing.JLabel labelRegistro;
     private javax.swing.JLabel labelSerie;
-    private javax.swing.JTextField textoColor;
-    private javax.swing.JTextField textoLinea;
-    private javax.swing.JTextField textoMarca;
-    private javax.swing.JTextField textoModelo;
-    private javax.swing.JTextField textoSerie;
+    private javax.swing.JLabel lblPersona;
+    private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtLinea;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtSerie;
     // End of variables declaration//GEN-END:variables
 
 }

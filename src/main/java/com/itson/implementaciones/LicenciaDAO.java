@@ -33,9 +33,9 @@ public class LicenciaDAO implements ILicenciaDAO {
 
             Licencia licencia = new Licencia();
             if (estadoDiscapacidad == 1) {
-                licencia.setTipo(TipoLicencia.DISCAPACITADO);
+                licencia.setTipo(TipoLicencia.Discapacitado);
             } else {
-                licencia.setTipo(TipoLicencia.NORMAL);
+                licencia.setTipo(TipoLicencia.Normal);
             }
             licencia.setVigencia(vigencia);
             licencia.setCosto(costo);
@@ -45,10 +45,30 @@ public class LicenciaDAO implements ILicenciaDAO {
             em.getTransaction().begin();
             em.persist(licencia);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
         } finally {
             em.close();
+        } 
+    }
+
+    @Override
+    public boolean validarLicenciaVigente(String rfc) {
+        boolean vigencia = false;
+        try {
+            TypedQuery<Licencia> queryLicencia = em.createQuery("select l from Licencia l join l.persona p where p.rfc = :rfc order by l.fechaEmision desc", Licencia.class);
+            queryLicencia.setParameter("rfc", rfc);
+            queryLicencia.setMaxResults(1);
+            Licencia licencia = queryLicencia.getSingleResult();
+            Calendar fechaVencimiento = Calendar.getInstance();
+            fechaVencimiento.add(Calendar.YEAR, licencia.getVigencia());
+            Calendar fechaActual = Calendar.getInstance();
+            if (fechaVencimiento.after(fechaActual)) {
+                vigencia = true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No tiene o no se encontró una licencia vigente para la persona con el RFC "+rfc, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+        return vigencia;
     }
 }

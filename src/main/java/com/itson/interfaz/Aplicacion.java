@@ -144,10 +144,9 @@ public class Aplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_botonLicenciasActionPerformed
 
     private void botonPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPlacasActionPerformed
-      this.setVisible(false);
-      CostosPlacas v = new CostosPlacas();
-      v.setVisible(true);
-   
+        ConsultaPlaca v = new ConsultaPlaca();
+        v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonPlacasActionPerformed
 
     private void botonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportesActionPerformed
@@ -163,12 +162,11 @@ public class Aplicacion extends javax.swing.JFrame {
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
         IPersonaDAO a = new PersonaDAO();
         long numeroPersonas = a.contarPersonas();
-        if (numeroPersonas >= 20) { // si hay más de 20 personas
+        if (numeroPersonas >= 20) {
             int respuesta = JOptionPane.showConfirmDialog(null, "Ya hay más de 20 personas registradas en la base de datos. ¿Quiere volver a ingresarlas?", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
                 a.insertarPersonas();
                 JOptionPane.showMessageDialog(null, "Se insertaron 20 personas exitosamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            } else {
             }
         } else {
             a.insertarPersonas();

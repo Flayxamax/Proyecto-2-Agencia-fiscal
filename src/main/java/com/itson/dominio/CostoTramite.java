@@ -19,6 +19,6 @@ public class CostoTramite {
     public final double licencia3D = 700;
 
     public final double placaNuevo = 1500;
-    public final double placaUsado = 1500;
+    public final double placaUsado = 1000;
 
 }

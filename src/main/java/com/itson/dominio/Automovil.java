@@ -3,8 +3,6 @@ package com.itson.dominio;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,14 +24,9 @@ public class Automovil extends Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_automovil", nullable = false)
     private Long id;
-    
-    @Column(name = "Estado", nullable  = false)
-    @Enumerated (EnumType.STRING)
-    private TipoAutomovil tipoAuto;
 
     @OneToMany(mappedBy = "automovil", targetEntity = Placa.class)
     private List<Placa> placa;
-
     @Override
     public Long getId() {
         return id;
@@ -44,18 +37,17 @@ public class Automovil extends Vehiculo {
         this.id = id;
     }
 
-    public TipoAutomovil getTipoAuto() {
-        return tipoAuto;
+    public List<Placa> getPlaca() {
+        return placa;
     }
 
-    public void setTipoAuto(TipoAutomovil tipoAuto) {
-        this.tipoAuto = tipoAuto;
+    public void setPlaca(List<Placa> placa) {
+        this.placa = placa;
     }
-    
+
     @Override
     public String toString() {
-        return "Automovil{" + "id=" + id + ", tipoAuto=" + tipoAuto + ", placa=" + placa + '}';
+        return "Automovil{" + "id=" + id + ", placa=" + placa + '}';
     }
-
 
 }

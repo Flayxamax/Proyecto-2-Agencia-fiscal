@@ -9,6 +9,6 @@ package com.itson.dominio;
  * @author ildex
  */
 public enum TipoPlaca {
-    VIGENTE,
-    NoVIGENTE
+    Activa,
+    Desactivada
 }

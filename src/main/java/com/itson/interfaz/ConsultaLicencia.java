@@ -28,6 +28,51 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         initComponents();
     }
 
+    private Persona extraerDatosFormulario() {
+        String RFC = txtRFC.getText();
+        Persona persona = a.buscarPersonasRFC(RFC);
+        return persona;
+    }
+
+    private void insertarDatospersona() {
+        Persona persona = this.extraerDatosFormulario();
+        lblNombreI.setText(persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
+        Calendar fechaNacimiento = persona.getFechaNacimiento();
+        Date date = fechaNacimiento.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaN = sdf.format(date);
+        lblFechaNI.setText(fechaN);
+        //Edad
+        LocalDate fechaNacimientoLocal = LocalDate.of(fechaNacimiento.get(Calendar.YEAR),
+                fechaNacimiento.get(Calendar.MONTH) + 1,
+                fechaNacimiento.get(Calendar.DAY_OF_MONTH));
+        LocalDate fechaActual = LocalDate.now();
+        int edad = Period.between(fechaNacimientoLocal, fechaActual).getYears();
+        lblEdadI.setText(String.valueOf(edad));
+    }
+    
+    private boolean validarEdad(){
+        boolean mayorEdad = false;
+        String eda = lblEdadI.getText();
+        int edad = Integer.parseInt(eda);
+        return mayorEdad = edad >= 18;
+    }
+
+    private void validaDatosPersona() {
+        if (txtRFC.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No has ingresado un RFC a consultar", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (a.validarPersonaRFC(txtRFC.getText()) != true) {
+            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (this.validarEdad() == true) {
+            CostosLicencia v = new CostosLicencia(txtRFC.getText());
+            v.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,40 +232,11 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRFCActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String RFC = txtRFC.getText();
-        Persona persona = a.buscarPersonasRFC(RFC);
-        lblNombreI.setText(persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
-        Calendar fechaNacimiento = persona.getFechaNacimiento();
-        Date date = fechaNacimiento.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaN = sdf.format(date);
-        lblFechaNI.setText(fechaN);
-        //Edad
-        LocalDate fechaNacimientoLocal = LocalDate.of(fechaNacimiento.get(Calendar.YEAR),
-                fechaNacimiento.get(Calendar.MONTH) + 1,
-                fechaNacimiento.get(Calendar.DAY_OF_MONTH));
-        LocalDate fechaActual = LocalDate.now();
-        int edad = Period.between(fechaNacimientoLocal, fechaActual).getYears();
-        lblEdadI.setText(String.valueOf(edad));
-
+        this.insertarDatospersona();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-
-        if (txtRFC.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No has ingresado un RFC a consultar", "Error", JOptionPane.INFORMATION_MESSAGE);
-        } else if (a.validarPersonaRFC(txtRFC.getText()) != true) {
-            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
-        String eda = lblEdadI.getText();
-        int edad = Integer.parseInt(eda);
-        if (edad >= 18) {
-            CostosLicencia v = new CostosLicencia(txtRFC.getText());
-            v.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        this.validaDatosPersona();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
 //    /**

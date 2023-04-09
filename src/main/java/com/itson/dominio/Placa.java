@@ -4,9 +4,9 @@
  */
 package com.itson.dominio;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @PrimaryKeyJoinColumn(name = "id_tramite_placa")
+@DiscriminatorValue("Placa")
 @Table(name = "tramite_placa")
 public class Placa extends Tramite {
 
@@ -34,6 +35,9 @@ public class Placa extends Tramite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_placa", nullable = false)
     private Long id;
+
+    @Column(name = "Placa", nullable = false, length = 7)
+    private String placa;
 
     @Column(name = "Estado", nullable = true)
     @Enumerated(EnumType.STRING)
@@ -55,6 +59,14 @@ public class Placa extends Tramite {
         this.id = id;
     }
 
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
     public void setTipo(TipoPlaca tipo) {
         this.tipo = tipo;
     }
@@ -74,14 +86,15 @@ public class Placa extends Tramite {
     public void setAutomovil(Automovil automovil) {
         this.automovil = automovil;
     }
-    public Placa(){
-        
+
+    public Placa() {
+
     }
-    public Placa(TipoPlaca tipo, Automovil automovil){
+
+    public Placa(TipoPlaca tipo, Automovil automovil) {
         this.tipo = tipo;
         this.automovil = automovil;
     }
-   
 
     @Override
     public String toString() {

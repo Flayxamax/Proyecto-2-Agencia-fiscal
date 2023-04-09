@@ -32,8 +32,16 @@ public class CostosLicencia extends javax.swing.JFrame {
     public CostosLicencia(String rfc) {
         this.rfc = rfc;
         initComponents();
+        this.insertarDatosPersona();
+        this.insertarDatosTablaCosto();
+    }
+
+    private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
+    }
+
+    private void insertarDatosTablaCosto() {
         DefaultTableModel tblCosto = (DefaultTableModel) tblPrecioLicencia.getModel();
         tblPrecioLicencia.setModel(tblCosto);
         tblCosto.addRow(new Object[]{"1 año", b.licencia1N, b.licencia1D});
