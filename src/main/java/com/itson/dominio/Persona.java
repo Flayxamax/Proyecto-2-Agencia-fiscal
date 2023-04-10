@@ -31,15 +31,15 @@ public class Persona implements Serializable {
     @Column(name = "RFC", nullable = false, length = 13)
     private String rfc;
     
-    @Convert(converter = Encriptacion.class)
+//    @Convert(converter = Encriptacion.class)
     @Column(name = "Nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Convert(converter = Encriptacion.class)
+//    @Convert(converter = Encriptacion.class)
     @Column(name = "Apellido_Paterno", nullable = false, length = 100)
     private String apellidoPaterno;
     
-    @Convert(converter = Encriptacion.class)
+//    @Convert(converter = Encriptacion.class)
     @Column(name = "Apellido_Materno", nullable = false, length = 100)
     private String apellidoMaterno;
 
