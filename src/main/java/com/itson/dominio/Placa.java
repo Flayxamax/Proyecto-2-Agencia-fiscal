@@ -39,13 +39,13 @@ public class Placa extends Tramite {
     @Column(name = "Placa", nullable = false, length = 7)
     private String placa;
 
-    @Column(name = "Estado", nullable = true)
-    @Enumerated(EnumType.STRING)
-    private TipoPlaca tipo;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_recepcion")
     private Calendar fechaRecepcion;
+
+    @Column(name = "Estado", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoPlaca estado;
 
     @ManyToOne
     @JoinColumn(name = "id_automovil", nullable = false)
@@ -59,16 +59,20 @@ public class Placa extends Tramite {
         this.id = id;
     }
 
+    public TipoPlaca getEstado() {
+        return estado;
+    }
+
+    public void setEstado(TipoPlaca estado) {
+        this.estado = estado;
+    }
+
     public String getPlaca() {
         return placa;
     }
 
     public void setPlaca(String placa) {
         this.placa = placa;
-    }
-
-    public void setTipo(TipoPlaca tipo) {
-        this.tipo = tipo;
     }
 
     public Calendar getFechaRecepcion() {
@@ -91,14 +95,9 @@ public class Placa extends Tramite {
 
     }
 
-    public Placa(TipoPlaca tipo, Automovil automovil) {
-        this.tipo = tipo;
-        this.automovil = automovil;
-    }
-
     @Override
     public String toString() {
-        return "Placa{" + "id=" + id + ", tipo=" + tipo + ", fechaRecepcion=" + fechaRecepcion + ", automovil=" + automovil + '}';
+        return "Placa{" + "id=" + id + ", placa=" + placa + ", fechaRecepcion=" + fechaRecepcion + ", estado=" + estado + ", automovil=" + automovil + '}';
     }
 
 }

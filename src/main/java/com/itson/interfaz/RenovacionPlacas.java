@@ -4,17 +4,94 @@
  */
 package com.itson.interfaz;
 
+import com.itson.dominio.Automovil;
+import com.itson.dominio.CostoTramite;
+import com.itson.dominio.Persona;
+import com.itson.dominio.Placa;
+import com.itson.implementaciones.LicenciaDAO;
+import com.itson.implementaciones.PersonaDAO;
+import com.itson.implementaciones.PlacaDAO;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author arace
  */
 public class RenovacionPlacas extends javax.swing.JFrame {
 
+    PersonaDAO a = new PersonaDAO();
+    CostoTramite b = new CostoTramite();
+    LicenciaDAO c = new LicenciaDAO();
+    PlacaDAO d = new PlacaDAO();
+    private static final Logger LOG = Logger.getLogger(PlacaDAO.class.getName());
+    private final String rfc;
+
     /**
      * Creates new form RenovacionPlacas
+     *
+     * @param rfc
      */
-    public RenovacionPlacas() {
+    public RenovacionPlacas(String rfc) {
         initComponents();
+        this.rfc = rfc;
+    }
+
+    private void cargarTablaAuto(String placa) {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        try {
+            List<Automovil> listaAuto = d.buscarPlacaAutomovilL(placa, persona);
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblAuto.getModel();
+            modeloTabla.setRowCount(0);
+            for (Automovil auto : listaAuto) {
+                Object[] fila = {
+                    auto.getSerie(),
+                    auto.getMarca(),
+                    auto.getLinea(),
+                    auto.getColor(),
+                    auto.getModelo()
+                };
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    private void validaPlaca() {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        if (txtPlaca.getText().equals("   -   ")) {
+            JOptionPane.showMessageDialog(null, "El campo de texto de placa está vacío", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        this.cargarTablaAuto(txtPlaca.getText());
+//        } else if (d.validaPlacaPersonaExiste(txtPlaca.getText(), persona) == false) {
+//            JOptionPane.showMessageDialog(null, "La placa " + txtPlaca.getText() + " no tiene coincidencia con una placa registrada en nuestro sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+//            System.out.println(d.validaPlacaPersonaExiste(txtPlaca.getText(), persona));
+//        } else {
+//            this.cargarTablaAuto(txtPlaca.getText());
+//            System.out.println(d.validaPlacaPersonaExiste(txtPlaca.getText(), persona));
+//        }
+    }
+
+    private void insertarPlaca() {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        Automovil auto = d.buscarPlacaAutomovil(txtPlaca.getText(), persona);
+        Double costo = b.placaUsado;
+        String placa = d.generarPlaca();
+        d.insertarTramitePlacasUsado(persona, auto, placa, costo);
+        JOptionPane.showMessageDialog(null, "Se ha renovado la placa para el vehiculo:\n"
+                + "Placa: " + placa + "\n"
+                + "No. Serie: " + auto.getSerie() + "\n"
+                + "Marca: " + auto.getMarca() + "\n"
+                + "Linea: " + auto.getLinea() + "\n"
+                + "Color: " + auto.getColor() + "\n"
+                + "Modelo: " + auto.getModelo() + "", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        Aplicacion v = new Aplicacion();
+        v.setVisible(true);
+        dispose();
     }
 
     /**
@@ -31,97 +108,133 @@ public class RenovacionPlacas extends javax.swing.JFrame {
         botonAceptar = new javax.swing.JButton();
         botonRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        textoPlacas = new javax.swing.JTextField();
+        tblAuto = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JButton();
+        txtPlaca = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Renovacion de Placas");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Renovacion de Placas");
 
-        labelIngresarPlacas.setText("Ingrese placas");
         labelIngresarPlacas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelIngresarPlacas.setText("Ingrese placas");
 
-        botonAceptar.setText("Aceptar");
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonAceptar.setText("Aceptar");
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
             }
         });
 
-        botonRegresar.setText("Regresar");
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonRegresar.setText("Regresar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAuto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Placa", "Modelo", "Serie", "Color", "Linea", "Marca", "Estado vigente"
+                "Serie", "Marca", "Línea", "Color", "Modelo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane1.setViewportView(jTable1);
 
-        textoPlacas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAuto.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblAuto);
+        if (tblAuto.getColumnModel().getColumnCount() > 0) {
+            tblAuto.getColumnModel().getColumn(0).setResizable(false);
+            tblAuto.getColumnModel().getColumn(1).setResizable(false);
+            tblAuto.getColumnModel().getColumn(2).setResizable(false);
+            tblAuto.getColumnModel().getColumn(3).setResizable(false);
+            tblAuto.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        try {
+            txtPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("AAA-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 26, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
                                 .addComponent(labelIngresarPlacas)
-                                .addGap(69, 69, 69)
-                                .addComponent(textoPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)))
+                                .addGap(28, 28, 28)
+                                .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscar))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
+                        .addGap(162, 162, 162)
                         .addComponent(botonRegresar)
                         .addGap(117, 117, 117)
-                        .addComponent(botonAceptar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(botonAceptar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel1)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel1)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelIngresarPlacas)
-                    .addComponent(textoPlacas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                    .addComponent(btnBuscar)
+                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar)
                     .addComponent(botonRegresar))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(56, 56, 56))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        // TODO add your handling code here:
+        this.insertarPlaca();
     }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        this.validaPlaca();
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -161,10 +274,11 @@ public class RenovacionPlacas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonRegresar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelIngresarPlacas;
-    private javax.swing.JTextField textoPlacas;
+    private javax.swing.JTable tblAuto;
+    private javax.swing.JFormattedTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }

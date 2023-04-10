@@ -8,6 +8,7 @@ import com.itson.dominio.CostoTramite;
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
+import com.itson.implementaciones.PlacaDAO;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +20,7 @@ public class CostosPlacas extends javax.swing.JFrame {
     PersonaDAO a = new PersonaDAO();
     CostoTramite b = new CostoTramite();
     LicenciaDAO c = new LicenciaDAO();
+    PlacaDAO d = new PlacaDAO();
     private final String rfc;
 
     /**
@@ -31,6 +33,12 @@ public class CostosPlacas extends javax.swing.JFrame {
         this.rfc = rfc;
         this.insertarDatosPersona();
         this.insertarDatosTablaCosto();
+        Persona persona = a.buscarPersonasRFC(rfc);
+        if (d.validaPersonaPlacas(persona) == true) {
+            btnVehiculoUsado.setEnabled(true);
+        } else{
+            btnVehiculoUsado.setEnabled(false);
+        }
     }
 
     private void insertarDatosPersona() {
@@ -152,10 +160,8 @@ public class CostosPlacas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelTipoCarro)
-                            .addComponent(lblLicenciaVigencia)))
+                        .addGap(456, 456, 456)
+                        .addComponent(lblLicenciaVigencia))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(botonRegresar)
@@ -170,28 +176,31 @@ public class CostosPlacas extends javax.swing.JFrame {
                         .addGap(103, 103, 103)
                         .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(231, 231, 231)
+                        .addComponent(labelTipoCarro))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(164, 164, 164)
                         .addComponent(btnVehiculoNuevo)
-                        .addGap(56, 56, 56)
+                        .addGap(45, 45, 45)
                         .addComponent(btnVehiculoUsado)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(labelModuloPlacas)
-                .addGap(32, 32, 32)
-                .addComponent(lblLicenciaVigencia)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addComponent(lblPersona)
-                .addGap(8, 8, 8)
+                .addGap(20, 20, 20)
+                .addComponent(lblLicenciaVigencia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(labelTipoCarro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVehiculoNuevo)
-                    .addComponent(btnVehiculoUsado))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVehiculoUsado)
+                    .addComponent(btnVehiculoNuevo))
+                .addGap(38, 38, 38)
                 .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -221,7 +230,9 @@ public class CostosPlacas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVehiculoNuevoActionPerformed
 
     private void btnVehiculoUsadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoUsadoActionPerformed
-        // TODO add your handling code here:
+        RenovacionPlacas v = new RenovacionPlacas(rfc);
+        v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnVehiculoUsadoActionPerformed
 
 //    /**

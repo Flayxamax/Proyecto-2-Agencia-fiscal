@@ -25,17 +25,13 @@ public class LicenciaDAO implements ILicenciaDAO {
     EntityManager em = emFactory.createEntityManager();
 
     @Override
-    public void insertarTramiteLicencia(String rfc, Double costo, int vigencia, int estadoDiscapacidad) {
+    public void insertarTramiteLicencia(Persona persona, Double costo, int vigencia, int estadoDiscapacidad) {
         try {
-            TypedQuery<Persona> queryPersona = em.createQuery("select p from Persona p where p.rfc = :rfc", Persona.class);
-            queryPersona.setParameter("rfc", rfc);
-            Persona persona = queryPersona.getSingleResult();
-
             Licencia licencia = new Licencia();
             if (estadoDiscapacidad == 1) {
-                licencia.setTipo(TipoLicencia.Discapacitado);
+                licencia.setTipoLicencia(TipoLicencia.Discapacitado);
             } else {
-                licencia.setTipo(TipoLicencia.Normal);
+                licencia.setTipoLicencia(TipoLicencia.Normal);
             }
             licencia.setVigencia(vigencia);
             licencia.setCosto(costo);
@@ -56,7 +52,10 @@ public class LicenciaDAO implements ILicenciaDAO {
     public boolean validarLicenciaVigente(String rfc) {
         boolean vigencia = false;
         try {
-            TypedQuery<Licencia> queryLicencia = em.createQuery("select l from Licencia l join l.persona p where p.rfc = :rfc order by l.fechaEmision desc", Licencia.class);
+            TypedQuery<Licencia> queryLicencia = em.createQuery("select l from Licencia l "
+                    + "inner join l.persona p "
+                    + "where p.rfc = :rfc "
+                    + "order by l.fechaEmision desc", Licencia.class);
             queryLicencia.setParameter("rfc", rfc);
             queryLicencia.setMaxResults(1);
             Licencia licencia = queryLicencia.getSingleResult();

@@ -27,6 +27,7 @@ public class Automovil extends Vehiculo {
 
     @OneToMany(mappedBy = "automovil", targetEntity = Placa.class)
     private List<Placa> placa;
+
     @Override
     public Long getId() {
         return id;

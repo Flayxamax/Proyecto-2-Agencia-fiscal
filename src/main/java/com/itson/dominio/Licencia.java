@@ -31,19 +31,14 @@ public class Licencia extends Tramite {
     @Column(name = "id_licencia", nullable = false)
     private Long id;
 
-    @Column(name = "Tipo", nullable = true)
-    @Enumerated(EnumType.STRING)
-    private TipoLicencia tipo;
-
     @Column(name = "Vigencia", nullable = false)
     private Integer vigencia;
 
-    public Licencia() {
-    }
+    @Column(name = "Tipo", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoLicencia tipoLicencia;
 
-    public Licencia(TipoLicencia tipo, Integer vigencia) {
-        this.tipo = tipo;
-        this.vigencia = vigencia;
+    public Licencia() {
     }
 
     public Long getId() {
@@ -54,8 +49,12 @@ public class Licencia extends Tramite {
         this.id = id;
     }
 
-    public void setTipo(TipoLicencia tipo) {
-        this.tipo = tipo;
+    public TipoLicencia getTipoLicencia() {
+        return tipoLicencia;
+    }
+
+    public void setTipoLicencia(TipoLicencia tipoLicencia) {
+        this.tipoLicencia = tipoLicencia;
     }
 
     public Integer getVigencia() {
@@ -68,7 +67,7 @@ public class Licencia extends Tramite {
 
     @Override
     public String toString() {
-        return "Licencia{" + "id=" + id + ", tipo=" + tipo + ", vigencia=" + vigencia + '}';
+        return "Licencia{" + "id=" + id + ", vigencia=" + vigencia + ", tipoLicencia=" + tipoLicencia + '}';
     }
 
 }

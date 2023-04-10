@@ -255,7 +255,7 @@ public class CostosLicencia extends javax.swing.JFrame {
                 break;
         }
 
-        c.insertarTramiteLicencia(rfc, costo, vigencia, estadoDiscapacidad);
+        c.insertarTramiteLicencia(persona, costo, vigencia, estadoDiscapacidad);
         JOptionPane.showMessageDialog(null, "Se ha generado una licencia con estos datos:\n"
                 + "Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno() + "\n"
                 + "Vigencia (años): " + vigencia + "\n"

@@ -26,6 +26,7 @@ public class RegistroAuto extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistroPlacas
+     *
      * @param rfc
      */
     public RegistroAuto(String rfc) {
@@ -36,14 +37,14 @@ public class RegistroAuto extends javax.swing.JFrame {
 
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
-        lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno()+c.generarPlaca());
+        lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
 
     private Automovil extraerDatosFormulario() {
-        String serie = txtSerie.getText();
-        String marca = txtMarca.getText();
-        String linea = txtLinea.getText();
-        String color = txtColor.getText();
+        String serie = txtSerie.getText().toUpperCase();
+        String marca = txtMarca.getText().toUpperCase();
+        String linea = txtLinea.getText().toUpperCase();
+        String color = txtColor.getText().toUpperCase();
         Integer modelo = Integer.valueOf(txtModelo.getText());
         Automovil auto = new Automovil();
         auto.setSerie(serie);
@@ -65,7 +66,6 @@ public class RegistroAuto extends javax.swing.JFrame {
 
         labelRegistro = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
-        txtSerie = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
         txtLinea = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
@@ -77,44 +77,44 @@ public class RegistroAuto extends javax.swing.JFrame {
         botonRegristrar = new javax.swing.JButton();
         botonRegresar = new javax.swing.JButton();
         lblPersona = new javax.swing.JLabel();
+        txtSerie = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelRegistro.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         labelRegistro.setText("Registro Auto");
-        getContentPane().add(labelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 27, -1, -1));
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 350, 25));
-        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 350, 25));
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 350, 25));
-        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 350, 25));
+        getContentPane().add(labelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 350, 25));
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 350, 25));
+        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 350, 25));
 
         txtMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMarcaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 350, 25));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 350, 25));
 
         labelModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelModelo.setText("Modelo");
-        getContentPane().add(labelModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
+        getContentPane().add(labelModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
         labelSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelSerie.setText("Serie");
-        getContentPane().add(labelSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
+        getContentPane().add(labelSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
 
         labelColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelColor.setText("Color");
-        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
+        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
 
         labelLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelLinea.setText("Linea");
-        getContentPane().add(labelLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        getContentPane().add(labelLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
 
         labelMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelMarca.setText("Marca");
-        getContentPane().add(labelMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+        getContentPane().add(labelMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
         botonRegristrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonRegristrar.setText("Registrar");
@@ -123,7 +123,7 @@ public class RegistroAuto extends javax.swing.JFrame {
                 botonRegristrarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonRegristrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, -1));
+        getContentPane().add(botonRegristrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
 
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonRegresar.setText("Regresar");
@@ -132,10 +132,17 @@ public class RegistroAuto extends javax.swing.JFrame {
                 botonRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
         lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+
+        try {
+            txtSerie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("AAA-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 120, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -149,12 +156,15 @@ public class RegistroAuto extends javax.swing.JFrame {
         b.registrarVehiculoPersona(auto, persona);
         c.insertarTramitePlacasNuevo(persona, auto, placa, costo);
         JOptionPane.showMessageDialog(null, "Se ha registrado el vehiculo:\n"
-                + "Placa: "+placa+""
-                        + "No. Serie: "+auto.getSerie()+"\n"
-                                + "Marca: "+auto.getMarca()+"\n"
-                                        + "Linea: "+auto.getLinea()+"\n"
-                                                + "Color: "+auto.getColor()+"\n"
-                                                        + "Modelo: "+auto.getModelo()+"", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                + "Placa: " + placa + "\n"
+                + "No. Serie: " + auto.getSerie() + "\n"
+                + "Marca: " + auto.getMarca() + "\n"
+                + "Linea: " + auto.getLinea() + "\n"
+                + "Color: " + auto.getColor() + "\n"
+                + "Modelo: " + auto.getModelo() + "", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        Aplicacion v = new Aplicacion();
+        v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonRegristrarActionPerformed
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
@@ -215,7 +225,7 @@ public class RegistroAuto extends javax.swing.JFrame {
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtSerie;
+    private javax.swing.JFormattedTextField txtSerie;
     // End of variables declaration//GEN-END:variables
 
 }
