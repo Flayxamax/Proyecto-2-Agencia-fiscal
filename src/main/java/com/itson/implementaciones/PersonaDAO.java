@@ -127,8 +127,6 @@ public class PersonaDAO implements IPersonaDAO {
         return query.getSingleResult() > 0;
     }
 
-    @Override
-    public List<Persona> buscarPersonas(String rfc, String nombre, int ano) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
+    
 }

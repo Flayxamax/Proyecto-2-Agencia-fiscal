@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class ConsultaPersona extends javax.swing.JFrame {
 
     IPersonaDAO a = new PersonaDAO();
+    Persona b  = new Persona();
 
     /**
      * Creates new form BusquedaLicencia
@@ -36,10 +37,15 @@ private Persona extraerDatosPersona(){
   
 }
 
-   private void insertarPersona(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String telefono) {
-    DefaultTableModel tabla = (DefaultTableModel) tblPersona.getModel();
-    Object[] fila = {rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, telefono};
-    tabla.addRow(fila);
+   private void insertarPersona() {
+    Persona p = new Persona();
+    DefaultTableModel tbldatos = (DefaultTableModel) tblPersona.getModel();
+    tblPersona.setModel(tbldatos);
+    tbldatos.addRow(new Object[]{"RFC", p.getRfc()});
+    tbldatos.addRow(new Object[]{"Nombre(s)",p.getNombre()+" "+ p.getApellidoPaterno()+" "+p.getApellidoMaterno()});
+    tbldatos.addRow(new Object[]{"Fecha de nacimiento", p.getFechaNacimiento()});
+    tbldatos.addRow(new Object[]{"Telefono",p.getTelefono()});
+    
    }
    
 
