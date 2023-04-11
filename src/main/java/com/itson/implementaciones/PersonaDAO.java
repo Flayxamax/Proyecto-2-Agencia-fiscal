@@ -73,7 +73,7 @@ public class PersonaDAO implements IPersonaDAO {
         return (long) query.getSingleResult();
     }
 
-    @Override
+
     public List<Persona> buscarPersonas(String rfc, String nombre, Integer ano) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);
@@ -125,5 +125,10 @@ public class PersonaDAO implements IPersonaDAO {
         TypedQuery<Long> query = em.createQuery("select count(p) from Persona p where p.rfc = :rfc", Long.class);
         query.setParameter("rfc", rfc);
         return query.getSingleResult() > 0;
+    }
+
+    @Override
+    public List<Persona> buscarPersonas(String rfc, String nombre, int ano) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

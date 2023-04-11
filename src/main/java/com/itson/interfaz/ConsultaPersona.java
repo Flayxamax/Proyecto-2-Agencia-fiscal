@@ -1,13 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.interfaz;
 
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
 import interfaces.IPersonaDAO;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,19 +27,21 @@ public class ConsultaPersona extends javax.swing.JFrame {
     public ConsultaPersona() {
         initComponents();
     }
+private Persona extraerDatosPersona(){
+    String RFC = txtRFC.getText();
+    String nombre = txtNombre.getText();
+    int ano = Integer.parseInt(txtAno.getText());
+        Persona persona = (Persona) a.buscarPersonas(RFC, nombre, ano);
+        return extraerDatosPersona();
+  
+}
 
-    public void agregarPersonas(List<Persona> personas) {
-        DefaultTableModel tabla = (DefaultTableModel) tblMostrarP.getModel();
-        for (Persona persona : personas) {
-            Object[] fila = {persona.getRfc(), persona.getNombre(), persona.getApellidoPaterno(), persona.getApellidoMaterno(), persona.getFechaNacimiento(), persona.getTelefono()};
-            tabla.addRow(fila);
-        }
-    }
-
-    public void consultarPersonas(String rfc, String nombre, Integer ano) {
-        List<Persona> personas = a.buscarPersonas(rfc, nombre, ano);
-        agregarPersonas(personas);
-    }
+   private void insertarPersona(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String telefono) {
+    DefaultTableModel tabla = (DefaultTableModel) tblPersona.getModel();
+    Object[] fila = {rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, telefono};
+    tabla.addRow(fila);
+   }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,8 +55,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         labelBuscarParametros = new javax.swing.JLabel();
         labelModuloConsulta = new javax.swing.JLabel();
         botonRegresar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblMostrarP = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         txtAno = new javax.swing.JTextField();
         txtRFC = new javax.swing.JTextField();
@@ -60,115 +63,103 @@ public class ConsultaPersona extends javax.swing.JFrame {
         labelNombreCompleto = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPersona = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labelBuscarParametros.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         labelBuscarParametros.setText("Buscar parametros:");
-        labelBuscarParametros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         labelModuloConsulta.setText("Modulo de consulta a personas");
         labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         getContentPane().add(labelModuloConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
-        botonRegresar.setText("Regresar");
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonRegresar.setText("Regresar");
         botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, -1, -1));
 
-        tblMostrarP.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "RFC", "Nombre(s)", "Apellido Paterno", "Apellido Materno", "Fecha nacimiento", "Télefono"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblMostrarP.setColumnSelectionAllowed(true);
-        tblMostrarP.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblMostrarP);
-        tblMostrarP.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (tblMostrarP.getColumnModel().getColumnCount() > 0) {
-            tblMostrarP.getColumnModel().getColumn(0).setResizable(false);
-            tblMostrarP.getColumnModel().getColumn(1).setResizable(false);
-            tblMostrarP.getColumnModel().getColumn(2).setResizable(false);
-            tblMostrarP.getColumnModel().getColumn(3).setResizable(false);
-            tblMostrarP.getColumnModel().getColumn(4).setResizable(false);
-            tblMostrarP.getColumnModel().getColumn(5).setResizable(false);
-        }
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 970, 130));
-
-        btnBuscar.setText("Buscar");
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, -1, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, -1, -1));
 
         txtAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnoActionPerformed(evt);
             }
         });
-        getContentPane().add(txtAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 100, 27));
+        getContentPane().add(txtAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 207, 130, 30));
 
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRFCActionPerformed(evt);
             }
         });
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 150, 27));
+        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 207, 150, 30));
 
-        botonSiguiente.setText("Siguiente");
         botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonSiguiente.setText("Siguiente");
         botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, -1));
+        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, -1, -1));
 
+        labelRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelRFC.setText("RFC");
-        labelRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        getContentPane().add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
+        labelNombreCompleto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelNombreCompleto.setText("Nombre completo");
-        labelNombreCompleto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
+        getContentPane().add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
 
+        labelFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelFecha.setText("Año nacimiento");
-        labelFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, -1, -1));
+        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, -1, -1));
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 380, 27));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 207, 380, 30));
+
+        tblPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblPersona.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "RFC", "Nombre(s)", "Fecha de Nacimiento", "Telefono"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblPersona);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 520, 160));
 
         pack();
         setLocationRelativeTo(null);
@@ -182,17 +173,10 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String RFC = txtRFC.getText();
-        String NombreCompleto = txtAno.getText();
-        Integer ano;
-        if (txtAno.getText().isEmpty()) {
-            ano = 0;
-        } else {
-            ano = Integer.valueOf(txtAno.getText());
-        }
-        consultarPersonas(RFC, NombreCompleto, ano);
+       
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    
+    
     private void txtAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnoActionPerformed
@@ -249,13 +233,13 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelBuscarParametros;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelModuloConsulta;
     private javax.swing.JLabel labelNombreCompleto;
     private javax.swing.JLabel labelRFC;
-    private javax.swing.JTable tblMostrarP;
+    private javax.swing.JTable tblPersona;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRFC;
