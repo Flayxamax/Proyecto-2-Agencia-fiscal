@@ -15,7 +15,7 @@ import java.util.List;
 public interface IPersonaDAO {
     public void insertarPersonas();
     public long contarPersonas();
-    public List<Persona> buscarPersonas(String rfc, String nombre, Integer ano);
+    public List<Persona> buscarPersonas(String rfc, String nombre, int ano);
     public Persona buscarPersonasRFC(String rfc);
     public boolean validarPersonaRFC(String rfc);
 }
