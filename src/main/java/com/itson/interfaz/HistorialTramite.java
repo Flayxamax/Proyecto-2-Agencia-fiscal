@@ -4,17 +4,155 @@
  */
 package com.itson.interfaz;
 
+import com.itson.dominio.Automovil;
+import com.itson.dominio.Licencia;
+import com.itson.dominio.Persona;
+import com.itson.dominio.Placa;
+import com.itson.implementaciones.LicenciaDAO;
+import com.itson.implementaciones.PersonaDAO;
+import com.itson.implementaciones.PlacaDAO;
+import com.itson.implementaciones.VehiculoDAO;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import utils.ConfiguracionPaginado;
+
 /**
  *
  * @author ildex
  */
 public class HistorialTramite extends javax.swing.JFrame {
 
+    PersonaDAO a = new PersonaDAO();
+    private final ConfiguracionPaginado configPaginado;
+    private static final Logger LOG = Logger.getLogger(LicenciaDAO.class.getName());
+    LicenciaDAO b = new LicenciaDAO();
+    PlacaDAO c = new PlacaDAO();
+    VehiculoDAO d = new VehiculoDAO();
+    private final String rfc;
+
     /**
      * Creates new form HistorialTramite
+     *
+     * @param rfc
      */
-    public HistorialTramite() {
+    public HistorialTramite(String rfc) {
         initComponents();
+        this.configPaginado = new ConfiguracionPaginado(0, 3);
+        this.rfc = rfc;
+        this.insertarDatosPersona();
+        this.cargarTablaLicencia();
+        this.cargarTablaPlaca();
+        this.cargarTablaVehiculo();
+    }
+
+    private void insertarDatosPersona() {
+        Persona persona = this.a.buscarPersonasRFC(rfc);
+        lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
+    }
+
+    private void cargarTablaLicencia() {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        try {
+            List<Licencia> listaLicencia = b.consultaLicencias(configPaginado, persona);
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblLicencias.getModel();
+            modeloTabla.setRowCount(0);
+            for (Licencia licencia : listaLicencia) {
+                Calendar fechaNacimiento = licencia.getFechaEmision();
+                Date date = fechaNacimiento.getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaE = sdf.format(date);
+                Object[] fila = {
+                    licencia.getTipoLicencia(),
+                    licencia.getVigencia(),
+                    licencia.getCosto(),
+                    fechaE
+                };
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    private void cargarTablaPlaca() {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        try {
+            List<Placa> listaPlaca = c.consultaPlacas(configPaginado, persona);
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPlacas.getModel();
+            modeloTabla.setRowCount(0);
+            for (Placa placa : listaPlaca) {
+                Calendar fechaNacimiento = placa.getFechaEmision();
+                Date date = fechaNacimiento.getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaE = sdf.format(date);
+                Object[] fila = {
+                    placa.getPlaca(),
+                    placa.getEstado(),
+                    placa.getCosto(),
+                    placa.getAutomovil().getSerie(),
+                    fechaE
+                };
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    private void cargarTablaVehiculo() {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        try {
+            List<Automovil> listaAutomovil = d.consultaVehiculos(configPaginado, persona);
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblVehiculos.getModel();
+            modeloTabla.setRowCount(0);
+            for (Automovil auto : listaAutomovil) {
+                Object[] fila = {
+                    auto.getSerie(),
+                    auto.getMarca(),
+                    auto.getLinea(),
+                    auto.getColor(),
+                    auto.getModelo()
+                };
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    private void avanzarPagina() {
+        this.configPaginado.avanzarPagina();
+        this.cargarTablaLicencia();
+    }
+
+    private void retrocederPagina() {
+        this.configPaginado.retrocederPagina();
+        this.cargarTablaLicencia();
+    }
+
+    private void avanzarPaginaP() {
+        this.configPaginado.avanzarPagina();
+        this.cargarTablaPlaca();
+    }
+
+    private void retrocederPaginaP() {
+        this.configPaginado.retrocederPagina();
+        this.cargarTablaPlaca();
+    }
+
+    private void avanzarPaginaV() {
+        this.configPaginado.avanzarPagina();
+        this.cargarTablaVehiculo();
+    }
+
+    private void retrocederPaginaV() {
+        this.configPaginado.retrocederPagina();
+        this.cargarTablaVehiculo();
     }
 
     /**
@@ -30,12 +168,21 @@ public class HistorialTramite extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaLicencias = new javax.swing.JTable();
+        tblLicencias = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaPlacas = new javax.swing.JTable();
+        tblPlacas = new javax.swing.JTable();
         botonRegresar = new javax.swing.JButton();
-        botonAceptar = new javax.swing.JButton();
+        lblPersona = new javax.swing.JLabel();
+        btnAvanzar = new javax.swing.JButton();
+        btnRetroceder = new javax.swing.JButton();
+        btnAvanzarP = new javax.swing.JButton();
+        btnRetrocederP = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblVehiculos = new javax.swing.JTable();
+        btnAvanzarV = new javax.swing.JButton();
+        btnRetrocederV = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,54 +195,164 @@ public class HistorialTramite extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Licencias");
 
-        tablaLicencias.setModel(new javax.swing.table.DefaultTableModel(
+        tblLicencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Tipo", "Fecha", "Costo"
+                "Tipo", "Vigencia", "Costo", "Fecha emisión"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(tablaLicencias);
+        tblLicencias.setShowGrid(true);
+        tblLicencias.setShowHorizontalLines(false);
+        tblLicencias.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblLicencias);
+        if (tblLicencias.getColumnModel().getColumnCount() > 0) {
+            tblLicencias.getColumnModel().getColumn(0).setResizable(false);
+            tblLicencias.getColumnModel().getColumn(1).setResizable(false);
+            tblLicencias.getColumnModel().getColumn(2).setResizable(false);
+            tblLicencias.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Placas");
 
-        tablaPlacas.setModel(new javax.swing.table.DefaultTableModel(
+        tblPlacas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Tipo", "Fecha", "Costo"
+                "Placa", "Estado", "Costo", "Num. serie vehículo", "Fecha emisión"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane2.setViewportView(tablaPlacas);
+        tblPlacas.setShowHorizontalLines(false);
+        tblPlacas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblPlacas);
+        if (tblPlacas.getColumnModel().getColumnCount() > 0) {
+            tblPlacas.getColumnModel().getColumn(0).setResizable(false);
+            tblPlacas.getColumnModel().getColumn(1).setResizable(false);
+            tblPlacas.getColumnModel().getColumn(2).setResizable(false);
+            tblPlacas.getColumnModel().getColumn(3).setResizable(false);
+            tblPlacas.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonRegresar.setText("Regresar");
-
-        botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonAceptar.setText("Aceptar");
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAceptarActionPerformed(evt);
+                botonRegresarActionPerformed(evt);
+            }
+        });
+
+        lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        btnAvanzar.setText("Avanzar");
+        btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarActionPerformed(evt);
+            }
+        });
+
+        btnRetroceder.setText("Retroceder");
+        btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederActionPerformed(evt);
+            }
+        });
+
+        btnAvanzarP.setText("Avanzar");
+        btnAvanzarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarPActionPerformed(evt);
+            }
+        });
+
+        btnRetrocederP.setText("Retroceder");
+        btnRetrocederP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederPActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("Vehículos");
+
+        tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Num. serie", "Marca", "Línea", "Color", "Modelo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblVehiculos.setShowGrid(true);
+        tblVehiculos.setShowHorizontalLines(false);
+        tblVehiculos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblVehiculos);
+        if (tblVehiculos.getColumnModel().getColumnCount() > 0) {
+            tblVehiculos.getColumnModel().getColumn(0).setResizable(false);
+            tblVehiculos.getColumnModel().getColumn(1).setResizable(false);
+            tblVehiculos.getColumnModel().getColumn(2).setResizable(false);
+            tblVehiculos.getColumnModel().getColumn(3).setResizable(false);
+            tblVehiculos.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        btnAvanzarV.setText("Avanzar");
+        btnAvanzarV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarVActionPerformed(evt);
+            }
+        });
+
+        btnRetrocederV.setText("Retroceder");
+        btnRetrocederV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederVActionPerformed(evt);
             }
         });
 
@@ -106,25 +363,51 @@ public class HistorialTramite extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel2))
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
-                .addContainerGap(119, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(botonRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonAceptar)
-                .addGap(200, 200, 200))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(205, 205, 205)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(270, 270, 270)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(138, 138, 138)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnRetrocederP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(btnAvanzarP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnRetrocederV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(btnAvanzarV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(75, 75, 75)
+                                                .addComponent(botonRegresar))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(lblPersona))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(220, 220, 220)
+                                .addComponent(btnRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnAvanzar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))))
+                        .addGap(0, 245, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,31 +416,70 @@ public class HistorialTramite extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
+                .addComponent(lblPersona)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(jLabel4)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 218, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonAceptar)
-                            .addComponent(botonRegresar))
-                        .addGap(95, 95, 95))))
+                    .addComponent(btnRetroceder)
+                    .addComponent(btnAvanzar))
+                .addGap(53, 53, 53)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRetrocederP)
+                    .addComponent(btnAvanzarP))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRetrocederV)
+                    .addComponent(btnAvanzarV))
+                .addGap(74, 74, 74)
+                .addComponent(botonRegresar)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonAceptarActionPerformed
+    private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
+        this.avanzarPagina();
+    }//GEN-LAST:event_btnAvanzarActionPerformed
+
+    private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
+        this.retrocederPagina();
+    }//GEN-LAST:event_btnRetrocederActionPerformed
+
+    private void btnAvanzarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarPActionPerformed
+        this.avanzarPaginaP();
+    }//GEN-LAST:event_btnAvanzarPActionPerformed
+
+    private void btnRetrocederPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederPActionPerformed
+        this.retrocederPaginaP();
+    }//GEN-LAST:event_btnRetrocederPActionPerformed
+
+    private void btnAvanzarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarVActionPerformed
+        this.avanzarPaginaV();
+    }//GEN-LAST:event_btnAvanzarVActionPerformed
+
+    private void btnRetrocederVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederVActionPerformed
+        this.retrocederPaginaV();
+    }//GEN-LAST:event_btnRetrocederVActionPerformed
+
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
+        ConsultaPersona v = new ConsultaPersona();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_botonRegresarActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -195,15 +517,24 @@ public class HistorialTramite extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonRegresar;
+    private javax.swing.JButton btnAvanzar;
+    private javax.swing.JButton btnAvanzarP;
+    private javax.swing.JButton btnAvanzarV;
+    private javax.swing.JButton btnRetroceder;
+    private javax.swing.JButton btnRetrocederP;
+    private javax.swing.JButton btnRetrocederV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaLicencias;
-    private javax.swing.JTable tablaPlacas;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblPersona;
+    private javax.swing.JTable tblLicencias;
+    private javax.swing.JTable tblPlacas;
+    private javax.swing.JTable tblVehiculos;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,8 +5,8 @@
 package interfaces;
 
 import com.itson.dominio.Persona;
-import java.time.LocalDate;
 import java.util.List;
+import utils.ConfiguracionPaginado;
 
 /**
  *
@@ -15,7 +15,7 @@ import java.util.List;
 public interface IPersonaDAO {
     public void insertarPersonas();
     public long contarPersonas();
-    public List<Persona> buscarPersonas(String rfc, String nombre, int ano);
+    public List<Persona> buscarPersonas(ConfiguracionPaginado configPaginado, String rfc, String nombre, String ano);
     public Persona buscarPersonasRFC(String rfc);
     public boolean validarPersonaRFC(String rfc);
 }

@@ -9,11 +9,13 @@ import com.itson.dominio.Persona;
 import com.itson.dominio.TipoLicencia;
 import interfaces.ILicenciaDAO;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+import utils.ConfiguracionPaginado;
 
 /**
  *
@@ -45,7 +47,7 @@ public class LicenciaDAO implements ILicenciaDAO {
             em.getTransaction().rollback();
         } finally {
             em.close();
-        } 
+        }
     }
 
     @Override
@@ -66,8 +68,24 @@ public class LicenciaDAO implements ILicenciaDAO {
                 vigencia = true;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No tiene o no se encontró una licencia vigente para la persona con el RFC "+rfc, "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No tiene o no se encontró una licencia vigente para la persona con el RFC " + rfc, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return vigencia;
+    }
+
+    public List<Licencia> consultaLicencias(ConfiguracionPaginado configPaginado, Persona persona) {
+        try {
+            TypedQuery<Licencia> query = em.createQuery(
+                    "select l from Licencia l "
+                    + "where l.persona = :persona",
+                    Licencia.class);
+            query.setParameter("persona", persona);
+            query.setFirstResult(configPaginado.getElementosASaltar());
+            query.setMaxResults(configPaginado.getElementosPagina());
+            return query.getResultList();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
     }
 }

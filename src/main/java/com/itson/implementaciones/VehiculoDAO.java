@@ -7,9 +7,12 @@ package com.itson.implementaciones;
 import com.itson.dominio.Automovil;
 import com.itson.dominio.Persona;
 import interfaces.IVehiculoDAO;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import utils.ConfiguracionPaginado;
 
 /**
  *
@@ -30,5 +33,21 @@ public class VehiculoDAO implements IVehiculoDAO {
         } catch (Exception e) {
             em.getTransaction().rollback();
         }
+    }
+
+    public List<Automovil> consultaVehiculos(ConfiguracionPaginado configPaginado, Persona persona) {
+        try {
+            TypedQuery<Automovil> query = em.createQuery(
+                    "select a from Automovil a "
+                    + "where a.persona = :persona",
+                    Automovil.class);
+            query.setParameter("persona", persona);
+            query.setFirstResult(configPaginado.getElementosASaltar());
+            query.setMaxResults(configPaginado.getElementosPagina());
+            return query.getResultList();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
     }
 }

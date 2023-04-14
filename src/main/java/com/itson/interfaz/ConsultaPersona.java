@@ -1,17 +1,16 @@
-
 package com.itson.interfaz;
 
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
 import interfaces.IPersonaDAO;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import utils.ConfiguracionPaginado;
 
 /**
  *
@@ -20,34 +19,58 @@ import javax.swing.table.DefaultTableModel;
 public class ConsultaPersona extends javax.swing.JFrame {
 
     IPersonaDAO a = new PersonaDAO();
-    Persona b  = new Persona();
+    Persona persona = new Persona();
+    private final ConfiguracionPaginado configPaginado;
+    private static final Logger LOG = Logger.getLogger(PersonaDAO.class.getName());
 
     /**
      * Creates new form BusquedaLicencia
      */
     public ConsultaPersona() {
+        this.configPaginado = new ConfiguracionPaginado(0, 5);
         initComponents();
     }
-private Persona extraerDatosPersona(){
-    String RFC = txtRFC.getText();
-    String nombre = txtNombre.getText();
-    int ano = Integer.parseInt(txtAno.getText());
-        Persona persona = (Persona) a.buscarPersonas(RFC, nombre, ano);
-        return extraerDatosPersona();
-  
-}
 
-   private void insertarPersona() {
-    Persona p = new Persona();
-    DefaultTableModel tbldatos = (DefaultTableModel) tblPersona.getModel();
-    tblPersona.setModel(tbldatos);
-    tbldatos.addRow(new Object[]{"RFC", p.getRfc()});
-    tbldatos.addRow(new Object[]{"Nombre(s)",p.getNombre()+" "+ p.getApellidoPaterno()+" "+p.getApellidoMaterno()});
-    tbldatos.addRow(new Object[]{"Fecha de nacimiento", p.getFechaNacimiento()});
-    tbldatos.addRow(new Object[]{"Telefono",p.getTelefono()});
-    
-   }
-   
+    private List<Persona> extraerDatosFormularioPersona() {
+        String RFC = txtRFC.getText();
+        String nombre = txtNombre.getText();
+        String ano = txtAno.getText();
+        return a.buscarPersonas(configPaginado, RFC, nombre, ano);
+    }
+
+    private void cargarTablaPersona() {
+        this.extraerDatosFormularioPersona();
+        try {
+            List<Persona> listaPersona = this.extraerDatosFormularioPersona();
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPersona.getModel();
+            modeloTabla.setRowCount(0);
+            for (Persona persona : listaPersona) {
+                Calendar fechaNacimiento = persona.getFechaNacimiento();
+                Date date = fechaNacimiento.getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaN = sdf.format(date);
+                Object[] fila = {
+                    persona.getRfc(),
+                    persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno(),
+                    fechaN,
+                    persona.getTelefono()
+                };
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    private void avanzarPagina() {
+        this.configPaginado.avanzarPagina();
+        this.cargarTablaPersona();
+    }
+
+    private void retrocederPagina() {
+        this.configPaginado.retrocederPagina();
+        this.cargarTablaPersona();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +81,7 @@ private Persona extraerDatosPersona(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         labelBuscarParametros = new javax.swing.JLabel();
         labelModuloConsulta = new javax.swing.JLabel();
         botonRegresar = new javax.swing.JButton();
@@ -69,8 +93,12 @@ private Persona extraerDatosPersona(){
         labelNombreCompleto = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         tblPersona = new javax.swing.JTable();
+        btnAvanzar = new javax.swing.JButton();
+        btnRetroceder = new javax.swing.JButton();
+        jrbLicencias = new javax.swing.JRadioButton();
+        jrbPlacas = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,7 +118,7 @@ private Persona extraerDatosPersona(){
                 botonRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, -1, -1));
+        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, -1, -1));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -99,7 +127,7 @@ private Persona extraerDatosPersona(){
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, -1, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, -1, -1));
 
         txtAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +150,7 @@ private Persona extraerDatosPersona(){
                 botonSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, -1, -1));
+        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, -1, -1));
 
         labelRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelRFC.setText("RFC");
@@ -143,29 +171,67 @@ private Persona extraerDatosPersona(){
         });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 207, 380, 30));
 
-        tblPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "RFC", "Nombre(s)", "Fecha de Nacimiento", "Telefono"
+                "RFC", "Nombres(s)", "Fecha de nacimiento", "Teléfono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane2.setViewportView(tblPersona);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 520, 160));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblPersona.setMaximumSize(new java.awt.Dimension(214748347, 0));
+        tblPersona.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPersona.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPersona.setShowGrid(false);
+        tblPersona.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblPersona);
+        if (tblPersona.getColumnModel().getColumnCount() > 0) {
+            tblPersona.getColumnModel().getColumn(0).setResizable(false);
+            tblPersona.getColumnModel().getColumn(1).setResizable(false);
+            tblPersona.getColumnModel().getColumn(2).setResizable(false);
+            tblPersona.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 810, 110));
+
+        btnAvanzar.setText("Avanzar");
+        btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 100, -1));
+
+        btnRetroceder.setText("Retroceder");
+        btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 100, -1));
+
+        buttonGroup1.add(jrbLicencias);
+        jrbLicencias.setText("Consultar Licencias");
+        getContentPane().add(jrbLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 200, -1, -1));
+
+        buttonGroup1.add(jrbPlacas);
+        jrbPlacas.setText("Consultar Placas");
+        getContentPane().add(jrbPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -179,10 +245,10 @@ private Persona extraerDatosPersona(){
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       
+        this.cargarTablaPersona();
     }//GEN-LAST:event_btnBuscarActionPerformed
-    
-    
+
+
     private void txtAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAnoActionPerformed
@@ -192,12 +258,23 @@ private Persona extraerDatosPersona(){
     }//GEN-LAST:event_txtRFCActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-        // TODO add your handling code here:
+        String RFC = tblPersona.getValueAt(tblPersona.getSelectedRow(), 0).toString();
+        HistorialTramite v = new HistorialTramite(RFC);
+        v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
+        this.avanzarPagina();
+    }//GEN-LAST:event_btnAvanzarActionPerformed
+
+    private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
+        this.retrocederPagina();
+    }//GEN-LAST:event_btnRetrocederActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -238,8 +315,13 @@ private Persona extraerDatosPersona(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSiguiente;
+    private javax.swing.JButton btnAvanzar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton btnRetroceder;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton jrbLicencias;
+    private javax.swing.JRadioButton jrbPlacas;
     private javax.swing.JLabel labelBuscarParametros;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelModuloConsulta;

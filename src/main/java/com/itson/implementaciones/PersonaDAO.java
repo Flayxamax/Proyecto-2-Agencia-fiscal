@@ -4,10 +4,8 @@
  */
 package com.itson.implementaciones;
 
-import com.itson.dominio.Encriptacion;
 import com.itson.dominio.Persona;
 import interfaces.IPersonaDAO;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,6 +18,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import utils.ConfiguracionPaginado;
 
 /**
  *
@@ -73,14 +72,13 @@ public class PersonaDAO implements IPersonaDAO {
         return (long) query.getSingleResult();
     }
 
-
-    public List<Persona> buscarPersonas(String rfc, String nombre, Integer ano) {
+    public List<Persona> buscarPersonas(ConfiguracionPaginado configPaginado, String rfc, String nombre, String ano) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);
         Root<Persona> root = cq.from(Persona.class);
         List<Predicate> parametros = new ArrayList<>();
 
-        if (nombre != null) {
+        if (!nombre.isBlank()) {
             String[] espacio = nombre.split("\\s+");
             for (String part : espacio) {
                 parametros.add(cb.or(
@@ -91,16 +89,16 @@ public class PersonaDAO implements IPersonaDAO {
             }
         }
 
-        if (rfc != null) {
+        if (!rfc.isBlank()) {
             parametros.add(cb.like(root.get("rfc"), "%" + rfc + "%"));
         }
 
-        if (ano != 0) {
+        if (!ano.isBlank()) {
             parametros.add(cb.equal(cb.function("YEAR", Integer.class, root.get("fechaNacimiento")), ano));
         }
 
         cq.select(root).where(parametros.toArray(new Predicate[]{}));
-        TypedQuery<Persona> query = em.createQuery(cq);
+        TypedQuery<Persona> query = em.createQuery(cq).setFirstResult(configPaginado.getElementosASaltar()).setMaxResults(configPaginado.getElementosPagina());
         return query.getResultList();
     }
 
@@ -127,6 +125,4 @@ public class PersonaDAO implements IPersonaDAO {
         return query.getSingleResult() > 0;
     }
 
-   
-    
 }

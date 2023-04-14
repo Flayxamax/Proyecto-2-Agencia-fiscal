@@ -154,6 +154,7 @@ public class RenovacionPlacas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblAuto.setShowGrid(false);
         tblAuto.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblAuto);
         if (tblAuto.getColumnModel().getColumnCount() > 0) {
@@ -164,8 +165,8 @@ public class RenovacionPlacas extends javax.swing.JFrame {
             tblAuto.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);

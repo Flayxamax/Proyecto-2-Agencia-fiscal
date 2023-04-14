@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import org.apache.commons.lang3.RandomStringUtils;
+import utils.ConfiguracionPaginado;
 
 /**
  *
@@ -70,6 +71,29 @@ public class PlacaDAO implements IPlacaDAO {
         }
     }
 
+    public void desactivarPlacasAnteriores(Automovil automovil, Persona persona) {
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Placa> query = em.createQuery(
+                    "select p from Placa p "
+                    + "where p.automovil = :automovil "
+                    + "and p.persona = :persona "
+                    + "and p.estado = :estado",
+                    Placa.class);
+            query.setParameter("automovil", automovil);
+            query.setParameter("persona", persona);
+            query.setParameter("estado", TipoPlaca.Activa);
+            List<Placa> placasActivas = query.getResultList();
+            for (Placa placa : placasActivas) {
+                placa.setEstado(TipoPlaca.Desactivada);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+    }
+
+    @Override
     public void insertarTramitePlacasUsado(Persona persona, Automovil automovil, String placaI, Double costo) {
         try {
             Placa placa = new Placa();
@@ -77,12 +101,10 @@ public class PlacaDAO implements IPlacaDAO {
             placa.setFechaEmision(Calendar.getInstance());
             placa.setFechaRecepcion(Calendar.getInstance());
             placa.setAutomovil(automovil);
+            this.desactivarPlacasAnteriores(automovil, persona);
             placa.setCosto(costo);
             placa.setEstado(TipoPlaca.Activa);
             placa.setPlaca(placaI);
-            for (Placa p : automovil.getPlaca()) {
-                p.setEstado(TipoPlaca.Desactivada);
-            }
             em.getTransaction().begin();
             em.persist(placa);
             em.getTransaction().commit();
@@ -118,7 +140,6 @@ public class PlacaDAO implements IPlacaDAO {
 //        }
 //        return valida;
 //    }
-
     public List<Automovil> buscarPlacaAutomovilL(String placa, Persona persona) {
         try {
             TypedQuery<Automovil> query = em.createQuery(
@@ -147,6 +168,22 @@ public class PlacaDAO implements IPlacaDAO {
             query.setParameter("persona", persona);
             query.setParameter("estado", TipoPlaca.Activa);
             return query.getSingleResult();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
+    }
+
+    public List<Placa> consultaPlacas(ConfiguracionPaginado configPaginado, Persona persona) {
+        try {
+            TypedQuery<Placa> query = em.createQuery(
+                    "select p from Placa p "
+                    + "where p.persona = :persona",
+                    Placa.class);
+            query.setParameter("persona", persona);
+            query.setFirstResult(configPaginado.getElementosASaltar());
+            query.setMaxResults(configPaginado.getElementosPagina());
+            return query.getResultList();
         } catch (Exception e) {
             e.getMessage();
         }
