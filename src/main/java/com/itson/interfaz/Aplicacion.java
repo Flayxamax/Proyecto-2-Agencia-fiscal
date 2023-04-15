@@ -150,7 +150,9 @@ public class Aplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPlacasActionPerformed
 
     private void botonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportesActionPerformed
-        // TODO add your handling code here:
+        ConsultaPersonaTramite v = new ConsultaPersonaTramite();
+        v.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonReportesActionPerformed
 
     private void botonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasActionPerformed

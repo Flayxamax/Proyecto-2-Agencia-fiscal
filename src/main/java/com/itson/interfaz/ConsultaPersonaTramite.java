@@ -16,7 +16,7 @@ import utils.ConfiguracionPaginado;
  *
  * @author ildex
  */
-public class ConsultaPersona extends javax.swing.JFrame {
+public class ConsultaPersonaTramite extends javax.swing.JFrame {
 
     IPersonaDAO a = new PersonaDAO();
     Persona persona = new Persona();
@@ -26,7 +26,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
     /**
      * Creates new form BusquedaLicencia
      */
-    public ConsultaPersona() {
+    public ConsultaPersonaTramite() {
         this.configPaginado = new ConfiguracionPaginado(0, 5);
         initComponents();
     }
@@ -72,18 +72,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         this.cargarTablaPersona();
     }
 
-    private int opcionConsultar() {
-        int opcion = 0;
-        if (jrbLicencias.isSelected()) {
-            opcion = 1;
-        } else if (jrbPlacas.isSelected()) {
-            opcion = 2;
-        } else if (jrbVehiculos.isSelected()) {
-            opcion = 3;
-        }
-        return opcion;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,7 +81,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         labelBuscarParametros = new javax.swing.JLabel();
         labelModuloConsulta = new javax.swing.JLabel();
         botonRegresar = new javax.swing.JButton();
@@ -109,9 +96,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         tblPersona = new javax.swing.JTable();
         btnAvanzar = new javax.swing.JButton();
         btnRetroceder = new javax.swing.JButton();
-        jrbLicencias = new javax.swing.JRadioButton();
-        jrbPlacas = new javax.swing.JRadioButton();
-        jrbVehiculos = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -120,8 +104,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
         labelBuscarParametros.setText("Buscar parametros:");
         getContentPane().add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        labelModuloConsulta.setText("Modulo de consulta a personas");
         labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        labelModuloConsulta.setText("Modulo de consulta a personas tramite");
         getContentPane().add(labelModuloConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -238,18 +222,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         });
         getContentPane().add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 100, -1));
 
-        buttonGroup1.add(jrbLicencias);
-        jrbLicencias.setText("Consultar Licencias");
-        getContentPane().add(jrbLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 200, -1, -1));
-
-        buttonGroup1.add(jrbPlacas);
-        jrbPlacas.setText("Consultar Placas");
-        getContentPane().add(jrbPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, -1, -1));
-
-        buttonGroup1.add(jrbVehiculos);
-        jrbVehiculos.setText("Consultar vehículos");
-        getContentPane().add(jrbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, -1, -1));
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -276,7 +248,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
         String RFC = tblPersona.getValueAt(tblPersona.getSelectedRow(), 0).toString();
-        HistorialTramite v = new HistorialTramite(RFC, this.opcionConsultar());
+        ReporteTramite v = new ReporteTramite(RFC);
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_botonSiguienteActionPerformed
@@ -335,11 +307,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private javax.swing.JButton btnAvanzar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRetroceder;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton jrbLicencias;
-    private javax.swing.JRadioButton jrbPlacas;
-    private javax.swing.JRadioButton jrbVehiculos;
     private javax.swing.JLabel labelBuscarParametros;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelModuloConsulta;

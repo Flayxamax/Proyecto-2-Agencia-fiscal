@@ -34,20 +34,62 @@ public class HistorialTramite extends javax.swing.JFrame {
     PlacaDAO c = new PlacaDAO();
     VehiculoDAO d = new VehiculoDAO();
     private final String rfc;
+    private final int opcion;
 
     /**
      * Creates new form HistorialTramite
      *
      * @param rfc
+     * @param opcion
      */
-    public HistorialTramite(String rfc) {
+    public HistorialTramite(String rfc, int opcion) {
         initComponents();
         this.configPaginado = new ConfiguracionPaginado(0, 3);
         this.rfc = rfc;
+        this.opcion = opcion;
+        this.opcionEscogida();
         this.insertarDatosPersona();
         this.cargarTablaLicencia();
         this.cargarTablaPlaca();
         this.cargarTablaVehiculo();
+    }
+
+    private void opcionEscogida() {
+        switch (opcion) {
+            case 1:
+                lblOpcion.setText("Licencias");
+                jScrollPane2.setVisible(false);
+                tblPlacas.setVisible(false);
+                btnRetrocederP.setVisible(false);
+                btnAvanzarP.setVisible(false);
+                jScrollPane3.setVisible(false);
+                tblVehiculos.setVisible(false);
+                btnRetrocederV.setVisible(false);
+                btnAvanzarV.setVisible(false);
+                break;
+            case 2:
+                lblOpcion.setText("Placas");
+                jScrollPane1.setVisible(false);
+                tblLicencias.setVisible(false);
+                btnRetroceder.setVisible(false);
+                btnAvanzar.setVisible(false);
+                jScrollPane3.setVisible(false);
+                tblVehiculos.setVisible(false);
+                btnRetrocederV.setVisible(false);
+                btnAvanzarV.setVisible(false);
+                break;
+            case 3:
+                lblOpcion.setText("Vehículos");
+                jScrollPane2.setVisible(false);
+                tblPlacas.setVisible(false);
+                btnRetrocederP.setVisible(false);
+                btnAvanzarP.setVisible(false);
+                jScrollPane1.setVisible(false);
+                tblLicencias.setVisible(false);
+                btnRetroceder.setVisible(false);
+                btnAvanzar.setVisible(false);
+                break;
+        }
     }
 
     private void insertarDatosPersona() {
@@ -166,10 +208,9 @@ public class HistorialTramite extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblOpcion = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLicencias = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPlacas = new javax.swing.JTable();
         botonRegresar = new javax.swing.JButton();
@@ -178,7 +219,6 @@ public class HistorialTramite extends javax.swing.JFrame {
         btnRetroceder = new javax.swing.JButton();
         btnAvanzarP = new javax.swing.JButton();
         btnRetrocederP = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVehiculos = new javax.swing.JTable();
         btnAvanzarV = new javax.swing.JButton();
@@ -192,8 +232,8 @@ public class HistorialTramite extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel2.setText("Módulo de consultas");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Licencias");
+        lblOpcion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblOpcion.setText("Licencias");
 
         tblLicencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -228,9 +268,6 @@ public class HistorialTramite extends javax.swing.JFrame {
             tblLicencias.getColumnModel().getColumn(2).setResizable(false);
             tblLicencias.getColumnModel().getColumn(3).setResizable(false);
         }
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Placas");
 
         tblPlacas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -304,9 +341,6 @@ public class HistorialTramite extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setText("Vehículos");
-
         tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -376,9 +410,8 @@ public class HistorialTramite extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
+                                    .addComponent(lblOpcion)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(138, 138, 138)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,9 +436,7 @@ public class HistorialTramite extends javax.swing.JFrame {
                                 .addComponent(btnAvanzar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(98, 98, 98)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 245, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -418,25 +449,21 @@ public class HistorialTramite extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25)
                 .addComponent(lblPersona)
-                .addGap(63, 63, 63)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(46, 46, 46)
+                .addComponent(lblOpcion)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRetroceder)
                     .addComponent(btnAvanzar))
-                .addGap(53, 53, 53)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(97, 97, 97)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRetrocederP)
                     .addComponent(btnAvanzarP))
-                .addGap(40, 40, 40)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(78, 78, 78)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,12 +553,10 @@ public class HistorialTramite extends javax.swing.JFrame {
     private javax.swing.JButton btnRetrocederV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblOpcion;
     private javax.swing.JLabel lblPersona;
     private javax.swing.JTable tblLicencias;
     private javax.swing.JTable tblPlacas;
