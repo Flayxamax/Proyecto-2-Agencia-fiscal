@@ -10,6 +10,7 @@ import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
 import com.itson.implementaciones.VehiculoDAO;
+import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +32,7 @@ public class RegistroAuto extends javax.swing.JFrame {
      */
     public RegistroAuto(String rfc) {
         initComponents();
+        setResizable(false);
         this.rfc = rfc;
         this.insertarDatosPersona();
     }
@@ -64,57 +66,159 @@ public class RegistroAuto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelRegistro = new javax.swing.JLabel();
-        txtModelo = new javax.swing.JTextField();
-        txtColor = new javax.swing.JTextField();
-        txtLinea = new javax.swing.JTextField();
-        txtMarca = new javax.swing.JTextField();
-        labelModelo = new javax.swing.JLabel();
+        pnlLogo = new javax.swing.JPanel();
+        labelOperacion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
         labelSerie = new javax.swing.JLabel();
-        labelColor = new javax.swing.JLabel();
-        labelLinea = new javax.swing.JLabel();
-        labelMarca = new javax.swing.JLabel();
-        botonRegristrar = new javax.swing.JButton();
-        botonRegresar = new javax.swing.JButton();
-        lblPersona = new javax.swing.JLabel();
         txtSerie = new javax.swing.JFormattedTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        labelMarca = new javax.swing.JLabel();
+        txtMarca = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        labelLinea = new javax.swing.JLabel();
+        txtLinea = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        labelColor = new javax.swing.JLabel();
+        txtColor = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        labelModelo = new javax.swing.JLabel();
+        txtModelo = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        botonRegristrar = new javax.swing.JButton();
+        lblPersona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Módulo de placas: Registrar vehículo");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelRegistro.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        labelRegistro.setText("Registro Auto");
-        getContentPane().add(labelRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 350, 25));
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 350, 25));
-        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 350, 25));
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
 
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelOperacion.setText("Módulo de placas: Registrar vehículo");
+
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha-izquierda (1).png"))); // NOI18N
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(labelOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(42, 42, 42))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar)
+                    .addComponent(labelOperacion))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 90));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelSerie.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelSerie.setForeground(new java.awt.Color(0, 0, 0));
+        labelSerie.setText("Serie");
+        roundedPanel1.add(labelSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        txtSerie.setBorder(null);
+        txtSerie.setForeground(new java.awt.Color(0, 0, 0));
+        try {
+            txtSerie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("AAA-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtSerie.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtSerie.setOpaque(false);
+        txtSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSerieActionPerformed(evt);
+            }
+        });
+        roundedPanel1.add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 290, 30));
+        roundedPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, -1));
+
+        labelMarca.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelMarca.setForeground(new java.awt.Color(0, 0, 0));
+        labelMarca.setText("Marca");
+        roundedPanel1.add(labelMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        txtMarca.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtMarca.setForeground(new java.awt.Color(0, 0, 0));
+        txtMarca.setBorder(null);
+        txtMarca.setOpaque(false);
         txtMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMarcaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 350, 25));
+        roundedPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 290, 25));
+        roundedPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 290, 10));
 
-        labelModelo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelModelo.setText("Modelo");
-        getContentPane().add(labelModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
-
-        labelSerie.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelSerie.setText("Serie");
-        getContentPane().add(labelSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
-
-        labelColor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelColor.setText("Color");
-        getContentPane().add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
-
-        labelLinea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelLinea.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelLinea.setForeground(new java.awt.Color(0, 0, 0));
         labelLinea.setText("Linea");
-        getContentPane().add(labelLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
+        roundedPanel1.add(labelLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        labelMarca.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelMarca.setText("Marca");
-        getContentPane().add(labelMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+        txtLinea.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtLinea.setForeground(new java.awt.Color(0, 0, 0));
+        txtLinea.setBorder(null);
+        txtLinea.setOpaque(false);
+        roundedPanel1.add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, -1));
+        roundedPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 290, 10));
+
+        labelColor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelColor.setForeground(new java.awt.Color(0, 0, 0));
+        labelColor.setText("Color");
+        roundedPanel1.add(labelColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+
+        txtColor.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtColor.setForeground(new java.awt.Color(0, 0, 0));
+        txtColor.setBorder(null);
+        txtColor.setOpaque(false);
+        roundedPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 290, -1));
+        roundedPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 290, 10));
+
+        labelModelo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelModelo.setForeground(new java.awt.Color(0, 0, 0));
+        labelModelo.setText("Modelo");
+        roundedPanel1.add(labelModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+
+        txtModelo.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtModelo.setForeground(new java.awt.Color(0, 0, 0));
+        txtModelo.setBorder(null);
+        txtModelo.setOpaque(false);
+        roundedPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 290, -1));
+        roundedPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 290, 10));
 
         botonRegristrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonRegristrar.setText("Registrar");
@@ -123,26 +227,14 @@ public class RegistroAuto extends javax.swing.JFrame {
                 botonRegristrarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonRegristrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
+        roundedPanel1.add(botonRegristrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
 
-        botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonRegresar.setText("Regresar");
-        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegresarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 520, 550));
 
         lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+        jPanel1.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 30));
 
-        try {
-            txtSerie.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("AAA-###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 120, 30));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 690, 660));
 
         pack();
         setLocationRelativeTo(null);
@@ -167,60 +259,47 @@ public class RegistroAuto extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_botonRegristrarActionPerformed
 
-    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonRegresarActionPerformed
-
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMarcaActionPerformed
-//
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RegistroAuto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RegistroAuto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RegistroAuto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RegistroAuto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new RegistroAuto().setVisible(true);
-//            }
-//        });
-//    }
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        CostosPlacas v = new CostosPlacas(rfc);
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseEntered
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseExited
+
+    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSerieActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonRegristrar;
+    private javax.swing.JLabel btnRegresar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel labelColor;
     private javax.swing.JLabel labelLinea;
     private javax.swing.JLabel labelMarca;
     private javax.swing.JLabel labelModelo;
-    private javax.swing.JLabel labelRegistro;
+    private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel labelSerie;
     private javax.swing.JLabel lblPersona;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMarca;

@@ -29,20 +29,10 @@
 			</image>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#075C4F" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
-				<staticText>
-					<reportElement style="Title" x="0" y="0" width="451" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
-					<textElement textAlignment="Center">
-						<font fontName="Franklin Gothic Medium" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Agencía fiscal]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="SubTitle" x="0" y="60" width="451" height="29" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="8978eac3-c578-41c9-837e-48d2b0184642"/>
-					<textElement textAlignment="Center">
-						<font fontName="SansSerif" size="22" isBold="false"/>
-					</textElement>
-					<text><![CDATA[La burocracía es nuestra pasión.]]></text>
-				</staticText>
+				<image onErrorType="Icon">
+					<reportElement x="109" y="0" width="311" height="95" uuid="1f47b298-aceb-43c4-82ad-869250bd51a5"/>
+					<imageExpression><![CDATA["src/main/resources/logoAgencia2.png"]]></imageExpression>
+				</image>
 			</frame>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#0F998B" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>

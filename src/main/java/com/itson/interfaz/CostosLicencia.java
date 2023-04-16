@@ -10,6 +10,7 @@ import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import interfaces.ILicenciaDAO;
 import interfaces.IPersonaDAO;
+import java.awt.Cursor;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,6 +33,7 @@ public class CostosLicencia extends javax.swing.JFrame {
     public CostosLicencia(String rfc) {
         this.rfc = rfc;
         initComponents();
+        setResizable(false);
         this.insertarDatosPersona();
         this.insertarDatosTablaCosto();
     }
@@ -58,46 +60,96 @@ public class CostosLicencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblModuloLicencias = new javax.swing.JLabel();
-        cmbVigencia = new javax.swing.JComboBox<>();
+        pnlLogo = new javax.swing.JPanel();
+        labelOperacion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
         lblVigencia = new javax.swing.JLabel();
+        cmbVigencia = new javax.swing.JComboBox<>();
         lblDiscapacitado = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
-        btnAceptar = new javax.swing.JButton();
+        jcbDiscapacidad = new javax.swing.JCheckBox();
         tablaCostosLicencia = new javax.swing.JScrollPane();
         tblPrecioLicencia = new javax.swing.JTable();
-        jcbDiscapacidad = new javax.swing.JCheckBox();
+        btnAceptar = new javax.swing.JButton();
         lblPersona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Módulo de licencias: Tramitar licencia");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblModuloLicencias.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lblModuloLicencias.setText("Módulo de Licencias");
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
+
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelOperacion.setText("Módulo de licencias: Tramitar licencia");
+
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha-izquierda (1).png"))); // NOI18N
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(labelOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(42, 42, 42))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar)
+                    .addComponent(labelOperacion))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 90));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblVigencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        lblVigencia.setForeground(new java.awt.Color(0, 0, 0));
+        lblVigencia.setText("Vigencia");
+        roundedPanel1.add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
         cmbVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        roundedPanel1.add(cmbVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 52, -1));
 
-        lblVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblVigencia.setText("Vigencia");
-
-        lblDiscapacitado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDiscapacitado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        lblDiscapacitado.setForeground(new java.awt.Color(0, 0, 0));
         lblDiscapacitado.setText("¿Es discapacitado?");
+        roundedPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
-        btnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+        jcbDiscapacidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
+                jcbDiscapacidadActionPerformed(evt);
             }
         });
-
-        btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
+        roundedPanel1.add(jcbDiscapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, 25));
 
         tablaCostosLicencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -133,77 +185,27 @@ public class CostosLicencia extends javax.swing.JFrame {
             tblPrecioLicencia.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jcbDiscapacidad.addActionListener(new java.awt.event.ActionListener() {
+        roundedPanel1.add(tablaCostosLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 420, 73));
+
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbDiscapacidadActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
+        roundedPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 520, 420));
 
         lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblModuloLicencias)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblVigencia)
-                                    .addComponent(lblDiscapacitado))
-                                .addGap(87, 87, 87)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbDiscapacidad)
-                                    .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPersona)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnRegresar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAceptar))
-                                .addComponent(tablaCostosLicencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblModuloLicencias)
-                .addGap(28, 28, 28)
-                .addComponent(lblPersona)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVigencia))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDiscapacitado, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jcbDiscapacidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(tablaCostosLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnAceptar))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 690, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        ConsultaLicencia v = new ConsultaLicencia();
-        v.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         Persona persona = this.a.buscarPersonasRFC(rfc);
@@ -269,6 +271,20 @@ public class CostosLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbDiscapacidadActionPerformed
 
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        ConsultaLicencia v = new ConsultaLicencia();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseEntered
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseExited
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -307,13 +323,16 @@ public class CostosLicencia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel btnRegresar;
     private javax.swing.JComboBox<String> cmbVigencia;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JCheckBox jcbDiscapacidad;
+    private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel lblDiscapacitado;
-    private javax.swing.JLabel lblModuloLicencias;
     private javax.swing.JLabel lblPersona;
     private javax.swing.JLabel lblVigencia;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
     private javax.swing.JScrollPane tablaCostosLicencia;
     private javax.swing.JTable tblPrecioLicencia;
     // End of variables declaration//GEN-END:variables

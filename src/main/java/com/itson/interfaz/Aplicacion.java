@@ -6,6 +6,7 @@ package com.itson.interfaz;
 
 import com.itson.implementaciones.PersonaDAO;
 import interfaces.IPersonaDAO;
+import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,7 @@ public class Aplicacion extends javax.swing.JFrame {
      */
     public Aplicacion() {
         initComponents();
+        setResizable(false);
     }
 
     /**
@@ -30,56 +32,282 @@ public class Aplicacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlLogo = new javax.swing.JPanel();
+        lblLogo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
+        btnModuloLicencia = new utils.RoundedPanel();
+        lblImgLicencia = new javax.swing.JLabel();
+        labelOperacion1 = new javax.swing.JLabel();
+        btnModuloPlaca = new utils.RoundedPanel();
+        lblImgPlaca = new javax.swing.JLabel();
+        labelOperacion3 = new javax.swing.JLabel();
+        btnModuloConsulta = new utils.RoundedPanel();
+        lblImgConsulta = new javax.swing.JLabel();
+        labelOperacion4 = new javax.swing.JLabel();
+        btnModuloReporte = new utils.RoundedPanel();
+        lblImgReporte = new javax.swing.JLabel();
+        labelOperacion5 = new javax.swing.JLabel();
         labelOperacion = new javax.swing.JLabel();
-        botonPlacas = new javax.swing.JButton();
-        botonLicencias = new javax.swing.JButton();
-        labelAgencia = new javax.swing.JLabel();
-        botonReportes = new javax.swing.JButton();
-        botonConsultas = new javax.swing.JButton();
         botonPersonas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Agencia fiscal");
         setBackground(new java.awt.Color(153, 0, 153));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusTraversalPolicyProvider(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelOperacion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoAgencia.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLogoLayout.createSequentialGroup()
+                .addContainerGap(400, Short.MAX_VALUE)
+                .addComponent(lblLogo)
+                .addGap(336, 336, 336))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLogoLayout.createSequentialGroup()
+                .addComponent(lblLogo)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, -1));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+
+        btnModuloLicencia.setBackground(new java.awt.Color(204, 204, 204));
+        btnModuloLicencia.setRoundBottomLeft(50);
+        btnModuloLicencia.setRoundBottomRight(50);
+        btnModuloLicencia.setRoundTopLeft(50);
+        btnModuloLicencia.setRoundTopRight(50);
+        btnModuloLicencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModuloLicenciaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModuloLicenciaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModuloLicenciaMouseExited(evt);
+            }
+        });
+
+        lblImgLicencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/licencia-de-conducir.png"))); // NOI18N
+
+        labelOperacion1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion1.setForeground(new java.awt.Color(0, 0, 0));
+        labelOperacion1.setText("Módulo de licencias");
+
+        javax.swing.GroupLayout btnModuloLicenciaLayout = new javax.swing.GroupLayout(btnModuloLicencia);
+        btnModuloLicencia.setLayout(btnModuloLicenciaLayout);
+        btnModuloLicenciaLayout.setHorizontalGroup(
+            btnModuloLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloLicenciaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelOperacion1)
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModuloLicenciaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblImgLicencia)
+                .addGap(55, 55, 55))
+        );
+        btnModuloLicenciaLayout.setVerticalGroup(
+            btnModuloLicenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloLicenciaLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblImgLicencia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelOperacion1)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        btnModuloPlaca.setBackground(new java.awt.Color(204, 204, 204));
+        btnModuloPlaca.setRoundBottomLeft(50);
+        btnModuloPlaca.setRoundBottomRight(50);
+        btnModuloPlaca.setRoundTopLeft(50);
+        btnModuloPlaca.setRoundTopRight(50);
+        btnModuloPlaca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModuloPlacaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModuloPlacaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModuloPlacaMouseExited(evt);
+            }
+        });
+
+        lblImgPlaca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/placa.png"))); // NOI18N
+
+        labelOperacion3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion3.setForeground(new java.awt.Color(0, 0, 0));
+        labelOperacion3.setText("Módulo de placas");
+
+        javax.swing.GroupLayout btnModuloPlacaLayout = new javax.swing.GroupLayout(btnModuloPlaca);
+        btnModuloPlaca.setLayout(btnModuloPlacaLayout);
+        btnModuloPlacaLayout.setHorizontalGroup(
+            btnModuloPlacaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloPlacaLayout.createSequentialGroup()
+                .addGroup(btnModuloPlacaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(btnModuloPlacaLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblImgPlaca))
+                    .addGroup(btnModuloPlacaLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(labelOperacion3)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        btnModuloPlacaLayout.setVerticalGroup(
+            btnModuloPlacaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloPlacaLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblImgPlaca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelOperacion3)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        btnModuloConsulta.setBackground(new java.awt.Color(204, 204, 204));
+        btnModuloConsulta.setRoundBottomLeft(50);
+        btnModuloConsulta.setRoundBottomRight(50);
+        btnModuloConsulta.setRoundTopLeft(50);
+        btnModuloConsulta.setRoundTopRight(50);
+        btnModuloConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModuloConsultaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModuloConsultaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModuloConsultaMouseExited(evt);
+            }
+        });
+
+        lblImgConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/consulta.png"))); // NOI18N
+
+        labelOperacion4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion4.setForeground(new java.awt.Color(0, 0, 0));
+        labelOperacion4.setText("Módulo de consultas");
+
+        javax.swing.GroupLayout btnModuloConsultaLayout = new javax.swing.GroupLayout(btnModuloConsulta);
+        btnModuloConsulta.setLayout(btnModuloConsultaLayout);
+        btnModuloConsultaLayout.setHorizontalGroup(
+            btnModuloConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloConsultaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelOperacion4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModuloConsultaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblImgConsulta)
+                .addGap(55, 55, 55))
+        );
+        btnModuloConsultaLayout.setVerticalGroup(
+            btnModuloConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloConsultaLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblImgConsulta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelOperacion4)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        btnModuloReporte.setBackground(new java.awt.Color(204, 204, 204));
+        btnModuloReporte.setRoundBottomLeft(50);
+        btnModuloReporte.setRoundBottomRight(50);
+        btnModuloReporte.setRoundTopLeft(50);
+        btnModuloReporte.setRoundTopRight(50);
+        btnModuloReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModuloReporteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModuloReporteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModuloReporteMouseExited(evt);
+            }
+        });
+
+        lblImgReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/portapapeles.png"))); // NOI18N
+
+        labelOperacion5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion5.setForeground(new java.awt.Color(0, 0, 0));
+        labelOperacion5.setText("Módulo de reportes");
+
+        javax.swing.GroupLayout btnModuloReporteLayout = new javax.swing.GroupLayout(btnModuloReporte);
+        btnModuloReporte.setLayout(btnModuloReporteLayout);
+        btnModuloReporteLayout.setHorizontalGroup(
+            btnModuloReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloReporteLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(btnModuloReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModuloReporteLayout.createSequentialGroup()
+                        .addComponent(lblImgReporte)
+                        .addGap(55, 55, 55))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModuloReporteLayout.createSequentialGroup()
+                        .addComponent(labelOperacion5)
+                        .addContainerGap())))
+        );
+        btnModuloReporteLayout.setVerticalGroup(
+            btnModuloReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnModuloReporteLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblImgReporte)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelOperacion5)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout roundedPanel1Layout = new javax.swing.GroupLayout(roundedPanel1);
+        roundedPanel1.setLayout(roundedPanel1Layout);
+        roundedPanel1Layout.setHorizontalGroup(
+            roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnModuloLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnModuloPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnModuloConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnModuloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        roundedPanel1Layout.setVerticalGroup(
+            roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel1Layout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
+                .addGroup(roundedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnModuloReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModuloConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModuloPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModuloLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
+        );
+
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 1060, 360));
+
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
         labelOperacion.setText("Selecccione la operación a realizar");
-
-        botonPlacas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonPlacas.setText("Módulo de placas");
-        botonPlacas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPlacasActionPerformed(evt);
-            }
-        });
-
-        botonLicencias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonLicencias.setText("Módulo de licencias");
-        botonLicencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLicenciasActionPerformed(evt);
-            }
-        });
-
-        labelAgencia.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        labelAgencia.setText("Agencía Fiscal");
-
-        botonReportes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonReportes.setText("Módulo de reportes");
-        botonReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonReportesActionPerformed(evt);
-            }
-        });
-
-        botonConsultas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonConsultas.setText("Módulo de consultas");
-        botonConsultas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonConsultasActionPerformed(evt);
-            }
-        });
+        jPanel1.add(labelOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
 
         botonPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         botonPersonas.setText("Inserción de personas");
@@ -88,78 +316,13 @@ public class Aplicacion extends javax.swing.JFrame {
                 botonPersonasActionPerformed(evt);
             }
         });
+        jPanel1.add(botonPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 442, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelAgencia)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(botonReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(botonPlacas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(botonConsultas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(439, 439, 439)
-                                .addComponent(botonPersonas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(73, 73, 73))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelOperacion)
-                            .addComponent(botonLicencias, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(labelAgencia)
-                .addGap(40, 40, 40)
-                .addComponent(labelOperacion)
-                .addGap(29, 29, 29)
-                .addComponent(botonLicencias)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonPlacas)
-                    .addComponent(botonPersonas))
-                .addGap(21, 21, 21)
-                .addComponent(botonConsultas)
-                .addGap(18, 18, 18)
-                .addComponent(botonReportes)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1200, 540));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLicenciasActionPerformed
-        ConsultaLicencia v = new ConsultaLicencia();
-        v.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonLicenciasActionPerformed
-
-    private void botonPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPlacasActionPerformed
-        ConsultaPlaca v = new ConsultaPlaca();
-        v.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonPlacasActionPerformed
-
-    private void botonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportesActionPerformed
-        ConsultaPersonaTramite v = new ConsultaPersonaTramite();
-        v.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonReportesActionPerformed
-
-    private void botonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasActionPerformed
-        ConsultaPersona v = new ConsultaPersona();
-        v.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonConsultasActionPerformed
 
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
         IPersonaDAO a = new PersonaDAO();
@@ -176,49 +339,85 @@ public class Aplicacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonPersonasActionPerformed
 
-//    /**
-    //     * @param args the command line arguments
-    //     */
-    //    public static void main(String args[]) {
-    //        /* Set the Nimbus look and feel */
-    //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-    //         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-    //         */
-    //        try {
-    //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //                if ("Nimbus".equals(info.getName())) {
-    //                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                    break;
-    //                }
-    //            }
-    //        } catch (ClassNotFoundException ex) {
-    //            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //        } catch (InstantiationException ex) {
-    //            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //        } catch (IllegalAccessException ex) {
-    //            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //            java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //        }
-    //        //</editor-fold>
-    //
-    //        /* Create and display the form */
-    //        java.awt.EventQueue.invokeLater(new Runnable() {
-    //            public void run() {
-    //                new Aplicacion().setVisible(true);
-    //            }
-    //        });
-    //    }
+    private void btnModuloLicenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseClicked
+        ConsultaLicencia v = new ConsultaLicencia();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnModuloLicenciaMouseClicked
+
+    private void btnModuloLicenciaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnModuloLicenciaMouseEntered
+
+    private void btnModuloLicenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnModuloLicenciaMouseExited
+
+    private void btnModuloPlacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseClicked
+        ConsultaPlaca v = new ConsultaPlaca();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnModuloPlacaMouseClicked
+
+    private void btnModuloPlacaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnModuloPlacaMouseEntered
+
+    private void btnModuloPlacaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnModuloPlacaMouseExited
+
+    private void btnModuloConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseClicked
+        ConsultaPersona v = new ConsultaPersona();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnModuloConsultaMouseClicked
+
+    private void btnModuloConsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnModuloConsultaMouseEntered
+
+    private void btnModuloConsultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnModuloConsultaMouseExited
+
+    private void btnModuloReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseClicked
+        ConsultaPersonaTramite v = new ConsultaPersonaTramite();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnModuloReporteMouseClicked
+
+    private void btnModuloReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnModuloReporteMouseEntered
+
+    private void btnModuloReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnModuloReporteMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonConsultas;
-    private javax.swing.JButton botonLicencias;
     private javax.swing.JButton botonPersonas;
-    private javax.swing.JButton botonPlacas;
-    private javax.swing.JButton botonReportes;
-    private javax.swing.JLabel labelAgencia;
+    private utils.RoundedPanel btnModuloConsulta;
+    private utils.RoundedPanel btnModuloLicencia;
+    private utils.RoundedPanel btnModuloPlaca;
+    private utils.RoundedPanel btnModuloReporte;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelOperacion;
+    private javax.swing.JLabel labelOperacion1;
+    private javax.swing.JLabel labelOperacion2;
+    private javax.swing.JLabel labelOperacion3;
+    private javax.swing.JLabel labelOperacion4;
+    private javax.swing.JLabel labelOperacion5;
+    private javax.swing.JLabel lblImgConsulta;
+    private javax.swing.JLabel lblImgLicencia;
+    private javax.swing.JLabel lblImgLicencia1;
+    private javax.swing.JLabel lblImgPlaca;
+    private javax.swing.JLabel lblImgReporte;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
+    private utils.RoundedPanel roundedPanel3;
     // End of variables declaration//GEN-END:variables
 
 }

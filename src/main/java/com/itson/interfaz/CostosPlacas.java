@@ -9,6 +9,7 @@ import com.itson.dominio.Persona;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
+import java.awt.Cursor;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +31,7 @@ public class CostosPlacas extends javax.swing.JFrame {
      */
     public CostosPlacas(String rfc) {
         initComponents();
+        setResizable(false);
         this.rfc = rfc;
         this.insertarDatosPersona();
         this.insertarDatosTablaCosto();
@@ -67,40 +69,98 @@ public class CostosPlacas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelModuloPlacas = new javax.swing.JLabel();
+        pnlLogo = new javax.swing.JPanel();
+        labelOperacion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
         labelTipoCarro = new javax.swing.JLabel();
-        botonRegresar = new javax.swing.JButton();
-        botonAceptar = new javax.swing.JButton();
-        ScrollCostos = new javax.swing.JScrollPane();
-        tblPrecioPlaca = new javax.swing.JTable();
-        lblPersona = new javax.swing.JLabel();
-        lblLicenciaVigencia = new javax.swing.JLabel();
         btnVehiculoNuevo = new javax.swing.JButton();
         btnVehiculoUsado = new javax.swing.JButton();
+        ScrollCostos = new javax.swing.JScrollPane();
+        tblPrecioPlaca = new javax.swing.JTable();
+        botonAceptar = new javax.swing.JButton();
+        lblPersona = new javax.swing.JLabel();
+        lblLicenciaVigencia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Módulo de placas: Tramitar placa");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelModuloPlacas.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        labelModuloPlacas.setText("Módulo de placas para automóviles");
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
 
-        labelTipoCarro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelTipoCarro.setText("Seleccione su tipo de carro");
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelOperacion.setText("Módulo de placas: Tramitar placa");
 
-        botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonRegresar.setText("Regresar");
-        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegresarActionPerformed(evt);
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha-izquierda (1).png"))); // NOI18N
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
             }
         });
 
-        botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonAceptar.setText("Aceptar\n");
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(labelOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(42, 42, 42))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar)
+                    .addComponent(labelOperacion))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 90));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelTipoCarro.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        labelTipoCarro.setForeground(new java.awt.Color(0, 0, 0));
+        labelTipoCarro.setText("Seleccione su tipo de vehículo");
+        roundedPanel1.add(labelTipoCarro, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
+
+        btnVehiculoNuevo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVehiculoNuevo.setText("Vehículo nuevo");
+        btnVehiculoNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAceptarActionPerformed(evt);
+                btnVehiculoNuevoActionPerformed(evt);
             }
         });
+        roundedPanel1.add(btnVehiculoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+
+        btnVehiculoUsado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVehiculoUsado.setText("Vehículo usado");
+        btnVehiculoUsado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVehiculoUsadoActionPerformed(evt);
+            }
+        });
+        roundedPanel1.add(btnVehiculoUsado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         tblPrecioPlaca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblPrecioPlaca.setModel(new javax.swing.table.DefaultTableModel(
@@ -133,91 +193,30 @@ public class CostosPlacas extends javax.swing.JFrame {
             tblPrecioPlaca.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        roundedPanel1.add(ScrollCostos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 483, 55));
+
+        botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonAceptar.setText("Aceptar\n");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
+        roundedPanel1.add(botonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, -1));
+
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 520, 420));
+
         lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 40));
 
         lblLicenciaVigencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(lblLicenciaVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, 40));
 
-        btnVehiculoNuevo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnVehiculoNuevo.setText("Vehículo nuevo");
-        btnVehiculoNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVehiculoNuevoActionPerformed(evt);
-            }
-        });
-
-        btnVehiculoUsado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnVehiculoUsado.setText("Vehículo usado");
-        btnVehiculoUsado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVehiculoUsadoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(456, 456, 456)
-                        .addComponent(lblLicenciaVigencia))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(botonRegresar)
-                        .addGap(65, 65, 65)
-                        .addComponent(botonAceptar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelModuloPlacas)
-                            .addComponent(lblPersona)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(labelTipoCarro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(btnVehiculoNuevo)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnVehiculoUsado)))
-                .addContainerGap(122, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(labelModuloPlacas)
-                .addGap(50, 50, 50)
-                .addComponent(lblPersona)
-                .addGap(20, 20, 20)
-                .addComponent(lblLicenciaVigencia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(labelTipoCarro)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVehiculoUsado)
-                    .addComponent(btnVehiculoNuevo))
-                .addGap(38, 38, 38)
-                .addComponent(ScrollCostos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonRegresar)
-                    .addComponent(botonAceptar))
-                .addGap(42, 42, 42))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 690, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
-        Aplicacion v = new Aplicacion();
-        v.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // TODO add your handling code here:
@@ -234,6 +233,20 @@ public class CostosPlacas extends javax.swing.JFrame {
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVehiculoUsadoActionPerformed
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        ConsultaPlaca v = new ConsultaPlaca();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseEntered
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseExited
 
 //    /**
 //     * @param args the command line arguments
@@ -273,13 +286,16 @@ public class CostosPlacas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollCostos;
     private javax.swing.JButton botonAceptar;
-    private javax.swing.JButton botonRegresar;
+    private javax.swing.JLabel btnRegresar;
     private javax.swing.JButton btnVehiculoNuevo;
     private javax.swing.JButton btnVehiculoUsado;
-    private javax.swing.JLabel labelModuloPlacas;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel labelTipoCarro;
     private javax.swing.JLabel lblLicenciaVigencia;
     private javax.swing.JLabel lblPersona;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
     private javax.swing.JTable tblPrecioPlaca;
     // End of variables declaration//GEN-END:variables
 }

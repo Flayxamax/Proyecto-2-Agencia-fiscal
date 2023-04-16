@@ -3,6 +3,7 @@ package com.itson.interfaz;
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
 import interfaces.IPersonaDAO;
+import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
     public ConsultaPersona() {
         this.configPaginado = new ConfiguracionPaginado(0, 5);
         initComponents();
+        setResizable(false);
     }
 
     private List<Persona> extraerDatosFormularioPersona() {
@@ -72,18 +74,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
         this.cargarTablaPersona();
     }
 
-    private int opcionConsultar() {
-        int opcion = 0;
-        if (jrbLicencias.isSelected()) {
-            opcion = 1;
-        } else if (jrbPlacas.isSelected()) {
-            opcion = 2;
-        } else if (jrbVehiculos.isSelected()) {
-            opcion = 3;
-        }
-        return opcion;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,44 +84,200 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        pnlLogo = new javax.swing.JPanel();
+        labelOperacion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
         labelBuscarParametros = new javax.swing.JLabel();
-        labelModuloConsulta = new javax.swing.JLabel();
-        botonRegresar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
-        txtAno = new javax.swing.JTextField();
-        txtRFC = new javax.swing.JTextField();
-        botonSiguiente = new javax.swing.JButton();
         labelRFC = new javax.swing.JLabel();
+        roundedPanel2 = new utils.RoundedPanel();
+        txtRFC = new javax.swing.JTextField();
         labelNombreCompleto = new javax.swing.JLabel();
-        labelFecha = new javax.swing.JLabel();
+        roundedPanel3 = new utils.RoundedPanel();
         txtNombre = new javax.swing.JTextField();
+        labelFecha = new javax.swing.JLabel();
+        roundedPanel4 = new utils.RoundedPanel();
+        txtAno = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersona = new javax.swing.JTable();
         btnAvanzar = new javax.swing.JButton();
         btnRetroceder = new javax.swing.JButton();
-        jrbLicencias = new javax.swing.JRadioButton();
-        jrbPlacas = new javax.swing.JRadioButton();
-        jrbVehiculos = new javax.swing.JRadioButton();
+        botonSiguiente = new javax.swing.JButton();
+        lblPersona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Módulo de consultas: Consulta a personas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelBuscarParametros.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        labelBuscarParametros.setText("Buscar parametros:");
-        getContentPane().add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
 
-        labelModuloConsulta.setText("Modulo de consulta a personas");
-        labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        getContentPane().add(labelModuloConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelOperacion.setText("Módulo de consultas: Consulta a personas");
 
-        botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonRegresar.setText("Regresar");
-        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegresarActionPerformed(evt);
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha-izquierda (1).png"))); // NOI18N
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
             }
         });
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, -1, -1));
+
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(labelOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 566, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(42, 42, 42))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar)
+                    .addComponent(labelOperacion))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 90));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelBuscarParametros.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        labelBuscarParametros.setForeground(new java.awt.Color(0, 0, 0));
+        labelBuscarParametros.setText("Buscar parametros:");
+        roundedPanel1.add(labelBuscarParametros, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        labelRFC.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        labelRFC.setForeground(new java.awt.Color(0, 0, 0));
+        labelRFC.setText("RFC");
+        roundedPanel1.add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        roundedPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        roundedPanel2.setRoundBottomLeft(50);
+        roundedPanel2.setRoundBottomRight(50);
+        roundedPanel2.setRoundTopLeft(50);
+        roundedPanel2.setRoundTopRight(50);
+
+        txtRFC.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtRFC.setForeground(new java.awt.Color(0, 0, 0));
+        txtRFC.setBorder(null);
+        txtRFC.setOpaque(false);
+        txtRFC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRFCActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout roundedPanel2Layout = new javax.swing.GroupLayout(roundedPanel2);
+        roundedPanel2.setLayout(roundedPanel2Layout);
+        roundedPanel2Layout.setHorizontalGroup(
+            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtRFC, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        roundedPanel2Layout.setVerticalGroup(
+            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtRFC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        roundedPanel1.add(roundedPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, 40));
+
+        labelNombreCompleto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        labelNombreCompleto.setForeground(new java.awt.Color(0, 0, 0));
+        labelNombreCompleto.setText("Nombre completo");
+        roundedPanel1.add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
+
+        roundedPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        roundedPanel3.setRoundBottomLeft(50);
+        roundedPanel3.setRoundBottomRight(50);
+        roundedPanel3.setRoundTopLeft(50);
+        roundedPanel3.setRoundTopRight(50);
+
+        txtNombre.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombre.setBorder(null);
+        txtNombre.setOpaque(false);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout roundedPanel3Layout = new javax.swing.GroupLayout(roundedPanel3);
+        roundedPanel3.setLayout(roundedPanel3Layout);
+        roundedPanel3Layout.setHorizontalGroup(
+            roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        roundedPanel3Layout.setVerticalGroup(
+            roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        roundedPanel1.add(roundedPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 420, 40));
+
+        labelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        labelFecha.setForeground(new java.awt.Color(0, 0, 0));
+        labelFecha.setText("Año nacimiento");
+        roundedPanel1.add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, -1, -1));
+
+        roundedPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        roundedPanel4.setRoundBottomLeft(50);
+        roundedPanel4.setRoundBottomRight(50);
+        roundedPanel4.setRoundTopLeft(50);
+        roundedPanel4.setRoundTopRight(50);
+
+        txtAno.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtAno.setForeground(new java.awt.Color(0, 0, 0));
+        txtAno.setBorder(null);
+        txtAno.setOpaque(false);
+        txtAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAnoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout roundedPanel4Layout = new javax.swing.GroupLayout(roundedPanel4);
+        roundedPanel4.setLayout(roundedPanel4Layout);
+        roundedPanel4Layout.setHorizontalGroup(
+            roundedPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        roundedPanel4Layout.setVerticalGroup(
+            roundedPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtAno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
+        roundedPanel1.add(roundedPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 150, -1));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -140,49 +286,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, -1, -1));
-
-        txtAno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAnoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 207, 130, 30));
-
-        txtRFC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRFCActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 207, 150, 30));
-
-        botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonSiguiente.setText("Siguiente");
-        botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSiguienteActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, -1, -1));
-
-        labelRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelRFC.setText("RFC");
-        getContentPane().add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
-
-        labelNombreCompleto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelNombreCompleto.setText("Nombre completo");
-        getContentPane().add(labelNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
-
-        labelFecha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelFecha.setText("Año nacimiento");
-        getContentPane().add(labelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, -1, -1));
-
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 207, 380, 30));
+        roundedPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 100, -1, 40));
 
         tblPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,7 +324,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
             tblPersona.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 810, 110));
+        roundedPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 810, 110));
 
         btnAvanzar.setText("Avanzar");
         btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +332,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 btnAvanzarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 100, -1));
+        roundedPanel1.add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 100, -1));
 
         btnRetroceder.setText("Retroceder");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
@@ -236,30 +340,27 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 btnRetrocederActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 100, -1));
+        roundedPanel1.add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 100, -1));
 
-        buttonGroup1.add(jrbLicencias);
-        jrbLicencias.setText("Consultar Licencias");
-        getContentPane().add(jrbLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 200, -1, -1));
+        botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        botonSiguiente.setText("Siguiente");
+        botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSiguienteActionPerformed(evt);
+            }
+        });
+        roundedPanel1.add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, -1, -1));
 
-        buttonGroup1.add(jrbPlacas);
-        jrbPlacas.setText("Consultar Placas");
-        getContentPane().add(jrbPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, -1, -1));
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 1020, 430));
 
-        buttonGroup1.add(jrbVehiculos);
-        jrbVehiculos.setText("Consultar vehículos");
-        getContentPane().add(jrbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, -1, -1));
+        lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1120, 550));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
-        // TODO add your handling code here:
-        Aplicacion a = new Aplicacion();
-        a.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         this.cargarTablaPersona();
@@ -276,7 +377,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
         String RFC = tblPersona.getValueAt(tblPersona.getSelectedRow(), 0).toString();
-        HistorialTramite v = new HistorialTramite(RFC, this.opcionConsultar());
+        HistorialTramite v = new HistorialTramite(RFC);
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_botonSiguienteActionPerformed
@@ -293,58 +394,41 @@ public class ConsultaPersona extends javax.swing.JFrame {
         this.retrocederPagina();
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ConsultaPersona().setVisible(true);
-//            }
-//        });
-//    }
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        Aplicacion v = new Aplicacion();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseEntered
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton btnAvanzar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JLabel btnRegresar;
     private javax.swing.JButton btnRetroceder;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton jrbLicencias;
-    private javax.swing.JRadioButton jrbPlacas;
-    private javax.swing.JRadioButton jrbVehiculos;
     private javax.swing.JLabel labelBuscarParametros;
     private javax.swing.JLabel labelFecha;
-    private javax.swing.JLabel labelModuloConsulta;
     private javax.swing.JLabel labelNombreCompleto;
+    private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel labelRFC;
+    private javax.swing.JLabel lblPersona;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
+    private utils.RoundedPanel roundedPanel2;
+    private utils.RoundedPanel roundedPanel3;
+    private utils.RoundedPanel roundedPanel4;
     private javax.swing.JTable tblPersona;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtNombre;

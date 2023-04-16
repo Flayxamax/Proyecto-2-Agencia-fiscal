@@ -6,6 +6,7 @@ package com.itson.interfaz;
 
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
+import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,6 +27,7 @@ public class ConsultaLicencia extends javax.swing.JFrame {
      */
     public ConsultaLicencia() {
         initComponents();
+        setResizable(false);
     }
 
     private Persona extraerDatosFormulario() {
@@ -49,6 +51,8 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         LocalDate fechaActual = LocalDate.now();
         int edad = Period.between(fechaNacimientoLocal, fechaActual).getYears();
         lblEdadI.setText(String.valueOf(edad));
+        
+        lblTelefonoI.setText(persona.getTelefono());
     }
     
     private boolean validarEdad(){
@@ -82,36 +86,120 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblBuscarParametros = new javax.swing.JLabel();
-        labelModuloConsulta = new javax.swing.JLabel();
-        lblRFC = new javax.swing.JLabel();
+        pnlLogo = new javax.swing.JPanel();
+        labelOperacion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
+        labelOperacion1 = new javax.swing.JLabel();
+        roundedPanel2 = new utils.RoundedPanel();
         txtRFC = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        roundedPanel3 = new utils.RoundedPanel();
         lblNombre = new javax.swing.JLabel();
-        lblNombreI = new javax.swing.JLabel();
-        lblFechaN = new javax.swing.JLabel();
         lblEdad = new javax.swing.JLabel();
-        lblEdadI = new javax.swing.JLabel();
+        lblFechaN = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JLabel();
         lblFechaNI = new javax.swing.JLabel();
+        lblNombreI = new javax.swing.JLabel();
+        lblEdadI = new javax.swing.JLabel();
+        lblTelefonoI = new javax.swing.JLabel();
         btnSiguiente = new javax.swing.JButton();
-        lblBuscarParametros1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Módulo de licencias: busqueda persona");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBuscarParametros.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblBuscarParametros.setText("Buscar parametros:");
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
 
-        labelModuloConsulta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        labelModuloConsulta.setText("Modulo de licencias");
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelOperacion.setText("Módulo de licencias: busqueda persona");
 
-        lblRFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblRFC.setText("RFC");
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha-izquierda (1).png"))); // NOI18N
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
+            }
+        });
 
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(labelOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(39, 39, 39))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegresar)
+                    .addComponent(labelOperacion))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 90));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelOperacion1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion1.setForeground(new java.awt.Color(0, 0, 0));
+        labelOperacion1.setText("RFC");
+        roundedPanel1.add(labelOperacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 40));
+
+        roundedPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        roundedPanel2.setRoundBottomLeft(50);
+        roundedPanel2.setRoundBottomRight(50);
+        roundedPanel2.setRoundTopLeft(50);
+        roundedPanel2.setRoundTopRight(50);
+
+        txtRFC.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        txtRFC.setForeground(new java.awt.Color(0, 0, 0));
+        txtRFC.setBorder(null);
+        txtRFC.setOpaque(false);
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRFCActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout roundedPanel2Layout = new javax.swing.GroupLayout(roundedPanel2);
+        roundedPanel2.setLayout(roundedPanel2Layout);
+        roundedPanel2Layout.setHorizontalGroup(
+            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtRFC, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        roundedPanel2Layout.setVerticalGroup(
+            roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedPanel2Layout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        roundedPanel1.add(roundedPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 310, 40));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -120,21 +208,88 @@ public class ConsultaLicencia extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        roundedPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
-        lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        roundedPanel3.setBackground(new java.awt.Color(204, 255, 204));
+        roundedPanel3.setRoundBottomLeft(50);
+        roundedPanel3.setRoundBottomRight(50);
+        roundedPanel3.setRoundTopLeft(50);
+        roundedPanel3.setRoundTopRight(50);
+
+        lblNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
         lblNombre.setText("Nombre:");
 
-        lblNombreI.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        lblFechaN.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblFechaN.setText("Fecha de nacimiento:");
-
-        lblEdad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEdad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lblEdad.setForeground(new java.awt.Color(0, 0, 0));
         lblEdad.setText("Edad:");
 
-        lblEdadI.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblFechaN.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lblFechaN.setForeground(new java.awt.Color(0, 0, 0));
+        lblFechaN.setText("Fecha de nacimiento:");
 
-        lblFechaNI.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lblTelefono.setForeground(new java.awt.Color(0, 0, 0));
+        lblTelefono.setText("Teléfono:");
+
+        lblFechaNI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+
+        lblNombreI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+
+        lblEdadI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+
+        lblTelefonoI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        lblTelefonoI.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout roundedPanel3Layout = new javax.swing.GroupLayout(roundedPanel3);
+        roundedPanel3.setLayout(roundedPanel3Layout);
+        roundedPanel3Layout.setHorizontalGroup(
+            roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(roundedPanel3Layout.createSequentialGroup()
+                        .addComponent(lblFechaN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblFechaNI))
+                    .addGroup(roundedPanel3Layout.createSequentialGroup()
+                        .addComponent(lblEdad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEdadI))
+                    .addGroup(roundedPanel3Layout.createSequentialGroup()
+                        .addComponent(lblNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombreI))
+                    .addGroup(roundedPanel3Layout.createSequentialGroup()
+                        .addComponent(lblTelefono)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTelefonoI)))
+                .addContainerGap(204, Short.MAX_VALUE))
+        );
+        roundedPanel3Layout.setVerticalGroup(
+            roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTelefonoI, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(roundedPanel3Layout.createSequentialGroup()
+                        .addGroup(roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNombre)
+                            .addComponent(lblNombreI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEdad)
+                            .addComponent(lblEdadI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblFechaN)
+                            .addComponent(lblFechaNI, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblTelefono)))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        roundedPanel1.add(roundedPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 410, 200));
 
         btnSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSiguiente.setText("Siguiente");
@@ -143,84 +298,11 @@ public class ConsultaLicencia extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
+        roundedPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, -1, -1));
 
-        lblBuscarParametros1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblBuscarParametros1.setText("Busqueda persona");
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 520, 420));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRFC)
-                            .addComponent(lblBuscarParametros)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnBuscar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblEdad)
-                                    .addGap(130, 130, 130)
-                                    .addComponent(lblEdadI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblNombre)
-                                    .addGap(104, 104, 104)
-                                    .addComponent(lblNombreI)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblFechaN)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblFechaNI)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
-                                .addComponent(btnSiguiente))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(labelModuloConsulta)))
-                .addGap(22, 22, 22))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addComponent(lblBuscarParametros1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelModuloConsulta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblBuscarParametros1)
-                        .addGap(60, 60, 60)
-                        .addComponent(lblBuscarParametros)
-                        .addGap(16, 16, 16)
-                        .addComponent(lblRFC)
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRFC, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar))
-                        .addGap(84, 84, 84)
-                        .addComponent(lblNombre))
-                    .addComponent(lblNombreI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEdad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblEdadI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblFechaN)
-                        .addComponent(lblFechaNI, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(btnSiguiente)))
-                .addGap(79, 79, 79))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 690, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -237,6 +319,20 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         this.validaDatosPersona();
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        Aplicacion v = new Aplicacion();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseEntered
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseExited
 
 //    /**
 //     * @param args the command line arguments
@@ -275,17 +371,23 @@ public class ConsultaLicencia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JLabel btnRegresar;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JLabel labelModuloConsulta;
-    private javax.swing.JLabel lblBuscarParametros;
-    private javax.swing.JLabel lblBuscarParametros1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelOperacion;
+    private javax.swing.JLabel labelOperacion1;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblEdadI;
     private javax.swing.JLabel lblFechaN;
     private javax.swing.JLabel lblFechaNI;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreI;
-    private javax.swing.JLabel lblRFC;
+    private javax.swing.JLabel lblTelefono;
+    private javax.swing.JLabel lblTelefonoI;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
+    private utils.RoundedPanel roundedPanel2;
+    private utils.RoundedPanel roundedPanel3;
     private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

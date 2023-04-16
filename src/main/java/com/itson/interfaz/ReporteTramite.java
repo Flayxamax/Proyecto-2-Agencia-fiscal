@@ -10,6 +10,7 @@ import com.itson.dominio.Tramite;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.TramiteDAO;
+import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class ReporteTramite extends javax.swing.JFrame {
      */
     public ReporteTramite(String rfc) {
         initComponents();
+        setResizable(false);
         this.configPaginado = new ConfiguracionPaginado(0, 5);
         this.rfc = rfc;
         this.insertarDatosPersona();
@@ -152,38 +154,87 @@ public class ReporteTramite extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        pnlLogo = new javax.swing.JPanel();
+        labelOperacion = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new utils.RoundedPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTramite = new javax.swing.JTable();
         dpDesde = new com.github.lgooddatepicker.components.DatePicker();
-        lblPersona = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         dpHasta = new com.github.lgooddatepicker.components.DatePicker();
         jLabel6 = new javax.swing.JLabel();
         cbTramite = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        botonRegresar = new javax.swing.JButton();
         botonReporte = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnAvanzar = new javax.swing.JButton();
         btnRetroceder = new javax.swing.JButton();
+        lblPersona1 = new javax.swing.JLabel();
+        lblPersona = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Módulo de reportes: Generar reporte");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Reporte de trámites realizados");
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
+        pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
 
-        jLabel2.setText("Módulo de reportes");
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+        labelOperacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        labelOperacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelOperacion.setText("Módulo de reportes: Generar reporte");
+
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flecha-izquierda (1).png"))); // NOI18N
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
+        pnlLogo.setLayout(pnlLogoLayout);
+        pnlLogoLayout.setHorizontalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(labelOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addComponent(btnRegresar)
+                .addGap(42, 42, 42))
+        );
+        pnlLogoLayout.setVerticalGroup(
+            pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLogoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegresar)
+                    .addComponent(labelOperacion))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 90));
+
+        jPanel1.setBackground(new java.awt.Color(15, 153, 139));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roundedPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        roundedPanel1.setRoundBottomLeft(50);
+        roundedPanel1.setRoundBottomRight(50);
+        roundedPanel1.setRoundTopLeft(50);
+        roundedPanel1.setRoundTopRight(50);
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Tramite");
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, 40));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        roundedPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 40));
 
         tblTramite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,32 +268,28 @@ public class ReporteTramite extends javax.swing.JFrame {
             tblTramite.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, 120));
-        getContentPane().add(dpDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, 30));
-
-        lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        roundedPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 120));
+        roundedPanel1.add(dpDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, 30));
 
         jLabel5.setText("Desde");
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
-        getContentPane().add(dpHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, 30));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        roundedPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+        roundedPanel1.add(dpHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 30));
 
         jLabel6.setText("Hasta");
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        roundedPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
 
         cbTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licencia", "Placa" }));
         cbTramite.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(cbTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 110, 30));
+        roundedPanel1.add(cbTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 110, 30));
 
         jLabel7.setText("Tipo tramite");
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
-
-        botonRegresar.setText("Regresar");
-        botonRegresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        getContentPane().add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        roundedPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
 
         botonReporte.setText("Generar reporte");
         botonReporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -251,7 +298,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 botonReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(botonReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 485, -1, 40));
+        roundedPanel1.add(botonReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, -1, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +306,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, -1, -1));
+        roundedPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, -1, 30));
 
         btnAvanzar.setText("Avanzar");
         btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +314,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 btnAvanzarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 100, -1));
+        roundedPanel1.add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 100, -1));
 
         btnRetroceder.setText("Retroceder");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +322,17 @@ public class ReporteTramite extends javax.swing.JFrame {
                 btnRetrocederActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 100, -1));
+        roundedPanel1.add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 100, -1));
+
+        jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 720, 420));
+
+        lblPersona1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(lblPersona1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 30));
+
+        lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel1.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 820, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -297,59 +354,41 @@ public class ReporteTramite extends javax.swing.JFrame {
         this.retrocederPagina();
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ReporteTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ReporteTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ReporteTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ReporteTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ReporteTramite().setVisible(true);
-//            }
-//        });
-//    }
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        ConsultaPersonaTramite v = new ConsultaPersonaTramite();
+        v.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseEntered
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnRegresarMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonReporte;
     private javax.swing.JButton btnAvanzar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JLabel btnRegresar;
     private javax.swing.JButton btnRetroceder;
     private javax.swing.JComboBox<String> cbTramite;
     private com.github.lgooddatepicker.components.DatePicker dpDesde;
     private com.github.lgooddatepicker.components.DatePicker dpHasta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel lblPersona;
+    private javax.swing.JLabel lblPersona1;
+    private javax.swing.JPanel pnlLogo;
+    private utils.RoundedPanel roundedPanel1;
     private javax.swing.JTable tblTramite;
     // End of variables declaration//GEN-END:variables
 }
