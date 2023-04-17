@@ -1,10 +1,12 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.itson.interfaz;
 
 import com.itson.dominio.Automovil;
 import com.itson.dominio.CostoTramite;
 import com.itson.dominio.Persona;
-import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
 import interfaces.IPersonaDAO;
@@ -18,13 +20,12 @@ import javax.swing.table.DefaultTableModel;
 import utils.Validadores;
 
 /**
+ * Formulario de renovación de placas
  *
  * @author arace
  */
 public class RenovacionPlacas extends javax.swing.JFrame {
-    /**
-     * Creacion de objetos PersonaDao, CostoTramite, PlacaDAO, VehiculoDAO 
-     */
+
     private final IPersonaDAO a = new PersonaDAO();
     private final CostoTramite b = new CostoTramite();
     private final IPlacaDAO d = new PlacaDAO();
@@ -34,6 +35,7 @@ public class RenovacionPlacas extends javax.swing.JFrame {
 
     /**
      * Form RenovacionPlacas
+     *
      * @param rfc de la persona
      */
     public RenovacionPlacas(String rfc) {
@@ -46,13 +48,14 @@ public class RenovacionPlacas extends javax.swing.JFrame {
     /**
      * Metodo que inserta los datos de la persona
      */
-
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
+
     /**
      * Metodo que carga la tabla de los automoviles mediante la placa
+     *
      * @param placa de los autos
      */
     private void cargarTablaAuto(String placa) {
@@ -75,9 +78,11 @@ public class RenovacionPlacas extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
+
     /**
-     * Metodo que valida los datos de la placa, al momento de insertar los datos de la persona se hace la validacion 
-     * y en caso de algun error, mostrar un mensaje de error
+     * Metodo que valida los datos de la placa, al momento de insertar los datos
+     * de la persona se hace la validacion y en caso de algun error, mostrar un
+     * mensaje de error
      */
     private void validaPlaca() {
         Persona persona = a.buscarPersonasRFC(rfc);
@@ -89,6 +94,7 @@ public class RenovacionPlacas extends javax.swing.JFrame {
             this.cargarTablaAuto(txtPlaca.getText());
         }
     }
+
     /**
      * Metodo que inserta los datos de la placa para su renovacion
      */
@@ -289,24 +295,37 @@ public class RenovacionPlacas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-/**
- * Boton que inserta la placa
- * @param evt accion a realizar
- */
+
+    /**
+     * Boton que inserta la placa
+     *
+     * @param evt accion a realizar
+     */
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        this.insertarPlaca();
+        Persona persona = a.buscarPersonasRFC(rfc);
+        if (txtPlaca.getText().equals("   -   ")) {
+            JOptionPane.showMessageDialog(null, "El campo de texto de placa está vacío", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (d.buscarPlacaAutomovil(txtPlaca.getText(), persona) == null) {
+            JOptionPane.showMessageDialog(null, "La placa ingresada no ha sido encontrado en el sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.insertarPlaca();
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
-/**
- * Boton que busca la palca y la valida
- * @param evt accion a realizar
- */
+
+    /**
+     * Boton que busca la palca y la valida
+     *
+     * @param evt accion a realizar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         this.validaPlaca();
     }//GEN-LAST:event_btnBuscarActionPerformed
-/**
- * Boton que regresa a la interfaz Costos de placas
- * @param evt accion a realizar
- */
+
+    /**
+     * Boton que regresa a la interfaz Costos de placas
+     *
+     * @param evt accion a realizar
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         CostosPlacas v = new CostosPlacas(rfc);
         v.setVisible(true);
@@ -314,7 +333,9 @@ public class RenovacionPlacas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
-     *Boton que cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
+     * Boton que cambia el cursor "mano" cuando el mouse se posiciona sobre le
+     * boton regresar
+     *
      * @param evt accion a realizar
      */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
@@ -322,9 +343,11 @@ public class RenovacionPlacas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseEntered
 
     /**
-     * Boton que cambia el cursor por el cursor por defecto cuando el mouse sale del area del boton regresar
+     * Boton que cambia el cursor por el cursor por defecto cuando el mouse sale
+     * del area del boton regresar
+     *
      * @param evt evento del mouse
-     */    
+     */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited

@@ -1,4 +1,3 @@
-
 package com.itson.implementaciones;
 
 import com.itson.dominio.Persona;
@@ -18,22 +17,26 @@ import javax.persistence.criteria.Root;
 import utils.ConfiguracionPaginado;
 
 /**
- * Clase que se encarga de insertar los datos de las personas, implementa la interfaz IPersonaDao
- * y se encarga de realizar las operaciones de persona
+ * Clase que se encarga de insertar los datos de las personas, implementa la
+ * interfaz IPersonaDao y se encarga de realizar las operaciones de persona
+ *
  * @author ildex
  */
 public class PersonaDAO implements IPersonaDAO {
+
     /**
-     * Objeto que se utiliza para crear instancias de entity manager y realiza las operacciones
-     * de persistencia en la base de datos
+     * Objeto que se utiliza para crear instancias de entity manager y realiza
+     * las operacciones de persistencia en la base de datos
      */
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
+
     /**
-     * Metodo que se encarga de insertar a las personas con sus atributos correspondientes, usando el
-     * entity manager para hacer la transaccion con el gestor de entidades recorriendo el array de objetos
-     * "Persona" y usando un for podemos insetar cada objeto a la base de datos , al final se confirma la 
-     * transaccion en una base de datos mediante JPA
+     * Metodo que se encarga de insertar a las personas con sus atributos
+     * correspondientes, usando el entity manager para hacer la transaccion con
+     * el gestor de entidades recorriendo el array de objetos "Persona" y usando
+     * un for podemos insetar cada objeto a la base de datos , al final se
+     * confirma la transaccion en una base de datos mediante JPA
      */
     @Override
     public void insertarPersonas() {
@@ -71,17 +74,23 @@ public class PersonaDAO implements IPersonaDAO {
         }
 
     }
+
     /**
-     * Metodo que cuenta a todas las personas que fueron insertadas en el sistema
-     * @return la canttidad de personas 
+     * Metodo que cuenta a todas las personas que fueron insertadas en el
+     * sistema
+     *
+     * @return la canttidad de personas
      */
     @Override
     public long contarPersonas() {
         Query query = em.createQuery("select count(p) from Persona p");
         return (long) query.getSingleResult();
     }
+
     /**
-     * Metodo de consulta que se encarga de buscar a las personas con los parametros recibidos
+     * Metodo de consulta que se encarga de buscar a las personas con los
+     * parametros recibidos
+     *
      * @param configPaginado objrto que contiene la informacion del paginado
      * @param rfc que representa a la persona a buscar
      * @param nombre de la persona con sus apellidos correspondientes a buscar
@@ -118,8 +127,10 @@ public class PersonaDAO implements IPersonaDAO {
         TypedQuery<Persona> query = em.createQuery(cq).setFirstResult(configPaginado.getElementosASaltar()).setMaxResults(configPaginado.getElementosPagina());
         return query.getResultList();
     }
+
     /**
-     * Metodo de consulta que busca a las personas mediante el RFC 
+     * Metodo de consulta que busca a las personas mediante el RFC
+     *
      * @param rfc de la persona a buscar
      * @return la persona encontrada, o null si no se encontro ninguna persona
      */
@@ -138,8 +149,11 @@ public class PersonaDAO implements IPersonaDAO {
         TypedQuery<Persona> query = em.createQuery(cq);
         return query.getSingleResult();
     }
+
     /**
-     * Metodo de consulta que valida si existe una persona con el RFC especificado
+     * Metodo de consulta que valida si existe una persona con el RFC
+     * especificado
+     *
      * @param rfc de la persona a buscar
      * @return si existe una persona con el rfc encontrado
      */

@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.itson.interfaz;
 
 import com.itson.dominio.CostoTramite;
@@ -13,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Interfaz consulta licencia
+ *
  * @author arace
  */
 public class CostosLicencia extends javax.swing.JFrame {
@@ -23,8 +27,9 @@ public class CostosLicencia extends javax.swing.JFrame {
     private final String rfc;
 
     /**
-     * Creates new form Licencia
-     * Metodo costos de licencia que requiere del rfc para insertar los datos de la persona
+     * costos de licencia que requiere del rfc para insertar los datos de la
+     * persona
+     *
      * @param rfc de la persona
      */
     public CostosLicencia(String rfc) {
@@ -34,15 +39,17 @@ public class CostosLicencia extends javax.swing.JFrame {
         this.insertarDatosPersona();
         this.insertarDatosTablaCosto();
     }
+
     /**
-     * Metodo que inserta loa datos de la persona 
+     * Metodo que inserta loa datos de la persona
      */
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
+
     /**
-     * Metodo que inserta los daros de la tabla de costos 
+     * Metodo que inserta los daros de la tabla de costos
      */
     private void insertarDatosTablaCosto() {
         DefaultTableModel tblCosto = (DefaultTableModel) tblPrecioLicencia.getModel();
@@ -209,8 +216,10 @@ public class CostosLicencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Boton que acepta la vigencia de la licencia, deacuerdo a la opcion que indique, debido a que cada anio
-     * tiene un costo diferene al igual si selecciona la opcion de discaapcitado o no
+     * Boton que acepta la vigencia de la licencia, deacuerdo a la opcion que
+     * indique, debido a que cada anio tiene un costo diferene al igual si
+     * selecciona la opcion de discaapcitado o no
+     *
      * @param evt la accion de acptar
      */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -276,6 +285,7 @@ public class CostosLicencia extends javax.swing.JFrame {
 
     /**
      * Boton que regresa a consulta licencia
+     *
      * @param evt accion a realizar
      */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -284,18 +294,20 @@ public class CostosLicencia extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
-   
-     /**
-     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
+    /**
+     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton
+     * regresar
+     *
      * @param evt accion a realizar
      */
-  
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
     /**
-     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón de regresar.
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del
+     * botón de regresar.
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited

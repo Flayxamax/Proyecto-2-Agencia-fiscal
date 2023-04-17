@@ -1,4 +1,3 @@
-
 package com.itson.implementaciones;
 
 import com.itson.dominio.Licencia;
@@ -19,14 +18,17 @@ import utils.ConfiguracionPaginado;
  * @author ildex
  */
 public class LicenciaDAO implements ILicenciaDAO {
+
     /**
-     * Objeto que se utiliza para crear instancias de entity manager y realiza las operacciones
-     * de persistencia en la base de datos
+     * Objeto que se utiliza para crear instancias de entity manager y realiza
+     * las operacciones de persistencia en la base de datos
      */
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
+
     /**
-     * Metodo para insertar un tramite del tipo licencia 
+     * Metodo para insertar un tramite del tipo licencia
+     *
      * @param persona la cual hara el tramite
      * @param costo del tramite de licencia
      * @param vigencia la duracion de la vigencia en anios
@@ -55,9 +57,12 @@ public class LicenciaDAO implements ILicenciaDAO {
             em.close();
         }
     }
+
     /**
-     * Metodo para validar la vigencia de la licencia de una persona, en caso de no existir o 
-     * no escribir bien los datos lanza un mensaje indicando el error
+     * Metodo para validar la vigencia de la licencia de una persona, en caso de
+     * no existir o no escribir bien los datos lanza un mensaje indicando el
+     * error
+     *
      * @param rfc de la persona a verificar
      * @return la vigencia de la licencia
      */
@@ -83,11 +88,13 @@ public class LicenciaDAO implements ILicenciaDAO {
         }
         return vigencia;
     }
+
     /**
-     * Metodo lista que realiza la consulta de licencia de una persona  
+     * Metodo lista que realiza la consulta de licencia de una persona
+     *
      * @param configPaginado la configuracion del paginado para la consulta
      * @param persona que le pertenece la licencia
-     * @return la lista de licencias de la persona 
+     * @return la lista de licencias de la persona
      */
     @Override
     public List<Licencia> consultaLicencias(ConfiguracionPaginado configPaginado, Persona persona) {
@@ -105,5 +112,5 @@ public class LicenciaDAO implements ILicenciaDAO {
         }
         return null;
     }
-    
+
 }

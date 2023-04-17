@@ -15,21 +15,26 @@ import javax.persistence.TypedQuery;
 import utils.ConfiguracionPaginado;
 
 /**
- * Clase que se encarga de la de las operaciones del vehiculo integrando la interfaz
- * IVehiculoDAO 
+ * Clase que se encarga de la de las operaciones del vehiculo integrando la
+ * interfaz IVehiculoDAO
+ *
  * @author ildex
  */
 public class VehiculoDAO implements IVehiculoDAO {
+
     /**
-     * Objeto que se utiliza para crear instancias de entity manager y realiza las operacciones
-     * de persistencia en la base de datos
+     * Objeto que se utiliza para crear instancias de entity manager y realiza
+     * las operacciones de persistencia en la base de datos
      */
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
+
     /**
-     * Metodo que registra un vehiculo de la persona y  toma como entrada un objeto de automovil 
-     * y un objeto de persona y registra el objeto de automvil en la base de datos, 
-     * estableciendo la persona como su propietario
+     * Metodo que registra un vehiculo de la persona y toma como entrada un
+     * objeto de automovil y un objeto de persona y registra el objeto de
+     * automvil en la base de datos, estableciendo la persona como su
+     * propietario
+     *
      * @param auto a registrar
      * @param persona el propietario del vehiculo a registrar
      */
@@ -44,11 +49,16 @@ public class VehiculoDAO implements IVehiculoDAO {
             em.getTransaction().rollback();
         }
     }
+
     /**
-     * Metodo que consulta a los vehiculos de los cuales las personas son propietarios
-     * @param configPaginado objeto que limita la cantidad de resultados que se devuelven por consulta
+     * Metodo que consulta a los vehiculos de los cuales las personas son
+     * propietarios
+     *
+     * @param configPaginado objeto que limita la cantidad de resultados que se
+     * devuelven por consulta
      * @param persona que es el propietario del vehiculo
-     * @return la lista con las personas y sus vehiculos, en caso de no existir regresa una lista vacia
+     * @return la lista con las personas y sus vehiculos, en caso de no existir
+     * regresa una lista vacia
      */
     @Override
     public List<Automovil> consultaVehiculos(ConfiguracionPaginado configPaginado, Persona persona) {

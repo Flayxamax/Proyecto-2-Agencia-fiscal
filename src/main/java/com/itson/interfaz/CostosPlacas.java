@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.itson.interfaz;
 
 import com.itson.dominio.CostoTramite;
@@ -14,12 +17,11 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Interfaz costos placas
+ *
  * @author arace
  */
 public class CostosPlacas extends javax.swing.JFrame {
-    /**
-     * Creacion de objetos PersonaDao, CostoTramite, LicenciaDAO y PlacaDAO 
-     */
+
     private final IPersonaDAO a = new PersonaDAO();
     private final CostoTramite b = new CostoTramite();
     private final ILicenciaDAO c = new LicenciaDAO();
@@ -29,7 +31,7 @@ public class CostosPlacas extends javax.swing.JFrame {
     /**
      * Form CostosPlacas
      *
-     * @param rfc
+     * @param rfc RFC de la persona
      */
     public CostosPlacas(String rfc) {
         initComponents();
@@ -40,10 +42,11 @@ public class CostosPlacas extends javax.swing.JFrame {
         Persona persona = a.buscarPersonasRFC(rfc);
         if (d.validaPersonaPlacas(persona) == true) {
             btnVehiculoUsado.setEnabled(true);
-        } else{
+        } else {
             btnVehiculoUsado.setEnabled(false);
         }
     }
+
     /**
      * Metodo que inserta los datos de la persona
      */
@@ -56,8 +59,10 @@ public class CostosPlacas extends javax.swing.JFrame {
             lblLicenciaVigencia.setText("Licencia: No vigente");
         }
     }
+
     /**
-     * Metodo que inserta los datos de tabla costo, usando los costos del objeto "b" de la clase CostoTramite
+     * Metodo que inserta los datos de tabla costo, usando los costos del objeto
+     * "b" de la clase CostoTramite
      */
     private void insertarDatosTablaCosto() {
         DefaultTableModel tblCosto = (DefaultTableModel) tblPrecioPlaca.getModel();
@@ -215,7 +220,8 @@ public class CostosPlacas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Boton que  envia a la interfaz de registra un vehiculo nuevo
+     * Boton que envia a la interfaz de registra un vehiculo nuevo
+     *
      * @param evt accion a realizar
      */
     private void btnVehiculoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoNuevoActionPerformed
@@ -226,6 +232,7 @@ public class CostosPlacas extends javax.swing.JFrame {
 
     /**
      * Boton que envia al apartado de vehiculo usado
+     *
      * @param evt accion a realizar
      */
     private void btnVehiculoUsadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoUsadoActionPerformed
@@ -236,6 +243,7 @@ public class CostosPlacas extends javax.swing.JFrame {
 
     /**
      * Boton que regresa a la interfaz consulta placa
+     *
      * @param evt accion a realizar
      */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -245,7 +253,9 @@ public class CostosPlacas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
-     * Cambia el cursor del estilo "mano" cuando el mouse se posiciona sobre el boton regresar
+     * Cambia el cursor del estilo "mano" cuando el mouse se posiciona sobre el
+     * boton regresar
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
@@ -253,47 +263,15 @@ public class CostosPlacas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseEntered
 
     /**
-     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón regresar
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del
+     * botón regresar
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CostosPlacas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CostosPlacas().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollCostos;

@@ -16,11 +16,14 @@ import utils.ConfiguracionPaginado;
 
 /**
  * Interfaz consulta Persona
+ *
  * @author ildex
  */
 public class ConsultaPersona extends javax.swing.JFrame {
+
     /**
-     * Creacion de los objetos de persona y personaDao, configuracion del paginado
+     * Creacion de los objetos de persona y personaDao, configuracion del
+     * paginado
      */
     private final IPersonaDAO a = new PersonaDAO();
     Persona persona = new Persona();
@@ -28,16 +31,18 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private static final Logger LOG = Logger.getLogger(PersonaDAO.class.getName());
 
     /**
-     *Form BusquedaLicencia
+     * Form BusquedaLicencia
      */
     public ConsultaPersona() {
         this.configPaginado = new ConfiguracionPaginado(0, 5);
         initComponents();
         setResizable(false);
     }
+
     /**
      * Metodo que extraer los datos de las personas en formato de lista
-     * @return buscar persona 
+     *
+     * @return buscar persona
      */
     private List<Persona> extraerDatosFormularioPersona() {
         String RFC = txtRFC.getText();
@@ -45,6 +50,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
         String ano = txtAno.getText();
         return a.buscarPersonas(configPaginado, RFC, nombre, ano);
     }
+
     /**
      * Metodo que carga una tablas de las personas mediante una lista
      */
@@ -70,13 +76,16 @@ public class ConsultaPersona extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
+
     /**
-     * Metodo que avanza hacia la siguiente pagina con configuracion del paginado
+     * Metodo que avanza hacia la siguiente pagina con configuracion del
+     * paginado
      */
     private void avanzarPagina() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaPersona();
     }
+
     /**
      * Metodo que retrocede la pagina con la consifuracion del paginado
      */
@@ -86,7 +95,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo que valida la busqueda con los datos de la persona, en caso no exitir dichos parametros lanza un mensaje de error
+     * Metodo que valida la busqueda con los datos de la persona, en caso no
+     * exitir dichos parametros lanza un mensaje de error
      */
     private void validaBusqueda() {
         if (this.extraerDatosFormularioPersona().isEmpty()) {
@@ -397,6 +407,11 @@ public class ConsultaPersona extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que busca a la persona
+     *
+     * @param evt la accion
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         this.validaBusqueda();
         this.cargarTablaPersona();
@@ -409,10 +424,12 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRFCActionPerformed
-/**
- * Boton siguiente que redirige hacia otra intefaz 
- * @param evt la accion a redigir hacia otra interfaz
- */
+
+    /**
+     * Boton siguiente que redirige hacia otra intefaz
+     *
+     * @param evt la accion a redigir hacia otra interfaz
+     */
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
         if (tblPersona.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -430,7 +447,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     /**
      * Boton que avanza la pagina
-     * @param evt accion a realizar
+     *
+     * @param evt acciona a realizar
      */
     private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
         this.avanzarPagina();
@@ -438,6 +456,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     /**
      * Boton que retrocede la pagina
+     *
      * @param evt acciona a realizar
      */
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
@@ -446,6 +465,7 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     /**
      * Boton que regresa a la Interfaz Aplicacion
+     *
      * @param evt la accion de regresar
      */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -453,17 +473,22 @@ public class ConsultaPersona extends javax.swing.JFrame {
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
-/**
- * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
- * @param evt 
- */
+
+    /**
+     * Camnbia el cursor por defecto cuando el mouse entra del ares del boton
+     * regresar
+     *
+     * @param evt
+     */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
     /**
-     * Camnbia el cursor por defecto cuando el mouse sale del ares del boton regresar
-     * @param evt 
+     * Camnbia el cursor por defecto cuando el mouse sale del ares del boton
+     * regresar
+     *
+     * @param evt
      */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -471,7 +496,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     /**
      * Campo de texto donde se debe colocar el RFC de la persona
-     * @param evt el campo de texto 
+     *
+     * @param evt el campo de texto
      */
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
         char car = evt.getKeyChar();
@@ -484,7 +510,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     /**
      * Campo de texto donde se debe colocar el Nombre de la persona
-     * @param evt el campo de texto 
+     *
+     * @param evt el campo de texto
      */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char car = evt.getKeyChar();
@@ -499,7 +526,8 @@ public class ConsultaPersona extends javax.swing.JFrame {
 
     /**
      * Campo de texto donde se debe colocar la fecha de nacimiento de la persona
-     * @param evt el campo de texto 
+     *
+     * @param evt el campo de texto
      */
     private void txtAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnoKeyTyped
         char car = evt.getKeyChar();

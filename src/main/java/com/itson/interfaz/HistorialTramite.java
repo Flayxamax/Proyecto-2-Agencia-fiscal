@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.itson.interfaz;
 
 import com.itson.dominio.Automovil;
@@ -25,12 +28,11 @@ import utils.ConfiguracionPaginado;
 
 /**
  * Interfaz Historial tramite
+ *
  * @author ildex
  */
 public class HistorialTramite extends javax.swing.JFrame {
-    /**
-     * Creacion de objetos PersonaDao, CostoTramite, LicenciaDAO, PlacaDAO, ConfiguracionPaginado, VehiculoDAO 
-     */
+
     private final IPersonaDAO a = new PersonaDAO();
     private final ConfiguracionPaginado configPaginado;
     private static final Logger LOG = Logger.getLogger(PersonaDAO.class.getName());
@@ -38,11 +40,11 @@ public class HistorialTramite extends javax.swing.JFrame {
     private final IPlacaDAO c = new PlacaDAO();
     private final IVehiculoDAO d = new VehiculoDAO();
     private final String rfc;
-    
 
     /**
      * From HistorialTramite
-     * @param rfc
+     *
+     * @param rfc RFC de la persona
      */
     public HistorialTramite(String rfc) {
         initComponents();
@@ -54,6 +56,7 @@ public class HistorialTramite extends javax.swing.JFrame {
         this.cargarTablaPlaca();
         this.cargarTablaVehiculo();
     }
+
     /**
      * Metodo que inserta los datos de la persona
      */
@@ -61,8 +64,9 @@ public class HistorialTramite extends javax.swing.JFrame {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
+
     /**
-     * Metodo que carga la tabla de licencia 
+     * Metodo que carga la tabla de licencia
      */
     private void cargarTablaLicencia() {
         Persona persona = a.buscarPersonasRFC(rfc);
@@ -87,6 +91,7 @@ public class HistorialTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
+
     /**
      * Metodo que carga la tabla de las placas
      */
@@ -114,6 +119,7 @@ public class HistorialTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
+
     /**
      * Metodo que carga la tabla de vehiculos
      */
@@ -137,43 +143,55 @@ public class HistorialTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
-     /**
-     * Metodo que avanza hacia la siguiente pagina con configuracion del paginado de la tabla licencia
+
+    /**
+     * Metodo que avanza hacia la siguiente pagina con configuracion del
+     * paginado de la tabla licencia
      */
     private void avanzarPagina() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaLicencia();
     }
+
     /**
-     * Metodo que retrocede la pagina con configuracion del paginado de la tabla licencia
+     * Metodo que retrocede la pagina con configuracion del paginado de la tabla
+     * licencia
      */
     private void retrocederPagina() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaLicencia();
     }
+
     /**
-     * Metodo que avanza la pagina con configuracion del paginado de la tabla placa
+     * Metodo que avanza la pagina con configuracion del paginado de la tabla
+     * placa
      */
     private void avanzarPaginaP() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaPlaca();
     }
+
     /**
-     * Metrodo que retrocede la pagina con configuracion del paginado de la tabla placa
+     * Metrodo que retrocede la pagina con configuracion del paginado de la
+     * tabla placa
      */
     private void retrocederPaginaP() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaPlaca();
     }
+
     /**
-     * Metodo que avanza la pagina con configuracion del paginado de la tabla vehiculo
+     * Metodo que avanza la pagina con configuracion del paginado de la tabla
+     * vehiculo
      */
     private void avanzarPaginaV() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaVehiculo();
     }
+
     /**
-     * Metrodo que retrocede la pagina con configuracion del paginado de la tabla vehiculo
+     * Metrodo que retrocede la pagina con configuracion del paginado de la
+     * tabla vehiculo
      */
     private void retrocederPaginaV() {
         this.configPaginado.retrocederPagina();
@@ -460,6 +478,7 @@ public class HistorialTramite extends javax.swing.JFrame {
 
     /**
      * Boton que avanza a ala pagina siguiente de licencia
+     *
      * @param evt acciona realizar
      */
     private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
@@ -468,6 +487,7 @@ public class HistorialTramite extends javax.swing.JFrame {
 
     /**
      * Boton que retrocede de pagina de licencia
+     *
      * @param evt acciona realizar
      */
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
@@ -476,6 +496,7 @@ public class HistorialTramite extends javax.swing.JFrame {
 
     /**
      * Boton que avanza la pagina de placas
+     *
      * @param evt accion a realizar
      */
     private void btnAvanzarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarPActionPerformed
@@ -484,6 +505,7 @@ public class HistorialTramite extends javax.swing.JFrame {
 
     /**
      * Boton que retrocede de pagina de placas
+     *
      * @param evt accion a realizar
      */
     private void btnRetrocederPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederPActionPerformed
@@ -492,6 +514,7 @@ public class HistorialTramite extends javax.swing.JFrame {
 
     /**
      * Boton que avanza la pagina de vehiculos
+     *
      * @param evt accion a realizar
      */
     private void btnAvanzarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarVActionPerformed
@@ -500,12 +523,18 @@ public class HistorialTramite extends javax.swing.JFrame {
 
     /**
      * Boton que retrocede de pagina de vehiculos
+     *
      * @param evt accion a realizar
      */
     private void btnRetrocederVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederVActionPerformed
         this.retrocederPaginaV();
     }//GEN-LAST:event_btnRetrocederVActionPerformed
 
+    /**
+     * Botón que regresa a la ventana anterior
+     *
+     * @param evt Acción
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         ConsultaPersona v = new ConsultaPersona();
         v.setVisible(true);
@@ -513,7 +542,9 @@ public class HistorialTramite extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
-     *Boton que cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
+     * Boton que cambia el cursor "mano" cuando el mouse se posiciona sobre le
+     * boton regresar
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
@@ -521,47 +552,14 @@ public class HistorialTramite extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseEntered
 
     /**
-     * Boton que cambia el cursor por el cursor por defecto cuando el mouse sale del area del boton regresar
+     * Boton que cambia el cursor por el cursor por defecto cuando el mouse sale
+     * del area del boton regresar
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
-
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(HistorialTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(HistorialTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(HistorialTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(HistorialTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new HistorialTramite().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvanzar;

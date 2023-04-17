@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
+ */
 package com.itson.interfaz;
 
 import com.itson.implementaciones.PersonaDAO;
@@ -7,13 +10,17 @@ import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
 /**
+ *
  * Pantalla inicial de la aplicacion
+ *
  * @author arace
  */
 public class Aplicacion extends javax.swing.JFrame {
-private final IPersonaDAO a = new PersonaDAO();
+
+    private final IPersonaDAO a = new PersonaDAO();
+
     /**
-     * Form Aplicacion
+     * Creates new form Aplicacion Form Aplicacion
      */
     public Aplicacion() {
         initComponents();
@@ -322,11 +329,11 @@ private final IPersonaDAO a = new PersonaDAO();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Boton que hace la insersion de las 20 personas ya registradas 
+     * Boton que hace la insersion de las 20 personas ya registradas
+     *
      * @param evt la accion a enviar
      */
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
-        IPersonaDAO a = new PersonaDAO();
         long numeroPersonas = a.contarPersonas();
         if (numeroPersonas >= 20) {
             int respuesta = JOptionPane.showConfirmDialog(null, "Ya hay más de 20 personas registradas en la base de datos. ¿Quiere volver a ingresarlas?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -342,6 +349,7 @@ private final IPersonaDAO a = new PersonaDAO();
 
     /**
      * Boton que envia a la interfaz de modulo de licencia
+     *
      * @param evt la accion a enviar
      */
     private void btnModuloLicenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseClicked
@@ -350,17 +358,28 @@ private final IPersonaDAO a = new PersonaDAO();
         dispose();
     }//GEN-LAST:event_btnModuloLicenciaMouseClicked
 
+    /**
+     * Botón que cambia el cursor
+     *
+     * @param evt la accion a enviar
+     */
     private void btnModuloLicenciaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnModuloLicenciaMouseEntered
 
+    /**
+     * Botón que cambia el cursor
+     *
+     * @param evt el evento de mouse
+     */
     private void btnModuloLicenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnModuloLicenciaMouseExited
 
     /**
-     * Boton que envia a la interfaz modulo de placas 
-     * @param evt la accion a enviar 
+     * Boton que envia a la interfaz modulo de placas
+     *
+     * @param evt la accion a enviar
      */
     private void btnModuloPlacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseClicked
         ConsultaPlaca v = new ConsultaPlaca();
@@ -369,7 +388,9 @@ private final IPersonaDAO a = new PersonaDAO();
     }//GEN-LAST:event_btnModuloPlacaMouseClicked
 
     /**
-     * Cambia el cursor al estilo "mano" cuando el mouse se posiciona sobre el botón del módulo de placas.
+     * Cambia el cursor al estilo "mano" cuando el mouse se posiciona sobre el
+     * botón del módulo de placas.
+     *
      * @param evt el evento de mouse
      */
     private void btnModuloPlacaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseEntered
@@ -377,7 +398,9 @@ private final IPersonaDAO a = new PersonaDAO();
     }//GEN-LAST:event_btnModuloPlacaMouseEntered
 
     /**
-     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón del módulo de placas.
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del
+     * botón del módulo de placas.
+     *
      * @param evt evento del mouse
      */
     private void btnModuloPlacaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseExited
@@ -386,6 +409,7 @@ private final IPersonaDAO a = new PersonaDAO();
 
     /**
      * Boton que envia a la interfaz consulta personas
+     *
      * @param evt la accion a enviar
      */
     private void btnModuloConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseClicked
@@ -395,7 +419,9 @@ private final IPersonaDAO a = new PersonaDAO();
     }//GEN-LAST:event_btnModuloConsultaMouseClicked
 
     /**
-     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton modulo de consulta
+     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton
+     * modulo de consulta
+     *
      * @param evt evento del mouse
      */
     private void btnModuloConsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseEntered
@@ -403,7 +429,9 @@ private final IPersonaDAO a = new PersonaDAO();
     }//GEN-LAST:event_btnModuloConsultaMouseEntered
 
     /**
-     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón del módulo de consulta.
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del
+     * botón del módulo de consulta.
+     *
      * @param evt evento del mouse
      */
     private void btnModuloConsultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseExited
@@ -412,6 +440,7 @@ private final IPersonaDAO a = new PersonaDAO();
 
     /**
      * Boton que envia a la interfaz consultas de persona tramite
+     *
      * @param evt la accion a enviar
      */
     private void btnModuloReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseClicked
@@ -421,7 +450,9 @@ private final IPersonaDAO a = new PersonaDAO();
     }//GEN-LAST:event_btnModuloReporteMouseClicked
 
     /**
-     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton modulo de reporte
+     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton
+     * modulo de reporte
+     *
      * @param evt evento del mouse
      */
     private void btnModuloReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseEntered
@@ -429,7 +460,9 @@ private final IPersonaDAO a = new PersonaDAO();
     }//GEN-LAST:event_btnModuloReporteMouseEntered
 
     /**
-     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón del módulo de reporte.
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del
+     * botón del módulo de reporte.
+     *
      * @param evt evento del mouse
      */
     private void btnModuloReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseExited

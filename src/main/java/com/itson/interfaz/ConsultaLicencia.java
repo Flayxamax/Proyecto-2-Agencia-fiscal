@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.itson.interfaz;
 
 import com.itson.dominio.Persona;
@@ -15,16 +18,17 @@ import utils.Validadores;
 
 /**
  * Interfaz consulta licencia
+ *
  * @author ildex
  */
 public class ConsultaLicencia extends javax.swing.JFrame {
+
     /**
      * Creacion del objeto personaDao
      */
-   
-    private final Validadores validadores = new Validadores();
     private final IPersonaDAO a = new PersonaDAO();
-  
+    private final Validadores validadores = new Validadores();
+
     /**
      * Form ConsultaLicencia
      */
@@ -34,6 +38,10 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         this.validadOperacion();
     }
 
+    /**
+     * Valida que no se ingrese a otra ventana
+     *
+     */
     private void validadOperacion() {
         if (lblNombreI.getText().isBlank()) {
             btnSiguiente.setEnabled(false);
@@ -41,8 +49,10 @@ public class ConsultaLicencia extends javax.swing.JFrame {
             btnSiguiente.setEnabled(true);
         }
     }
+
     /**
      * Metodo que extrae los datos del formulario de la persona
+     *
      * @return la persona con sus datos
      */
     private Persona extraerDatosFormulario() {
@@ -50,8 +60,9 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         Persona persona = a.buscarPersonasRFC(RFC);
         return persona;
     }
+
     /**
-     * Metodo que inserta los datos de la persona 
+     * Metodo que inserta los datos de la persona
      */
     private void insertarDatospersona() {
         Persona persona = this.extraerDatosFormulario();
@@ -74,17 +85,20 @@ public class ConsultaLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo que validad de la persona
+     *
      * @return la edad, en caso de ser menor se muestra un mensaje
      */
-    private boolean validarEdad(){
+    private boolean validarEdad() {
         boolean mayorEdad = false;
         String eda = lblEdadI.getText();
         int edad = Integer.parseInt(eda);
         return mayorEdad = edad >= 18;
     }
+
     /**
-     * Metodo que valida los datos de la persona, en caso no haber registrado el rfc, y si la persona no tiene la edad correspondiente
-     * lanza un mensaje de error
+     * Metodo que valida los datos de la persona, en caso no haber registrado el
+     * rfc, y si la persona no tiene la edad correspondiente lanza un mensaje de
+     * error
      */
     private void validaDatosPersona() {
         if (txtRFC.getText().isEmpty()) {
@@ -102,8 +116,9 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo que valida los datos a buscar, se ingresa el RFC de la persona y en caso de no exitir o este ingresado
-     * incorrectamente lanza un mensaje de eror
+     * Metodo que valida los datos a buscar, se ingresa el RFC de la persona y
+     * en caso de no exitir o este ingresado incorrectamente lanza un mensaje de
+     * eror
      */
     private void validaDatosBuscar() {
         if (txtRFC.getText().isEmpty()) {
@@ -354,12 +369,14 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRFCActionPerformed
 
     /**
      * Boton que busca los datos para validar
+     *
      * @param evt accion a realizar
      */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -368,6 +385,7 @@ public class ConsultaLicencia extends javax.swing.JFrame {
 
     /**
      * Boton que lleva hacia otro apartado
+     *
      * @param evt accion a realizar
      */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -376,6 +394,7 @@ public class ConsultaLicencia extends javax.swing.JFrame {
 
     /**
      * Boton que hace la funcion de regresar a la interfaz anterior
+     *
      * @param evt la accion a enviar
      */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -385,7 +404,9 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
-     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
+     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton
+     * regresar
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
@@ -393,16 +414,20 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseEntered
 
     /**
-     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón de regresar.
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del
+     * botón de regresar.
+     *
      * @param evt evento del mouse
      */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
-/**
- * Campo de texto en el cual se debe agregar el RFC de la persona
- * @param evt el campo que se tiene que llenar
- */
+
+    /**
+     * Campo de texto en el cual se debe agregar el RFC de la persona
+     *
+     * @param evt el campo que se tiene que llenar
+     */
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
         char car = evt.getKeyChar();
         if (!Character.isLetterOrDigit(car) && txtRFC.getText().length() >= 13) {
