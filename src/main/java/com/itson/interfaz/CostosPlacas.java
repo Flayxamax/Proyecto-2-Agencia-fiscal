@@ -6,6 +6,9 @@ import com.itson.dominio.Persona;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
+import interfaces.ILicenciaDAO;
+import interfaces.IPersonaDAO;
+import interfaces.IPlacaDAO;
 import java.awt.Cursor;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,10 +20,10 @@ public class CostosPlacas extends javax.swing.JFrame {
     /**
      * Creacion de objetos PersonaDao, CostoTramite, LicenciaDAO y PlacaDAO 
      */
-    PersonaDAO a = new PersonaDAO();
-    CostoTramite b = new CostoTramite();
-    LicenciaDAO c = new LicenciaDAO();
-    PlacaDAO d = new PlacaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
+    private final CostoTramite b = new CostoTramite();
+    private final ILicenciaDAO c = new LicenciaDAO();
+    private final IPlacaDAO d = new PlacaDAO();
     private final String rfc;
 
     /**

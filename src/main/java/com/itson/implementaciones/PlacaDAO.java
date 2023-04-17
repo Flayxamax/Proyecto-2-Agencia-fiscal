@@ -185,6 +185,7 @@ public class PlacaDAO implements IPlacaDAO {
      * @param persona que es el propietario del automovil
      * @return las placas 
      */
+    @Override
     public Automovil buscarPlacaAutomovil(String placa, Persona persona) {
         try {
             TypedQuery<Automovil> query = em.createQuery(

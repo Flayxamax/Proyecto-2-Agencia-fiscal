@@ -50,6 +50,7 @@ public class VehiculoDAO implements IVehiculoDAO {
      * @param persona que es el propietario del vehiculo
      * @return la lista con las personas y sus vehiculos, en caso de no existir regresa una lista vacia
      */
+    @Override
     public List<Automovil> consultaVehiculos(ConfiguracionPaginado configPaginado, Persona persona) {
         try {
             TypedQuery<Automovil> query = em.createQuery(

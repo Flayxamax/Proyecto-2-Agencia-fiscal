@@ -15,8 +15,7 @@ import javax.swing.JOptionPane;
 import utils.ConfiguracionPaginado;
 
 /**
- * Esta clase implementa la interfaz ILicenciaDAO y se encarga de realizar operaciones
- * de acceso a datos relacionados con la entidad licencia
+ *
  * @author ildex
  */
 public class LicenciaDAO implements ILicenciaDAO {
@@ -27,12 +26,11 @@ public class LicenciaDAO implements ILicenciaDAO {
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
     /**
-     * Metodo que permite insertar un nuevo trámite de licencia en la base de datos
-     * @param persona objeto persona que es el propietario de la licencia
-     * @param costo de la licencia
-     * @param vigencia la duracion de la vigencia 
-     * @param estadoDiscapacidad si la persona es discapacitada tendra un diferente costo
-     * a la persona que no es discapacitada
+     * Metodo para insertar un tramite del tipo licencia 
+     * @param persona la cual hara el tramite
+     * @param costo del tramite de licencia
+     * @param vigencia la duracion de la vigencia en anios
+     * @param estadoDiscapacidad si la persona es o no discapacitado
      */
     @Override
     public void insertarTramiteLicencia(Persona persona, Double costo, int vigencia, int estadoDiscapacidad) {
@@ -58,9 +56,10 @@ public class LicenciaDAO implements ILicenciaDAO {
         }
     }
     /**
-     * Metodo que verifica si existe una licencia vigente ccon el RFC 
-     * @param rfc de la persona
-     * @return en caso de no existir lanza un mensaje y retorna la vigencia
+     * Metodo para validar la vigencia de la licencia de una persona, en caso de no existir o 
+     * no escribir bien los datos lanza un mensaje indicando el error
+     * @param rfc de la persona a verificar
+     * @return la vigencia de la licencia
      */
     @Override
     public boolean validarLicenciaVigente(String rfc) {
@@ -85,11 +84,12 @@ public class LicenciaDAO implements ILicenciaDAO {
         return vigencia;
     }
     /**
-     * Metodo que reliza la consulta a la base de datos para obtener la licencia de la persona
-     * @param configPaginado es la configuracion del paginado para limitar la cantidad de resultados
-     * @param persona a la que se le consultan las licencias
-     * @return la lista del obejto de tipo licencia que pertencen a la persona
+     * Metodo lista que realiza la consulta de licencia de una persona  
+     * @param configPaginado la configuracion del paginado para la consulta
+     * @param persona que le pertenece la licencia
+     * @return la lista de licencias de la persona 
      */
+    @Override
     public List<Licencia> consultaLicencias(ConfiguracionPaginado configPaginado, Persona persona) {
         try {
             TypedQuery<Licencia> query = em.createQuery(
@@ -105,4 +105,5 @@ public class LicenciaDAO implements ILicenciaDAO {
         }
         return null;
     }
+    
 }

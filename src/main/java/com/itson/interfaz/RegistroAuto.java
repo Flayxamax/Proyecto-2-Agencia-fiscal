@@ -7,6 +7,9 @@ import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
 import com.itson.implementaciones.VehiculoDAO;
+import interfaces.IPersonaDAO;
+import interfaces.IPlacaDAO;
+import interfaces.IVehiculoDAO;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
 import utils.Validadores;
@@ -20,10 +23,10 @@ public class RegistroAuto extends javax.swing.JFrame {
      * Creacion de objetos PersonaDao, CostoTramite, PlacaDAO, VehiculoDAO 
      */
     private final String rfc;
-    PersonaDAO a = new PersonaDAO();
-    VehiculoDAO b = new VehiculoDAO();
-    PlacaDAO c = new PlacaDAO();
-    CostoTramite d = new CostoTramite();
+    private final IPersonaDAO a = new PersonaDAO();
+    private final IVehiculoDAO b = new VehiculoDAO();
+    private final IPlacaDAO c = new PlacaDAO();
+    private final CostoTramite d = new CostoTramite();
     private final Validadores validadores = new Validadores();
 
     /**
@@ -273,29 +276,14 @@ public class RegistroAuto extends javax.swing.JFrame {
     private void botonRegristrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegristrarActionPerformed
         if (txtSerie.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado un número de serie al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!validadores.validaNumSerie(txtSerie.getText())) {
-            JOptionPane.showMessageDialog(null, "El número de serie ingresado no es valido\n"
-                    + "Ejemplo: [ABC-123]", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtMarca.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado una marca al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!validadores.validaCaracteristicasVehiculo(txtMarca.getText())) {
-            JOptionPane.showMessageDialog(null, "La marca ingresada al vehículo no es valida\n"
-                    + "Recordatorio: Debe contener solo letras y de longitud máxima de 100 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtLinea.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado una línea al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!validadores.validaCaracteristicasVehiculo(txtLinea.getText())) {
-            JOptionPane.showMessageDialog(null, "La línea ingresada al vehículo no es valida\n"
-                    + "Recordatorio: Debe contener solo letras y de longitud máxima de 100 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (txtColor.getText().isBlank()) {
+        }else if (txtColor.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado un color al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!validadores.validaCaracteristicasVehiculo(txtColor.getText())) {
-            JOptionPane.showMessageDialog(null, "El color ingresado al vehículo no es valida\n"
-                    + "Recordatorio: Debe contener solo letras y de longitud máxima de 100 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtModelo.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado un modelo al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!validadores.validaModelo(txtModelo.getText())) {
-            JOptionPane.showMessageDialog(null, "El modelo ingresado al vehículo no es valido\n"
-                    + "Recordatorio: Debe contener solo números y de longitud máxima de 10 carácteres (19XX, 20XX)", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             Persona persona = a.buscarPersonasRFC(rfc);
             Automovil auto = this.extraerDatosFormulario();

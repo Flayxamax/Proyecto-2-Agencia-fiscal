@@ -3,7 +3,9 @@ package interfaces;
 
 import com.itson.dominio.Automovil;
 import com.itson.dominio.Persona;
+import com.itson.dominio.Placa;
 import java.util.List;
+import utils.ConfiguracionPaginado;
 
 /**
  * Interaz que define los metodos necesarios para realizar operaciones relacionadas
@@ -60,4 +62,12 @@ public interface IPlacaDAO {
      */
 
     public void insertarTramitePlacasUsado(Persona persona, Automovil automovil, String placaI, Double costo);
+    /**
+     * 
+     * Este método realiza una consulta de placas en base a los parámetros proporcionados.
+     * @param configPaginado Objeto de tipo ConfiguracionPaginado que contiene información de paginación y ordenamiento para la consulta.
+     * @param persona Objeto de tipo Persona que contiene información de la persona para la que se desea realizar la consulta.
+     * @return Lista de objetos Placa que cumplen con los parámetros de consulta proporcionados.
+     */
+    public List<Placa> consultaPlacas(ConfiguracionPaginado configPaginado, Persona persona);
 }

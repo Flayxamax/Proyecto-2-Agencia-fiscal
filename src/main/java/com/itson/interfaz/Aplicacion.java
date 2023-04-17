@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author arace
  */
 public class Aplicacion extends javax.swing.JFrame {
-
+private final IPersonaDAO a = new PersonaDAO();
     /**
      * Form Aplicacion
      */

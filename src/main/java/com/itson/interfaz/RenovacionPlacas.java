@@ -7,6 +7,8 @@ import com.itson.dominio.Persona;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
+import interfaces.IPersonaDAO;
+import interfaces.IPlacaDAO;
 import java.awt.Cursor;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,10 +25,9 @@ public class RenovacionPlacas extends javax.swing.JFrame {
     /**
      * Creacion de objetos PersonaDao, CostoTramite, PlacaDAO, VehiculoDAO 
      */
-    PersonaDAO a = new PersonaDAO();
-    CostoTramite b = new CostoTramite();
-    LicenciaDAO c = new LicenciaDAO();
-    PlacaDAO d = new PlacaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
+    private final CostoTramite b = new CostoTramite();
+    private final IPlacaDAO d = new PlacaDAO();
     private static final Logger LOG = Logger.getLogger(PlacaDAO.class.getName());
     private final String rfc;
     private final Validadores validadores = new Validadores();

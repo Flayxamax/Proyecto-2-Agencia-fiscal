@@ -9,6 +9,10 @@ import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.PlacaDAO;
 import com.itson.implementaciones.VehiculoDAO;
+import interfaces.ILicenciaDAO;
+import interfaces.IPersonaDAO;
+import interfaces.IPlacaDAO;
+import interfaces.IVehiculoDAO;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,13 +31,14 @@ public class HistorialTramite extends javax.swing.JFrame {
     /**
      * Creacion de objetos PersonaDao, CostoTramite, LicenciaDAO, PlacaDAO, ConfiguracionPaginado, VehiculoDAO 
      */
-    PersonaDAO a = new PersonaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
     private final ConfiguracionPaginado configPaginado;
-    private static final Logger LOG = Logger.getLogger(LicenciaDAO.class.getName());
-    LicenciaDAO b = new LicenciaDAO();
-    PlacaDAO c = new PlacaDAO();
-    VehiculoDAO d = new VehiculoDAO();
+    private static final Logger LOG = Logger.getLogger(PersonaDAO.class.getName());
+    private final ILicenciaDAO b = new LicenciaDAO();
+    private final IPlacaDAO c = new PlacaDAO();
+    private final IVehiculoDAO d = new VehiculoDAO();
     private final String rfc;
+    
 
     /**
      * From HistorialTramite

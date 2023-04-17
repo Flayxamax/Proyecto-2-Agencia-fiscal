@@ -88,6 +88,7 @@ public class PersonaDAO implements IPersonaDAO {
      * @param ano la fecha de nacimiento de la persona a buscar
      * @return la lista de objetos de la personas que cumplen con los criterios
      */
+    @Override
     public List<Persona> buscarPersonas(ConfiguracionPaginado configPaginado, String rfc, String nombre, String ano) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);

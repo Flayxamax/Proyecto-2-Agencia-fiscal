@@ -7,6 +7,8 @@ import com.itson.dominio.Tramite;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
 import com.itson.implementaciones.TramiteDAO;
+import interfaces.IPersonaDAO;
+import interfaces.ITramiteDAO;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,10 +37,10 @@ import utils.ConfiguracionPaginado;
  */
 public class ReporteTramite extends javax.swing.JFrame {
 
-    PersonaDAO a = new PersonaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
     private final ConfiguracionPaginado configPaginado;
     private static final Logger LOG = Logger.getLogger(LicenciaDAO.class.getName());
-    TramiteDAO b = new TramiteDAO();
+    private final ITramiteDAO b = new TramiteDAO();
     private final String rfc;
 
     /**

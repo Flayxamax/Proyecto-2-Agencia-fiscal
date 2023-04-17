@@ -22,7 +22,7 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
     /**
      * Creacion de los objetos de persona y personaDao, configuracion del paginado
      */
-    IPersonaDAO a = new PersonaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
     Persona persona = new Persona();
     private final ConfiguracionPaginado configPaginado;
     private static final Logger LOG = Logger.getLogger(PersonaDAO.class.getName());

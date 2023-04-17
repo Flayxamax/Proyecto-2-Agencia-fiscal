@@ -3,6 +3,7 @@ package com.itson.interfaz;
 
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.PersonaDAO;
+import interfaces.IPersonaDAO;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -20,9 +21,10 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     /**
      * Creacion del objeto personaDao
      */
-    PersonaDAO a = new PersonaDAO();
+   
     private final Validadores validadores = new Validadores();
-
+    private final IPersonaDAO a = new PersonaDAO();
+  
     /**
      * Form ConsultaLicencia
      */

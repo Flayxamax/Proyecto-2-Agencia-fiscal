@@ -1,7 +1,10 @@
 
 package interfaces;
 
+import com.itson.dominio.Licencia;
 import com.itson.dominio.Persona;
+import java.util.List;
+import utils.ConfiguracionPaginado;
 
 /**
  * Interfaz que define los metodos que deben implementarse para realizar operaciones relacionadas con las 
@@ -24,4 +27,12 @@ public interface ILicenciaDAO {
      * @return si indica que licencia esta vigente 
      */
     public boolean validarLicenciaVigente(String rfc);
+
+    /**
+     * Este método realiza una consulta de licencias en base a los parámetros proporcionados.
+     * @param configPaginado Objeto de tipo ConfiguracionPaginado que contiene información de paginación y ordenamiento para la consulta.
+     * @param persona Objeto de tipo Persona que contiene información de la persona para la que se desea realizar la consulta.
+     * @return Lista de objetos Licencia que cumplen con los parámetros de consulta proporcionados.
+     */ 
+    public List<Licencia> consultaLicencias(ConfiguracionPaginado configPaginado, Persona persona);
 }

@@ -3,6 +3,8 @@ package com.itson.interfaz;
 import com.itson.dominio.Persona;
 import com.itson.implementaciones.LicenciaDAO;
 import com.itson.implementaciones.PersonaDAO;
+import interfaces.ILicenciaDAO;
+import interfaces.IPersonaDAO;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,8 +20,8 @@ import utils.Validadores;
  */
 public class ConsultaPlaca extends javax.swing.JFrame {
 
-    PersonaDAO a = new PersonaDAO();
-    LicenciaDAO b = new LicenciaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
+    private final ILicenciaDAO b = new LicenciaDAO();
     private final Validadores validadores = new Validadores();
 
     /**

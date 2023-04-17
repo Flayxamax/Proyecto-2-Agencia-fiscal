@@ -17,9 +17,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CostosLicencia extends javax.swing.JFrame {
 
-    IPersonaDAO a = new PersonaDAO();
-    CostoTramite b = new CostoTramite();
-    ILicenciaDAO c = new LicenciaDAO();
+    private final IPersonaDAO a = new PersonaDAO();
+    private final CostoTramite b = new CostoTramite();
+    private final ILicenciaDAO c = new LicenciaDAO();
     private final String rfc;
 
     /**
