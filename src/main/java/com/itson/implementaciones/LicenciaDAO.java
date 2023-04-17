@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.itson.implementaciones;
 
 import com.itson.dominio.Licencia;
@@ -18,14 +15,25 @@ import javax.swing.JOptionPane;
 import utils.ConfiguracionPaginado;
 
 /**
- *
+ * Esta clase implementa la interfaz ILicenciaDAO y se encarga de realizar operaciones
+ * de acceso a datos relacionados con la entidad licencia
  * @author ildex
  */
 public class LicenciaDAO implements ILicenciaDAO {
-
+    /**
+     * Objeto que se utiliza para crear instancias de entity manager y realiza las operacciones
+     * de persistencia en la base de datos
+     */
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
-
+    /**
+     * Metodo que permite insertar un nuevo trámite de licencia en la base de datos
+     * @param persona objeto persona que es el propietario de la licencia
+     * @param costo de la licencia
+     * @param vigencia la duracion de la vigencia 
+     * @param estadoDiscapacidad si la persona es discapacitada tendra un diferente costo
+     * a la persona que no es discapacitada
+     */
     @Override
     public void insertarTramiteLicencia(Persona persona, Double costo, int vigencia, int estadoDiscapacidad) {
         try {
@@ -49,7 +57,11 @@ public class LicenciaDAO implements ILicenciaDAO {
             em.close();
         }
     }
-
+    /**
+     * Metodo que verifica si existe una licencia vigente ccon el RFC 
+     * @param rfc de la persona
+     * @return en caso de no existir lanza un mensaje y retorna la vigencia
+     */
     @Override
     public boolean validarLicenciaVigente(String rfc) {
         boolean vigencia = false;
@@ -72,7 +84,12 @@ public class LicenciaDAO implements ILicenciaDAO {
         }
         return vigencia;
     }
-
+    /**
+     * Metodo que reliza la consulta a la base de datos para obtener la licencia de la persona
+     * @param configPaginado es la configuracion del paginado para limitar la cantidad de resultados
+     * @param persona a la que se le consultan las licencias
+     * @return la lista del obejto de tipo licencia que pertencen a la persona
+     */
     public List<Licencia> consultaLicencias(ConfiguracionPaginado configPaginado, Persona persona) {
         try {
             TypedQuery<Licencia> query = em.createQuery(

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.interfaz;
 
 import com.itson.dominio.Persona;
@@ -33,7 +30,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import utils.ConfiguracionPaginado;
 
 /**
- *
+ * Interfaz reporte de tramite
  * @author ildex
  */
 public class ReporteTramite extends javax.swing.JFrame {
@@ -45,9 +42,8 @@ public class ReporteTramite extends javax.swing.JFrame {
     private final String rfc;
 
     /**
-     * Creates new form HistorialTramite
-     *
-     * @param rfc
+     * Form HistorialTramite
+     * @param rfc de la persona
      */
     public ReporteTramite(String rfc) {
         initComponents();
@@ -61,24 +57,35 @@ public class ReporteTramite extends javax.swing.JFrame {
         dpDesde.getComponentDateTextField().setEnabled(false);
         dpHasta.getComponentDateTextField().setEnabled(false);
     }
-
+    /**
+     * Metodo que inserta los datos de la persona
+     */
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
-
+    /**
+     * Metodo que obtiene la fecha desde en el reporte de tramite
+     * @return la fecha desde que se hiso el tramite
+     */
     private Date sacarFechaDesde() {
         LocalDate fechaD = this.dpDesde.getDate();
         Date fechaDesde = new Date(fechaD.getYear() - 1900, fechaD.getMonthValue() - 1, fechaD.getDayOfMonth());
         return fechaDesde;
     }
-
+    /**
+     * Metodo obtiene la fecha hasta en el reporte de tramite
+     * @return la fecha hasta que se hiso el tramite
+     */
     private Date sacarFechaHasta() {
         LocalDate fechaH = this.dpHasta.getDate();
         Date fechaHasta = new Date(fechaH.getYear() - 1900, fechaH.getMonthValue() - 1, fechaH.getDayOfMonth());
         return fechaHasta;
     }
-
+    /**
+     * Metodo que indica que tipo de tramite desea hacer el reporte
+     * @return 
+     */
     private TipoTramite tipo() {
         String opcion = (String) cbTramite.getSelectedItem();
         TipoTramite tipo;
@@ -89,7 +96,9 @@ public class ReporteTramite extends javax.swing.JFrame {
         }
         return tipo;
     }
-
+    /**
+     * Metodo que carga la tabla de la licencia
+     */
     private void cargarTablaLicencia() {
         Persona persona = a.buscarPersonasRFC(rfc);
         try {
@@ -112,17 +121,24 @@ public class ReporteTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
-
+    /**
+     * Metodo que avanza hacia la siguiente pagina con configuracion del paginado 
+     */
     private void avanzarPagina() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaLicencia();
     }
-
+    /**
+     * Metodo que retrocede la pagina con configuracion del paginado 
+     */
     private void retrocederPagina() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaLicencia();
     }
 
+    /**
+     * Metodo que se encarga de la generacion del reporte en PDF
+     */
     private void generacionReporte() {
         try {
             Persona persona = a.buscarPersonasRFC(rfc);
@@ -151,6 +167,9 @@ public class ReporteTramite extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo que valida todos los datos de la busqueda
+     */
     private void validaBusqueda() {
         Persona persona = a.buscarPersonasRFC(rfc);
         if (b.buscarTramites(configPaginado, persona, this.tipo(), this.sacarFechaDesde(), this.sacarFechaHasta()) == null) {
@@ -351,6 +370,11 @@ public class ReporteTramite extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo que  primero que hace es buscar una persona en un sistema a través de su RFC,
+     * comprueba si se han ingresado fechas de inicio y fin para la búsqueda. Si no se han ingresado fechas, muestra un mensaje de error.
+     * @param evt accion a realizar
+     */
     private void botonReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporteActionPerformed
         Persona persona = a.buscarPersonasRFC(rfc);
         if (dpDesde.getDate() == null) {
@@ -364,6 +388,10 @@ public class ReporteTramite extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonReporteActionPerformed
 
+    /**
+     * Método que se ejecuta al hacer clic en el botón de buscar. Verifica que se haya ingresado una fecha desde y una fecha hasta, y llama a los métodos 
+     * @param evt accion a realizr
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (dpDesde.getDate() == null) {
             JOptionPane.showMessageDialog(null, "No se ha ingresado una fecha desde", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -375,24 +403,44 @@ public class ReporteTramite extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Boton que avanza de pagina
+     * @param evt accion a realizar
+     */
     private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
         this.avanzarPagina();
     }//GEN-LAST:event_btnAvanzarActionPerformed
 
+    /**
+     * Boton que retrocede de pagina
+     * @param evt accion a realizar
+     */
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
         this.retrocederPagina();
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
+    /**
+     * Boton que regresa a persona consulta tramite
+     * @param evt accion a realizar
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         ConsultaPersonaTramite v = new ConsultaPersonaTramite();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    /**
+     * Cambia el cursor del estilo "mano" cuando el mouse se posiciona sobre el boton regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
+    /**
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited

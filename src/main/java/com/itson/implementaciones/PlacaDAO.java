@@ -19,10 +19,16 @@ import utils.ConfiguracionPaginado;
  * @author aracelyC
  */
 public class PlacaDAO implements IPlacaDAO {
-
+    /**
+     * Objeto que se utiliza para crear instancias de entity manager y realiza las operacciones
+     * de persistencia en la base de datos
+     */
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
-
+    /**
+     * Metodo que hace la opercion de generar la placa de los automoviles
+     * @return la placa generada
+     */
     @Override
     public String generarPlaca() {
         String placa = null;
@@ -38,7 +44,11 @@ public class PlacaDAO implements IPlacaDAO {
         }
         return placa;
     }
-
+    /**
+     * Metodo que se encarga de validar la placa
+     * @param placa que se va a validar
+     * @return placa validada
+     */
     @Override
     public boolean validarPlaca(String placa) {
         boolean valida = false;
@@ -51,7 +61,13 @@ public class PlacaDAO implements IPlacaDAO {
         }
         return valida;
     }
-
+    /**
+     * Metodo que hacer el tramite de las placas nuevas al automovil
+     * @param persona el propietario que realiza el tramite
+     * @param automovil al cual se le insertaran las placas
+     * @param placaI nueva para el automovil
+     * @param costo del tramite a realizar
+     */
     @Override
     public void insertarTramitePlacasNuevo(Persona persona, Automovil automovil, String placaI, Double costo) {
         try {
@@ -70,7 +86,11 @@ public class PlacaDAO implements IPlacaDAO {
             em.getTransaction().rollback();
         }
     }
-
+    /**
+     * Metodo que deasactiva las placas anteriores del automovil
+     * @param automovil del cual se van a desctivar las placas
+     * @param persona el propietario del automovil
+     */
     public void desactivarPlacasAnteriores(Automovil automovil, Persona persona) {
         try {
             em.getTransaction().begin();
@@ -92,8 +112,13 @@ public class PlacaDAO implements IPlacaDAO {
             em.getTransaction().rollback();
         }
     }
-
-    @Override
+    /**
+     * Metodo que hace el tramite de insetar las placas al automovil usado
+     * @param persona el propietario del automovil
+     * @param automovil usado del cual se le insertaran las placas
+     * @param placaI las placas que se van a insertar
+     * @param costo del tramite a realizar
+     */
     public void insertarTramitePlacasUsado(Persona persona, Automovil automovil, String placaI, Double costo) {
         try {
             Placa placa = new Placa();
@@ -112,7 +137,11 @@ public class PlacaDAO implements IPlacaDAO {
             em.getTransaction().rollback();
         }
     }
-
+    /**
+     * Metodo que se encarga de validar las placas del autmovil de la persona
+     * @param persona que desea validar las plcas
+     * @return valida las placas del autmovil de la persona
+     */
     public boolean validaPersonaPlacas(Persona persona) {
         boolean valida = false;
         try {
@@ -127,7 +156,13 @@ public class PlacaDAO implements IPlacaDAO {
         }
         return valida;
     }
-    
+
+    /**
+     * Metodo que busca en forma de lista las placas del automovil 
+     * @param placa del autmovil que se va a buscar
+     * @param persona el propietario del autmovil que tiene las placas a buscar
+     * @return las placas del automovil encontradas
+     */
     public List<Automovil> buscarPlacaAutomovilL(String placa, Persona persona) {
         try {
             TypedQuery<Automovil> query = em.createQuery(
@@ -144,7 +179,12 @@ public class PlacaDAO implements IPlacaDAO {
         }
         return null;
     }
-
+    /**
+     * Metodo automovil que busca las placas del automovil medianye las placas y el propietario
+     * @param placa del automovil que van a buscar
+     * @param persona que es el propietario del automovil
+     * @return las placas 
+     */
     public Automovil buscarPlacaAutomovil(String placa, Persona persona) {
         try {
             TypedQuery<Automovil> query = em.createQuery(
@@ -161,7 +201,12 @@ public class PlacaDAO implements IPlacaDAO {
         }
         return null;
     }
-
+    /**
+     * Metodo que busca en forma de lista realiza la consulta de placas asociadas a una persona
+     * @param configPaginado de la paginacion de la consulta
+     * @param persona la cual se busca la consulta
+     * @return lista de placas asociadas con la persona
+     */
     public List<Placa> consultaPlacas(ConfiguracionPaginado configPaginado, Persona persona) {
         try {
             TypedQuery<Placa> query = em.createQuery(

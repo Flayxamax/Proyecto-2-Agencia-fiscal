@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.interfaz;
 
 import com.itson.dominio.Automovil;
@@ -15,11 +12,13 @@ import javax.swing.JOptionPane;
 import utils.Validadores;
 
 /**
- *
+ * Interfaz Registro auto
  * @author arace
  */
 public class RegistroAuto extends javax.swing.JFrame {
-
+     /**
+     * Creacion de objetos PersonaDao, CostoTramite, PlacaDAO, VehiculoDAO 
+     */
     private final String rfc;
     PersonaDAO a = new PersonaDAO();
     VehiculoDAO b = new VehiculoDAO();
@@ -28,9 +27,8 @@ public class RegistroAuto extends javax.swing.JFrame {
     private final Validadores validadores = new Validadores();
 
     /**
-     * Creates new form RegistroPlacas
-     *
-     * @param rfc
+     * From RegistroPlacas
+     * @param rfc de persona
      */
     public RegistroAuto(String rfc) {
         initComponents();
@@ -38,12 +36,17 @@ public class RegistroAuto extends javax.swing.JFrame {
         this.rfc = rfc;
         this.insertarDatosPersona();
     }
-
+    /**
+     * Metodo que inserta los datos de la persona
+     */
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
-
+    /**
+     * Metodo que extraer los datos del automovil
+     * @return auto con sus datos
+     */
     private Automovil extraerDatosFormulario() {
         String serie = txtSerie.getText().toUpperCase();
         String marca = txtMarca.getText().toUpperCase();
@@ -262,6 +265,11 @@ public class RegistroAuto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton regresar, que se encarga de obtener todos loda datos del automovil, en caso de que algun dato no este ingresado correctamente
+     * lanza un mensaje de error indicado que dato no esta ingresado correctamente
+     * @param evt que hace la funcion
+     */
     private void botonRegristrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegristrarActionPerformed
         if (txtSerie.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado un número de serie al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
@@ -309,16 +317,28 @@ public class RegistroAuto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMarcaActionPerformed
 
+    /**
+     * Boton que regresa a la interfaz Costos Placas
+     * @param evt accion a realizar
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         CostosPlacas v = new CostosPlacas(rfc);
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    /**
+     * Boton que cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
+    /**
+     * Boton que cambia el cursor por el cursor por defecto cuando el mouse sale del area del boton regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
@@ -327,6 +347,10 @@ public class RegistroAuto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSerieActionPerformed
 
+    /**
+     * Verifica si la tecla presionada es una letra y si se ha alcanzado la longitud máxima permitida para el campo de texto de la marca.
+     * @param evt evento del teclado
+     */
     private void txtMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyTyped
         char car = evt.getKeyChar();
         if (!Character.isLetter(car) && txtMarca.getText().length() >= 100) {
@@ -336,6 +360,10 @@ public class RegistroAuto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtMarcaKeyTyped
 
+    /**
+     * Método que limita la longitud del campo de texto y solo permite caracteres alfanuméricos en el campo de línea.
+     * @param evt de tecla presionada
+     */
     private void txtLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLineaKeyTyped
         char car = evt.getKeyChar();
         if (!Character.isLetter(car) && txtLinea.getText().length() >= 100) {
@@ -345,6 +373,10 @@ public class RegistroAuto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtLineaKeyTyped
 
+    /**
+     * Método que limita la longitud del campo de texto y solo permite caracteres alfanuméricos en el campo de línea.
+     * @param evt accion de teclaco
+     */
     private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
         char car = evt.getKeyChar();
         if (!Character.isLetter(car) && txtColor.getText().length() >= 100) {
@@ -354,6 +386,11 @@ public class RegistroAuto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtColorKeyTyped
 
+    /**
+     * Metodo que obtiene del caracter ingresado por el usuario y si el caracter tiene mas de 10 datos
+     * no se podran agregar mas
+     * @param evt accion de teclado
+     */
     private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
         char car = evt.getKeyChar();
         if (Character.isDigit(car) && txtModelo.getText().length() >= 10) {

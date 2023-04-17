@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.interfaz;
 
 import com.itson.dominio.CostoTramite;
@@ -13,11 +10,13 @@ import java.awt.Cursor;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Interfaz costos placas
  * @author arace
  */
 public class CostosPlacas extends javax.swing.JFrame {
-
+    /**
+     * Creacion de objetos PersonaDao, CostoTramite, LicenciaDAO y PlacaDAO 
+     */
     PersonaDAO a = new PersonaDAO();
     CostoTramite b = new CostoTramite();
     LicenciaDAO c = new LicenciaDAO();
@@ -25,7 +24,7 @@ public class CostosPlacas extends javax.swing.JFrame {
     private final String rfc;
 
     /**
-     * Creates new form CostosPlacas
+     * Form CostosPlacas
      *
      * @param rfc
      */
@@ -42,7 +41,9 @@ public class CostosPlacas extends javax.swing.JFrame {
             btnVehiculoUsado.setEnabled(false);
         }
     }
-
+    /**
+     * Metodo que inserta los datos de la persona
+     */
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
@@ -52,7 +53,9 @@ public class CostosPlacas extends javax.swing.JFrame {
             lblLicenciaVigencia.setText("Licencia: No vigente");
         }
     }
-
+    /**
+     * Metodo que inserta los datos de tabla costo, usando los costos del objeto "b" de la clase CostoTramite
+     */
     private void insertarDatosTablaCosto() {
         DefaultTableModel tblCosto = (DefaultTableModel) tblPrecioPlaca.getModel();
         tblPrecioPlaca.setModel(tblCosto);
@@ -208,28 +211,48 @@ public class CostosPlacas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que  envia a la interfaz de registra un vehiculo nuevo
+     * @param evt accion a realizar
+     */
     private void btnVehiculoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoNuevoActionPerformed
         RegistroAuto v = new RegistroAuto(rfc);
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVehiculoNuevoActionPerformed
 
+    /**
+     * Boton que envia al apartado de vehiculo usado
+     * @param evt accion a realizar
+     */
     private void btnVehiculoUsadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoUsadoActionPerformed
         RenovacionPlacas v = new RenovacionPlacas(rfc);
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVehiculoUsadoActionPerformed
 
+    /**
+     * Boton que regresa a la interfaz consulta placa
+     * @param evt accion a realizar
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         ConsultaPlaca v = new ConsultaPlaca();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    /**
+     * Cambia el cursor del estilo "mano" cuando el mouse se posiciona sobre el boton regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
+    /**
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited

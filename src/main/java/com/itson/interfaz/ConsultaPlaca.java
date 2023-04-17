@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import utils.Validadores;
 
 /**
- *
+ * Interfaz consulta de placas
  * @author aracelyC
  */
 public class ConsultaPlaca extends javax.swing.JFrame {
@@ -23,7 +23,7 @@ public class ConsultaPlaca extends javax.swing.JFrame {
     private final Validadores validadores = new Validadores();
 
     /**
-     * Creates new form ConsultaPlaca
+     * From ConsultaPlaca
      */
     public ConsultaPlaca() {
         initComponents();
@@ -38,13 +38,18 @@ public class ConsultaPlaca extends javax.swing.JFrame {
             btnSiguiente.setEnabled(true);
         }
     }
-
+    /**
+     * Metodo que extrae los datos del formulario de la persona mediante el RFC
+     * @return persona
+     */
     private Persona extraerDatosFormulario() {
         String RFC = txtRFC.getText();
         Persona persona = a.buscarPersonasRFC(RFC);
         return persona;
     }
-
+    /**
+     * Metodo que inserta los datos de la persona mediante teclado
+     */
     private void insertarDatospersona() {
         Persona persona = this.extraerDatosFormulario();
         lblNombreI.setText(persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
@@ -67,14 +72,19 @@ public class ConsultaPlaca extends javax.swing.JFrame {
             lblLicencia.setText("Licencia: No vigente");
         }
     }
-
+    /**
+     * Metodo que valida la edad de la persona
+     * @return la edad
+     */
     private boolean validarEdad() {
         boolean mayorEdad = false;
         String eda = lblEdadI.getText();
         int edad = Integer.parseInt(eda);
         return mayorEdad = edad >= 18;
     }
-
+    /**
+     * Metodo que valida los datos de la persona, en caso de no ingrese un RFC y la edad correspondiente, lanza un mensaje de error
+     */
     private void validaDatosPersona() {
         if (txtRFC.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No has ingresado un RFC a consultar", "Error", JOptionPane.ERROR_MESSAGE);
@@ -93,7 +103,9 @@ public class ConsultaPlaca extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    /**
+     * Metodo que valida la busqueda con los datos de la persona, en caso no exitir, no haberse ingresado o no es valido los parametros lanza un mensaje de error
+     */
     private void validaDatosBuscar(){
         if (txtRFC.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No ha ingresado un RFC a consultar", "Error", JOptionPane.ERROR_MESSAGE);
@@ -139,6 +151,7 @@ public class ConsultaPlaca extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Módulo de placas: busqueda persona");
+        setAutoRequestFocus(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlLogo.setBackground(new java.awt.Color(7, 92, 79));
@@ -194,7 +207,6 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelOperacion1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        labelOperacion1.setForeground(new java.awt.Color(0, 0, 0));
         labelOperacion1.setText("RFC");
         roundedPanel1.add(labelOperacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 40));
 
@@ -205,9 +217,7 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         roundedPanel2.setRoundTopRight(50);
 
         txtRFC.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        txtRFC.setForeground(new java.awt.Color(0, 0, 0));
         txtRFC.setBorder(null);
-        txtRFC.setOpaque(false);
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRFCActionPerformed(evt);
@@ -244,19 +254,15 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         roundedPanel3.setRoundTopRight(50);
 
         lblNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
         lblNombre.setText("Nombre:");
 
         lblEdad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        lblEdad.setForeground(new java.awt.Color(0, 0, 0));
         lblEdad.setText("Edad:");
 
         lblFechaN.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        lblFechaN.setForeground(new java.awt.Color(0, 0, 0));
         lblFechaN.setText("Fecha de nacimiento:");
 
         lblTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        lblTelefono.setForeground(new java.awt.Color(0, 0, 0));
         lblTelefono.setText("Teléfono:");
 
         lblFechaNI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
@@ -266,10 +272,8 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         lblEdadI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
 
         lblTelefonoI.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        lblTelefonoI.setForeground(new java.awt.Color(0, 0, 0));
 
         lblLicencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        lblLicencia.setForeground(new java.awt.Color(0, 0, 0));
         lblLicencia.setText("Licencia:");
 
         javax.swing.GroupLayout roundedPanel3Layout = new javax.swing.GroupLayout(roundedPanel3);
@@ -352,32 +356,57 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que busca los datos
+     * @param evt accion a realizar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         this.validaDatosBuscar();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Boton que manda a la siguiente interfaz
+     * @param evt acciona a realizar
+     */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         this.validaDatosPersona();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    /**
+     * Boton que regresa a la interfaz Aplicacion
+     * @param evt 
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         Aplicacion v = new Aplicacion();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    /**
+     * Cambia el cursor al estilo "mano" cuando el mouse se posiciona sobre el botón de regresar.
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
+    /**
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón de regresar.
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
 
+    
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRFCActionPerformed
 
+    /**
+     * Campo de texto donde se le agrega el RFC de la persona
+     * @param evt campo de texto 
+     */
     private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
         char car = evt.getKeyChar();
         if (!Character.isLetterOrDigit(car) && txtRFC.getText().length() >= 13) {

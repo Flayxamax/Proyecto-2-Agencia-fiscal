@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.interfaz;
 
 import com.itson.dominio.Automovil;
@@ -23,11 +20,13 @@ import javax.swing.table.DefaultTableModel;
 import utils.ConfiguracionPaginado;
 
 /**
- *
+ * Interfaz Historial tramite
  * @author ildex
  */
 public class HistorialTramite extends javax.swing.JFrame {
-
+    /**
+     * Creacion de objetos PersonaDao, CostoTramite, LicenciaDAO, PlacaDAO, ConfiguracionPaginado, VehiculoDAO 
+     */
     PersonaDAO a = new PersonaDAO();
     private final ConfiguracionPaginado configPaginado;
     private static final Logger LOG = Logger.getLogger(LicenciaDAO.class.getName());
@@ -37,8 +36,7 @@ public class HistorialTramite extends javax.swing.JFrame {
     private final String rfc;
 
     /**
-     * Creates new form HistorialTramite
-     *
+     * From HistorialTramite
      * @param rfc
      */
     public HistorialTramite(String rfc) {
@@ -51,12 +49,16 @@ public class HistorialTramite extends javax.swing.JFrame {
         this.cargarTablaPlaca();
         this.cargarTablaVehiculo();
     }
-
+    /**
+     * Metodo que inserta los datos de la persona
+     */
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
     }
-
+    /**
+     * Metodo que carga la tabla de licencia 
+     */
     private void cargarTablaLicencia() {
         Persona persona = a.buscarPersonasRFC(rfc);
         try {
@@ -80,7 +82,9 @@ public class HistorialTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
-
+    /**
+     * Metodo que carga la tabla de las placas
+     */
     private void cargarTablaPlaca() {
         Persona persona = a.buscarPersonasRFC(rfc);
         try {
@@ -105,7 +109,9 @@ public class HistorialTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
-
+    /**
+     * Metodo que carga la tabla de vehiculos
+     */
     private void cargarTablaVehiculo() {
         Persona persona = a.buscarPersonasRFC(rfc);
         try {
@@ -126,32 +132,44 @@ public class HistorialTramite extends javax.swing.JFrame {
             LOG.log(Level.SEVERE, e.getMessage());
         }
     }
-
+     /**
+     * Metodo que avanza hacia la siguiente pagina con configuracion del paginado de la tabla licencia
+     */
     private void avanzarPagina() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaLicencia();
     }
-
+    /**
+     * Metodo que retrocede la pagina con configuracion del paginado de la tabla licencia
+     */
     private void retrocederPagina() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaLicencia();
     }
-
+    /**
+     * Metodo que avanza la pagina con configuracion del paginado de la tabla placa
+     */
     private void avanzarPaginaP() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaPlaca();
     }
-
+    /**
+     * Metrodo que retrocede la pagina con configuracion del paginado de la tabla placa
+     */
     private void retrocederPaginaP() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaPlaca();
     }
-
+    /**
+     * Metodo que avanza la pagina con configuracion del paginado de la tabla vehiculo
+     */
     private void avanzarPaginaV() {
         this.configPaginado.avanzarPagina();
         this.cargarTablaVehiculo();
     }
-
+    /**
+     * Metrodo que retrocede la pagina con configuracion del paginado de la tabla vehiculo
+     */
     private void retrocederPaginaV() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaVehiculo();
@@ -435,26 +453,50 @@ public class HistorialTramite extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que avanza a ala pagina siguiente de licencia
+     * @param evt acciona realizar
+     */
     private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
         this.avanzarPagina();
     }//GEN-LAST:event_btnAvanzarActionPerformed
 
+    /**
+     * Boton que retrocede de pagina de licencia
+     * @param evt acciona realizar
+     */
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
         this.retrocederPagina();
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
+    /**
+     * Boton que avanza la pagina de placas
+     * @param evt accion a realizar
+     */
     private void btnAvanzarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarPActionPerformed
         this.avanzarPaginaP();
     }//GEN-LAST:event_btnAvanzarPActionPerformed
 
+    /**
+     * Boton que retrocede de pagina de placas
+     * @param evt accion a realizar
+     */
     private void btnRetrocederPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederPActionPerformed
         this.retrocederPaginaP();
     }//GEN-LAST:event_btnRetrocederPActionPerformed
 
+    /**
+     * Boton que avanza la pagina de vehiculos
+     * @param evt accion a realizar
+     */
     private void btnAvanzarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarVActionPerformed
         this.avanzarPaginaV();
     }//GEN-LAST:event_btnAvanzarVActionPerformed
 
+    /**
+     * Boton que retrocede de pagina de vehiculos
+     * @param evt accion a realizar
+     */
     private void btnRetrocederVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederVActionPerformed
         this.retrocederPaginaV();
     }//GEN-LAST:event_btnRetrocederVActionPerformed
@@ -465,10 +507,18 @@ public class HistorialTramite extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    /**
+     *Boton que cambia el cursor "mano" cuando el mouse se posiciona sobre le boton regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseEntered
 
+    /**
+     * Boton que cambia el cursor por el cursor por defecto cuando el mouse sale del area del boton regresar
+     * @param evt evento del mouse
+     */
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited

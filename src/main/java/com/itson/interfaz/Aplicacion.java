@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
- */
+
 package com.itson.interfaz;
 
 import com.itson.implementaciones.PersonaDAO;
@@ -10,13 +7,13 @@ import java.awt.Cursor;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Pantalla inicial de la aplicacion
  * @author arace
  */
 public class Aplicacion extends javax.swing.JFrame {
 
     /**
-     * Creates new form Aplicacion
+     * Form Aplicacion
      */
     public Aplicacion() {
         initComponents();
@@ -324,6 +321,10 @@ public class Aplicacion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton que hace la insersion de las 20 personas ya registradas 
+     * @param evt la accion a enviar
+     */
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
         IPersonaDAO a = new PersonaDAO();
         long numeroPersonas = a.contarPersonas();
@@ -339,6 +340,10 @@ public class Aplicacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonPersonasActionPerformed
 
+    /**
+     * Boton que envia a la interfaz de modulo de licencia
+     * @param evt la accion a enviar
+     */
     private void btnModuloLicenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloLicenciaMouseClicked
         ConsultaLicencia v = new ConsultaLicencia();
         v.setVisible(true);
@@ -353,44 +358,80 @@ public class Aplicacion extends javax.swing.JFrame {
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnModuloLicenciaMouseExited
 
+    /**
+     * Boton que envia a la interfaz modulo de placas 
+     * @param evt la accion a enviar 
+     */
     private void btnModuloPlacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseClicked
         ConsultaPlaca v = new ConsultaPlaca();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnModuloPlacaMouseClicked
 
+    /**
+     * Cambia el cursor al estilo "mano" cuando el mouse se posiciona sobre el botón del módulo de placas.
+     * @param evt el evento de mouse
+     */
     private void btnModuloPlacaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnModuloPlacaMouseEntered
 
+    /**
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón del módulo de placas.
+     * @param evt evento del mouse
+     */
     private void btnModuloPlacaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloPlacaMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnModuloPlacaMouseExited
 
+    /**
+     * Boton que envia a la interfaz consulta personas
+     * @param evt la accion a enviar
+     */
     private void btnModuloConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseClicked
         ConsultaPersona v = new ConsultaPersona();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnModuloConsultaMouseClicked
 
+    /**
+     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton modulo de consulta
+     * @param evt evento del mouse
+     */
     private void btnModuloConsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnModuloConsultaMouseEntered
 
+    /**
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón del módulo de consulta.
+     * @param evt evento del mouse
+     */
     private void btnModuloConsultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloConsultaMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnModuloConsultaMouseExited
 
+    /**
+     * Boton que envia a la interfaz consultas de persona tramite
+     * @param evt la accion a enviar
+     */
     private void btnModuloReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseClicked
         ConsultaPersonaTramite v = new ConsultaPersonaTramite();
         v.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnModuloReporteMouseClicked
 
+    /**
+     * Cambia el cursor "mano" cuando el mouse se posiciona sobre le boton modulo de reporte
+     * @param evt evento del mouse
+     */
     private void btnModuloReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btnModuloReporteMouseEntered
 
+    /**
+     * Cambia el cursor al cursor por defecto cuando el mouse sale del área del botón del módulo de reporte.
+     * @param evt evento del mouse
+     */
     private void btnModuloReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModuloReporteMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnModuloReporteMouseExited

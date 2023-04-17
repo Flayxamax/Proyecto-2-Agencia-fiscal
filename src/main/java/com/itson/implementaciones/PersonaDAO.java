@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.itson.implementaciones;
 
 import com.itson.dominio.Persona;
@@ -21,14 +18,23 @@ import javax.persistence.criteria.Root;
 import utils.ConfiguracionPaginado;
 
 /**
- *
+ * Clase que se encarga de insertar los datos de las personas, implementa la interfaz IPersonaDao
+ * y se encarga de realizar las operaciones de persona
  * @author ildex
  */
 public class PersonaDAO implements IPersonaDAO {
-
+    /**
+     * Objeto que se utiliza para crear instancias de entity manager y realiza las operacciones
+     * de persistencia en la base de datos
+     */
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
-
+    /**
+     * Metodo que se encarga de insertar a las personas con sus atributos correspondientes, usando el
+     * entity manager para hacer la transaccion con el gestor de entidades recorriendo el array de objetos
+     * "Persona" y usando un for podemos insetar cada objeto a la base de datos , al final se confirma la 
+     * transaccion en una base de datos mediante JPA
+     */
     @Override
     public void insertarPersonas() {
         try {
@@ -65,13 +71,23 @@ public class PersonaDAO implements IPersonaDAO {
         }
 
     }
-
+    /**
+     * Metodo que cuenta a todas las personas que fueron insertadas en el sistema
+     * @return la canttidad de personas 
+     */
     @Override
     public long contarPersonas() {
         Query query = em.createQuery("select count(p) from Persona p");
         return (long) query.getSingleResult();
     }
-
+    /**
+     * Metodo de consulta que se encarga de buscar a las personas con los parametros recibidos
+     * @param configPaginado objrto que contiene la informacion del paginado
+     * @param rfc que representa a la persona a buscar
+     * @param nombre de la persona con sus apellidos correspondientes a buscar
+     * @param ano la fecha de nacimiento de la persona a buscar
+     * @return la lista de objetos de la personas que cumplen con los criterios
+     */
     public List<Persona> buscarPersonas(ConfiguracionPaginado configPaginado, String rfc, String nombre, String ano) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Persona> cq = cb.createQuery(Persona.class);
@@ -101,7 +117,11 @@ public class PersonaDAO implements IPersonaDAO {
         TypedQuery<Persona> query = em.createQuery(cq).setFirstResult(configPaginado.getElementosASaltar()).setMaxResults(configPaginado.getElementosPagina());
         return query.getResultList();
     }
-
+    /**
+     * Metodo de consulta que busca a las personas mediante el RFC 
+     * @param rfc de la persona a buscar
+     * @return la persona encontrada, o null si no se encontro ninguna persona
+     */
     @Override
     public Persona buscarPersonasRFC(String rfc) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -117,7 +137,11 @@ public class PersonaDAO implements IPersonaDAO {
         TypedQuery<Persona> query = em.createQuery(cq);
         return query.getSingleResult();
     }
-
+    /**
+     * Metodo de consulta que valida si existe una persona con el RFC especificado
+     * @param rfc de la persona a buscar
+     * @return si existe una persona con el rfc encontrado
+     */
     @Override
     public boolean validarPersonaRFC(String rfc) {
         TypedQuery<Long> query = em.createQuery("select count(p) from Persona p where p.rfc = :rfc", Long.class);
