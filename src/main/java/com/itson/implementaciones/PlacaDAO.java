@@ -127,19 +127,7 @@ public class PlacaDAO implements IPlacaDAO {
         }
         return valida;
     }
-
-//    public boolean validaPlacaPersonaExiste(String placa, Persona persona) {
-//        boolean valida = false;
-//        try {
-//            TypedQuery<Long> query = em.createQuery("select count(a) from Automovil a where a.placa = :placa and a.persona = :persona", Long.class);
-//            query.setParameter("placa", placa);
-//            query.setParameter("persona", persona);
-//            valida = query.getSingleResult() > 0;
-//        } catch (Exception e) {
-//            e.getMessage();
-//        }
-//        return valida;
-//    }
+    
     public List<Automovil> buscarPlacaAutomovilL(String placa, Persona persona) {
         try {
             TypedQuery<Automovil> query = em.createQuery(

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utils.ConfiguracionPaginado;
 
@@ -41,7 +42,6 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }
 
     private void cargarTablaPersona() {
-        this.extraerDatosFormularioPersona();
         try {
             List<Persona> listaPersona = this.extraerDatosFormularioPersona();
             DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPersona.getModel();
@@ -72,6 +72,12 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private void retrocederPagina() {
         this.configPaginado.retrocederPagina();
         this.cargarTablaPersona();
+    }
+
+    private void validaBusqueda() {
+        if (this.extraerDatosFormularioPersona().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado ni una persona con los parametros buscados dentro del sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -188,6 +194,11 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 txtRFCActionPerformed(evt);
             }
         });
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundedPanel2Layout = new javax.swing.GroupLayout(roundedPanel2);
         roundedPanel2.setLayout(roundedPanel2Layout);
@@ -225,6 +236,11 @@ public class ConsultaPersona extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundedPanel3Layout = new javax.swing.GroupLayout(roundedPanel3);
         roundedPanel3.setLayout(roundedPanel3Layout);
@@ -260,6 +276,11 @@ public class ConsultaPersona extends javax.swing.JFrame {
         txtAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnoActionPerformed(evt);
+            }
+        });
+        txtAno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAnoKeyTyped(evt);
             }
         });
 
@@ -363,9 +384,9 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        this.validaBusqueda();
         this.cargarTablaPersona();
     }//GEN-LAST:event_btnBuscarActionPerformed
-
 
     private void txtAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnoActionPerformed
         // TODO add your handling code here:
@@ -376,10 +397,14 @@ public class ConsultaPersona extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRFCActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-        String RFC = tblPersona.getValueAt(tblPersona.getSelectedRow(), 0).toString();
-        HistorialTramite v = new HistorialTramite(RFC);
-        v.setVisible(true);
-        dispose();
+        if (tblPersona.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String RFC = tblPersona.getValueAt(tblPersona.getSelectedRow(), 0).toString();
+            HistorialTramite v = new HistorialTramite(RFC);
+            v.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -407,6 +432,35 @@ public class ConsultaPersona extends javax.swing.JFrame {
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetterOrDigit(car) && txtRFC.getText().length() >= 13) {
+            evt.consume();
+        } else if (txtRFC.getText().length() >= 13 && !Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetter(car) && txtNombre.getText().length() >= 300) {
+            evt.consume();
+        } else if (txtNombre.getText().length() >= 300 && Character.isDigit(car)) {
+            evt.consume();
+        } else if (Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnoKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isDigit(car)) {
+            evt.consume();
+        } else if (txtAno.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAnoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

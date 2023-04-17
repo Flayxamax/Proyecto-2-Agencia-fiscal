@@ -262,9 +262,6 @@ public class CostosLicencia extends javax.swing.JFrame {
                 + "Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno() + "\n"
                 + "Vigencia (años): " + vigencia + "\n"
                 + "Tipo: " + estado + "", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        Aplicacion a = new Aplicacion();
-        a.setVisible(true);
-        dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jcbDiscapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDiscapacidadActionPerformed

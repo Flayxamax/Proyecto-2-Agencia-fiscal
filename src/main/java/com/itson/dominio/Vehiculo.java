@@ -30,7 +30,7 @@ public abstract class Vehiculo implements Serializable {
     @Column(name = "Modelo", nullable = false, length = 10)
     private Integer modelo;
 
-    @Column(name = "Serie", nullable = false, length = 100)
+    @Column(name = "Serie", nullable = false, length = 7)
     private String serie;
 
     @Column(name = "Color", nullable = false, length = 100)

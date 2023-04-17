@@ -79,7 +79,6 @@ public class CostosPlacas extends javax.swing.JFrame {
         btnVehiculoUsado = new javax.swing.JButton();
         ScrollCostos = new javax.swing.JScrollPane();
         tblPrecioPlaca = new javax.swing.JTable();
-        botonAceptar = new javax.swing.JButton();
         lblPersona = new javax.swing.JLabel();
         lblLicenciaVigencia = new javax.swing.JLabel();
 
@@ -195,15 +194,6 @@ public class CostosPlacas extends javax.swing.JFrame {
 
         roundedPanel1.add(ScrollCostos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 483, 55));
 
-        botonAceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonAceptar.setText("Aceptar\n");
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAceptarActionPerformed(evt);
-            }
-        });
-        roundedPanel1.add(botonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, -1, -1));
-
         jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 520, 420));
 
         lblPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -217,10 +207,6 @@ public class CostosPlacas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void btnVehiculoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoNuevoActionPerformed
         RegistroAuto v = new RegistroAuto(rfc);
@@ -285,7 +271,6 @@ public class CostosPlacas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollCostos;
-    private javax.swing.JButton botonAceptar;
     private javax.swing.JLabel btnRegresar;
     private javax.swing.JButton btnVehiculoNuevo;
     private javax.swing.JButton btnVehiculoUsado;

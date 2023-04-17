@@ -7,6 +7,7 @@ package com.itson.implementaciones;
 import com.itson.dominio.Persona;
 import com.itson.dominio.TipoTramite;
 import com.itson.dominio.Tramite;
+import interfaces.ITramiteDAO;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,11 +20,12 @@ import utils.ConfiguracionPaginado;
  *
  * @author ildex
  */
-public class TramiteDAO {
+public class TramiteDAO implements ITramiteDAO{
 
     EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("org.itson_ProyectoBDA_jar_1.0-SNAPSHOTPU");
     EntityManager em = emFactory.createEntityManager();
-
+    
+    @Override
     public List<Tramite> buscarTramites(ConfiguracionPaginado configPaginado, Persona persona, TipoTramite tipo, Date fechaDesde, Date fechaHasta) {
         try {
             TypedQuery<Tramite> query = em.createQuery(

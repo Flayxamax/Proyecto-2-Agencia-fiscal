@@ -13,6 +13,7 @@ import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import utils.Validadores;
 
 /**
  *
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 public class ConsultaLicencia extends javax.swing.JFrame {
 
     PersonaDAO a = new PersonaDAO();
+    private final Validadores validadores = new Validadores();
 
     /**
      * Creates new form ConsultaLicencia
@@ -28,6 +30,15 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     public ConsultaLicencia() {
         initComponents();
         setResizable(false);
+        this.validadOperacion();
+    }
+
+    private void validadOperacion() {
+        if (lblNombreI.getText().isBlank()) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+        }
     }
 
     private Persona extraerDatosFormulario() {
@@ -51,11 +62,11 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         LocalDate fechaActual = LocalDate.now();
         int edad = Period.between(fechaNacimientoLocal, fechaActual).getYears();
         lblEdadI.setText(String.valueOf(edad));
-        
+
         lblTelefonoI.setText(persona.getTelefono());
     }
-    
-    private boolean validarEdad(){
+
+    private boolean validarEdad() {
         boolean mayorEdad = false;
         String eda = lblEdadI.getText();
         int edad = Integer.parseInt(eda);
@@ -74,6 +85,19 @@ public class ConsultaLicencia extends javax.swing.JFrame {
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void validaDatosBuscar() {
+        if (txtRFC.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado un RFC a consultar", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (a.validarPersonaRFC(txtRFC.getText()) != true) {
+            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaRfc(txtRFC.getText())) {
+            this.insertarDatospersona();
+            this.validadOperacion();
+        } else {
+            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -180,6 +204,11 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRFCActionPerformed(evt);
+            }
+        });
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
             }
         });
 
@@ -313,7 +342,7 @@ public class ConsultaLicencia extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRFCActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.insertarDatospersona();
+        this.validaDatosBuscar();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -334,40 +363,15 @@ public class ConsultaLicencia extends javax.swing.JFrame {
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ConsultaLicencia().setVisible(true);
-//            }
-//        });
-//    }
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetterOrDigit(car) && txtRFC.getText().length() >= 13) {
+            evt.consume();
+        } else if (txtRFC.getText().length() >= 13 && !Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

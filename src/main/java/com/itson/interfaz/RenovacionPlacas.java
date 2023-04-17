@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utils.Validadores;
 
 /**
  *
@@ -29,6 +30,7 @@ public class RenovacionPlacas extends javax.swing.JFrame {
     PlacaDAO d = new PlacaDAO();
     private static final Logger LOG = Logger.getLogger(PlacaDAO.class.getName());
     private final String rfc;
+    private final Validadores validadores = new Validadores();
 
     /**
      * Creates new form RenovacionPlacas
@@ -41,7 +43,7 @@ public class RenovacionPlacas extends javax.swing.JFrame {
         this.rfc = rfc;
         this.insertarDatosPersona();
     }
-    
+
     private void insertarDatosPersona() {
         Persona persona = this.a.buscarPersonasRFC(rfc);
         lblPersona.setText("Persona: " + persona.getNombre() + " " + persona.getApellidoPaterno() + " " + persona.getApellidoMaterno());
@@ -72,15 +74,11 @@ public class RenovacionPlacas extends javax.swing.JFrame {
         Persona persona = a.buscarPersonasRFC(rfc);
         if (txtPlaca.getText().equals("   -   ")) {
             JOptionPane.showMessageDialog(null, "El campo de texto de placa está vacío", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (d.buscarPlacaAutomovil(txtPlaca.getText(), persona) == null) {
+            JOptionPane.showMessageDialog(null, "La placa ingresada no ha sido encontrado en el sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.cargarTablaAuto(txtPlaca.getText());
         }
-        this.cargarTablaAuto(txtPlaca.getText());
-//        } else if (d.validaPlacaPersonaExiste(txtPlaca.getText(), persona) == false) {
-//            JOptionPane.showMessageDialog(null, "La placa " + txtPlaca.getText() + " no tiene coincidencia con una placa registrada en nuestro sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
-//            System.out.println(d.validaPlacaPersonaExiste(txtPlaca.getText(), persona));
-//        } else {
-//            this.cargarTablaAuto(txtPlaca.getText());
-//            System.out.println(d.validaPlacaPersonaExiste(txtPlaca.getText(), persona));
-//        }
     }
 
     private void insertarPlaca() {

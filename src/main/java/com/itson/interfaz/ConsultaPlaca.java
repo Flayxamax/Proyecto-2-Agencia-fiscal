@@ -10,6 +10,7 @@ import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import utils.Validadores;
 
 /**
  *
@@ -19,6 +20,7 @@ public class ConsultaPlaca extends javax.swing.JFrame {
 
     PersonaDAO a = new PersonaDAO();
     LicenciaDAO b = new LicenciaDAO();
+    private final Validadores validadores = new Validadores();
 
     /**
      * Creates new form ConsultaPlaca
@@ -26,6 +28,15 @@ public class ConsultaPlaca extends javax.swing.JFrame {
     public ConsultaPlaca() {
         initComponents();
         setResizable(false);
+        this.validadOperacion();
+    }
+
+    private void validadOperacion() {
+        if (lblNombreI.getText().isBlank()) {
+            btnSiguiente.setEnabled(false);
+        } else {
+            btnSiguiente.setEnabled(true);
+        }
     }
 
     private Persona extraerDatosFormulario() {
@@ -76,10 +87,23 @@ public class ConsultaPlaca extends javax.swing.JFrame {
                 v.setVisible(true);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "No tiene o no se encontró una licencia vigente para la persona con el RFC: "+txtRFC.getText(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No tiene o no se encontró una licencia vigente para la persona con el RFC: " + txtRFC.getText(), "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Esta persona no puede tramitar licencia por menor de edad permitida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void validaDatosBuscar(){
+        if (txtRFC.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado un RFC a consultar", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (a.validarPersonaRFC(txtRFC.getText()) != true) {
+            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaRfc(txtRFC.getText())) {
+            this.insertarDatospersona();
+            this.validadOperacion();
+        } else {
+            JOptionPane.showMessageDialog(null, "El RFC ingresado no es valido", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -111,7 +135,7 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         lblTelefonoI = new javax.swing.JLabel();
         lblLicencia = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        botonSiguiente = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Módulo de placas: busqueda persona");
@@ -187,6 +211,11 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRFCActionPerformed(evt);
+            }
+        });
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
             }
         });
 
@@ -306,14 +335,14 @@ public class ConsultaPlaca extends javax.swing.JFrame {
         });
         roundedPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
-        botonSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        botonSiguiente.setText("Siguiente");
-        botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSiguienteActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
-        roundedPanel1.add(botonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
+        roundedPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
 
         jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 520, 420));
 
@@ -324,12 +353,12 @@ public class ConsultaPlaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.insertarDatospersona();
+        this.validaDatosBuscar();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         this.validaDatosPersona();
-    }//GEN-LAST:event_botonSiguienteActionPerformed
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         Aplicacion v = new Aplicacion();
@@ -348,46 +377,21 @@ public class ConsultaPlaca extends javax.swing.JFrame {
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRFCActionPerformed
-//
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ConsultaPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ConsultaPlaca().setVisible(true);
-//            }
-//        });
-//    }
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetterOrDigit(car) && txtRFC.getText().length() >= 13) {
+            evt.consume();
+        } else if (txtRFC.getText().length() >= 13 && !Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnRegresar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel labelOperacion1;

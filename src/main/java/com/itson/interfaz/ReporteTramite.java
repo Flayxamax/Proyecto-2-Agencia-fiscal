@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -54,6 +55,11 @@ public class ReporteTramite extends javax.swing.JFrame {
         this.configPaginado = new ConfiguracionPaginado(0, 5);
         this.rfc = rfc;
         this.insertarDatosPersona();
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate minFecha = LocalDate.of(1900, 01, 01);
+        dpHasta.getSettings().setDateRangeLimits(minFecha, fechaActual);
+        dpDesde.getComponentDateTextField().setEnabled(false);
+        dpHasta.getComponentDateTextField().setEnabled(false);
     }
 
     private void insertarDatosPersona() {
@@ -142,6 +148,13 @@ public class ReporteTramite extends javax.swing.JFrame {
             jv.setVisible(true);
         } catch (JRException e) {
             e.getMessage();
+        }
+    }
+
+    private void validaBusqueda() {
+        Persona persona = a.buscarPersonasRFC(rfc);
+        if (b.buscarTramites(configPaginado, persona, this.tipo(), this.sacarFechaDesde(), this.sacarFechaHasta()) == null) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado trámites con los parametros buscados", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -268,28 +281,28 @@ public class ReporteTramite extends javax.swing.JFrame {
             tblTramite.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        roundedPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 120));
+        roundedPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 110));
         roundedPanel1.add(dpDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, 30));
 
         jLabel5.setText("Desde");
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         roundedPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
-        roundedPanel1.add(dpHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 30));
+        roundedPanel1.add(dpHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, 30));
 
         jLabel6.setText("Hasta");
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        roundedPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
+        roundedPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
 
         cbTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licencia", "Placa" }));
         cbTramite.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        roundedPanel1.add(cbTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 110, 30));
+        roundedPanel1.add(cbTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 110, 30));
 
         jLabel7.setText("Tipo tramite");
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        roundedPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
+        roundedPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
 
         botonReporte.setText("Generar reporte");
         botonReporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -298,7 +311,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 botonReporteActionPerformed(evt);
             }
         });
-        roundedPanel1.add(botonReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, -1, -1));
+        roundedPanel1.add(botonReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -306,7 +319,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        roundedPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, -1, 30));
+        roundedPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, -1, 30));
 
         btnAvanzar.setText("Avanzar");
         btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
@@ -314,7 +327,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 btnAvanzarActionPerformed(evt);
             }
         });
-        roundedPanel1.add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 100, -1));
+        roundedPanel1.add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 100, -1));
 
         btnRetroceder.setText("Retroceder");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
@@ -322,7 +335,7 @@ public class ReporteTramite extends javax.swing.JFrame {
                 btnRetrocederActionPerformed(evt);
             }
         });
-        roundedPanel1.add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 100, -1));
+        roundedPanel1.add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 100, -1));
 
         jPanel1.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 720, 420));
 
@@ -339,11 +352,27 @@ public class ReporteTramite extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporteActionPerformed
-        this.generacionReporte();
+        Persona persona = a.buscarPersonasRFC(rfc);
+        if (dpDesde.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "No se ha ingresado una fecha desde", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (dpHasta.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "No se ha ingresado una fecha hasta", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (b.buscarTramites(configPaginado, persona, this.tipo(), this.sacarFechaDesde(), this.sacarFechaHasta()) == null) {
+            JOptionPane.showMessageDialog(null, "No se puede generar reporte, favor de buscar tramites con los parametros correspondientes", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.generacionReporte();
+        }
     }//GEN-LAST:event_botonReporteActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.cargarTablaLicencia();
+        if (dpDesde.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "No se ha ingresado una fecha desde", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (dpHasta.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "No se ha ingresado una fecha hasta", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.validaBusqueda();
+            this.cargarTablaLicencia();
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed

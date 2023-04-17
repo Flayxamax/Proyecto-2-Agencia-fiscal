@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utils.ConfiguracionPaginado;
 
@@ -34,9 +35,9 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
     }
 
     private List<Persona> extraerDatosFormularioPersona() {
-        String RFC = txtRFC1.getText();
-        String nombre = txtNombre1.getText();
-        String ano = txtAno1.getText();
+        String RFC = txtRFC.getText();
+        String nombre = txtNombre.getText();
+        String ano = txtAno.getText();
         return a.buscarPersonas(configPaginado, RFC, nombre, ano);
     }
 
@@ -44,7 +45,7 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         this.extraerDatosFormularioPersona();
         try {
             List<Persona> listaPersona = this.extraerDatosFormularioPersona();
-            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPersona1.getModel();
+            DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPersona.getModel();
             modeloTabla.setRowCount(0);
             for (Persona persona : listaPersona) {
                 Calendar fechaNacimiento = persona.getFechaNacimiento();
@@ -73,6 +74,12 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         this.configPaginado.retrocederPagina();
         this.cargarTablaPersona();
     }
+    
+    private void validaBusqueda() {
+        if (this.extraerDatosFormularioPersona().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado ni una persona con los parametros buscados dentro del sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,18 +98,18 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         labelBuscarParametros1 = new javax.swing.JLabel();
         labelRFC1 = new javax.swing.JLabel();
         roundedPanel2 = new utils.RoundedPanel();
-        txtRFC1 = new javax.swing.JTextField();
+        txtRFC = new javax.swing.JTextField();
         labelNombreCompleto1 = new javax.swing.JLabel();
         roundedPanel3 = new utils.RoundedPanel();
-        txtNombre1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         labelFecha1 = new javax.swing.JLabel();
         roundedPanel4 = new utils.RoundedPanel();
-        txtAno1 = new javax.swing.JTextField();
+        txtAno = new javax.swing.JTextField();
         btnBuscar1 = new javax.swing.JButton();
         btnAvanzar1 = new javax.swing.JButton();
         btnRetroceder1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPersona1 = new javax.swing.JTable();
+        tblPersona = new javax.swing.JTable();
         botonSiguiente = new javax.swing.JButton();
         lblPersona = new javax.swing.JLabel();
 
@@ -178,13 +185,18 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         roundedPanel2.setRoundTopLeft(50);
         roundedPanel2.setRoundTopRight(50);
 
-        txtRFC1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        txtRFC1.setForeground(new java.awt.Color(0, 0, 0));
-        txtRFC1.setBorder(null);
-        txtRFC1.setOpaque(false);
-        txtRFC1.addActionListener(new java.awt.event.ActionListener() {
+        txtRFC.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtRFC.setForeground(new java.awt.Color(0, 0, 0));
+        txtRFC.setBorder(null);
+        txtRFC.setOpaque(false);
+        txtRFC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRFC1ActionPerformed(evt);
+                txtRFCActionPerformed(evt);
+            }
+        });
+        txtRFC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRFCKeyTyped(evt);
             }
         });
 
@@ -194,12 +206,12 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
             roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtRFC1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(txtRFC, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addContainerGap())
         );
         roundedPanel2Layout.setVerticalGroup(
             roundedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtRFC1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(txtRFC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         roundedPanel1.add(roundedPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, 40));
@@ -215,13 +227,18 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         roundedPanel3.setRoundTopLeft(50);
         roundedPanel3.setRoundTopRight(50);
 
-        txtNombre1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        txtNombre1.setForeground(new java.awt.Color(0, 0, 0));
-        txtNombre1.setBorder(null);
-        txtNombre1.setOpaque(false);
-        txtNombre1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombre.setBorder(null);
+        txtNombre.setOpaque(false);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombre1ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
             }
         });
 
@@ -231,12 +248,12 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
             roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtNombre1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addContainerGap())
         );
         roundedPanel3Layout.setVerticalGroup(
             roundedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtNombre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         roundedPanel1.add(roundedPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 420, 40));
@@ -252,13 +269,18 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         roundedPanel4.setRoundTopLeft(50);
         roundedPanel4.setRoundTopRight(50);
 
-        txtAno1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        txtAno1.setForeground(new java.awt.Color(0, 0, 0));
-        txtAno1.setBorder(null);
-        txtAno1.setOpaque(false);
-        txtAno1.addActionListener(new java.awt.event.ActionListener() {
+        txtAno.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        txtAno.setForeground(new java.awt.Color(0, 0, 0));
+        txtAno.setBorder(null);
+        txtAno.setOpaque(false);
+        txtAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAno1ActionPerformed(evt);
+                txtAnoActionPerformed(evt);
+            }
+        });
+        txtAno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAnoKeyTyped(evt);
             }
         });
 
@@ -268,12 +290,12 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
             roundedPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundedPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtAno1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roundedPanel4Layout.setVerticalGroup(
             roundedPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtAno1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+            .addComponent(txtAno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
         );
 
         roundedPanel1.add(roundedPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 150, -1));
@@ -293,7 +315,7 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
                 btnAvanzar1ActionPerformed(evt);
             }
         });
-        roundedPanel1.add(btnAvanzar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 100, -1));
+        roundedPanel1.add(btnAvanzar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 100, -1));
 
         btnRetroceder1.setText("Retroceder");
         btnRetroceder1.addActionListener(new java.awt.event.ActionListener() {
@@ -301,9 +323,9 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
                 btnRetroceder1ActionPerformed(evt);
             }
         });
-        roundedPanel1.add(btnRetroceder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 100, -1));
+        roundedPanel1.add(btnRetroceder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 100, -1));
 
-        tblPersona1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -326,17 +348,17 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblPersona1.setMaximumSize(new java.awt.Dimension(214748347, 0));
-        tblPersona1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblPersona1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblPersona1.setShowGrid(false);
-        tblPersona1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblPersona1);
-        if (tblPersona1.getColumnModel().getColumnCount() > 0) {
-            tblPersona1.getColumnModel().getColumn(0).setResizable(false);
-            tblPersona1.getColumnModel().getColumn(1).setResizable(false);
-            tblPersona1.getColumnModel().getColumn(2).setResizable(false);
-            tblPersona1.getColumnModel().getColumn(3).setResizable(false);
+        tblPersona.setMaximumSize(new java.awt.Dimension(214748347, 0));
+        tblPersona.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPersona.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPersona.setShowGrid(false);
+        tblPersona.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblPersona);
+        if (tblPersona.getColumnModel().getColumnCount() > 0) {
+            tblPersona.getColumnModel().getColumn(0).setResizable(false);
+            tblPersona.getColumnModel().getColumn(1).setResizable(false);
+            tblPersona.getColumnModel().getColumn(2).setResizable(false);
+            tblPersona.getColumnModel().getColumn(3).setResizable(false);
         }
 
         roundedPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 810, 110));
@@ -363,10 +385,14 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
 
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-        String RFC = tblPersona1.getValueAt(tblPersona1.getSelectedRow(), 0).toString();
-        ReporteTramite v = new ReporteTramite(RFC);
-        v.setVisible(true);
-        dispose();
+        if (tblPersona.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila en la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String RFC = tblPersona.getValueAt(tblPersona.getSelectedRow(), 0).toString();
+            ReporteTramite v = new ReporteTramite(RFC);
+            v.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -383,19 +409,20 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnRegresarMouseExited
 
-    private void txtRFC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFC1ActionPerformed
+    private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRFC1ActionPerformed
+    }//GEN-LAST:event_txtRFCActionPerformed
 
-    private void txtNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre1ActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombre1ActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtAno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAno1ActionPerformed
+    private void txtAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAno1ActionPerformed
+    }//GEN-LAST:event_txtAnoActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        this.validaBusqueda();
         this.cargarTablaPersona();
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
@@ -406,6 +433,35 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
     private void btnRetroceder1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetroceder1ActionPerformed
         this.retrocederPagina();
     }//GEN-LAST:event_btnRetroceder1ActionPerformed
+
+    private void txtRFCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRFCKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetterOrDigit(car) && txtRFC.getText().length() >= 13) {
+            evt.consume();
+        } else if (txtRFC.getText().length() >= 13 && !Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRFCKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetter(car) && txtNombre.getText().length() >= 300) {
+            evt.consume();
+        } else if (txtNombre.getText().length() >= 300 && Character.isDigit(car)) {
+            evt.consume();
+        } else if (Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtAnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnoKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isDigit(car)) {
+            evt.consume();
+        } else if (txtAno.getText().length() >= 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAnoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -427,9 +483,9 @@ public class ConsultaPersonaTramite extends javax.swing.JFrame {
     private utils.RoundedPanel roundedPanel2;
     private utils.RoundedPanel roundedPanel3;
     private utils.RoundedPanel roundedPanel4;
-    private javax.swing.JTable tblPersona1;
-    private javax.swing.JTextField txtAno1;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtRFC1;
+    private javax.swing.JTable tblPersona;
+    private javax.swing.JTextField txtAno;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }

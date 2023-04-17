@@ -12,6 +12,7 @@ import com.itson.implementaciones.PlacaDAO;
 import com.itson.implementaciones.VehiculoDAO;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
+import utils.Validadores;
 
 /**
  *
@@ -24,6 +25,7 @@ public class RegistroAuto extends javax.swing.JFrame {
     VehiculoDAO b = new VehiculoDAO();
     PlacaDAO c = new PlacaDAO();
     CostoTramite d = new CostoTramite();
+    private final Validadores validadores = new Validadores();
 
     /**
      * Creates new form RegistroPlacas
@@ -181,6 +183,11 @@ public class RegistroAuto extends javax.swing.JFrame {
                 txtMarcaActionPerformed(evt);
             }
         });
+        txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMarcaKeyTyped(evt);
+            }
+        });
         roundedPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 290, 25));
         roundedPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 290, 10));
 
@@ -193,6 +200,11 @@ public class RegistroAuto extends javax.swing.JFrame {
         txtLinea.setForeground(new java.awt.Color(0, 0, 0));
         txtLinea.setBorder(null);
         txtLinea.setOpaque(false);
+        txtLinea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLineaKeyTyped(evt);
+            }
+        });
         roundedPanel1.add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, -1));
         roundedPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 290, 10));
 
@@ -205,6 +217,11 @@ public class RegistroAuto extends javax.swing.JFrame {
         txtColor.setForeground(new java.awt.Color(0, 0, 0));
         txtColor.setBorder(null);
         txtColor.setOpaque(false);
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtColorKeyTyped(evt);
+            }
+        });
         roundedPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 290, -1));
         roundedPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 290, 10));
 
@@ -217,6 +234,11 @@ public class RegistroAuto extends javax.swing.JFrame {
         txtModelo.setForeground(new java.awt.Color(0, 0, 0));
         txtModelo.setBorder(null);
         txtModelo.setOpaque(false);
+        txtModelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtModeloKeyTyped(evt);
+            }
+        });
         roundedPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 290, -1));
         roundedPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 290, 10));
 
@@ -241,22 +263,46 @@ public class RegistroAuto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegristrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegristrarActionPerformed
-        Persona persona = a.buscarPersonasRFC(rfc);
-        Automovil auto = this.extraerDatosFormulario();
-        Double costo = d.placaNuevo;
-        String placa = c.generarPlaca();
-        b.registrarVehiculoPersona(auto, persona);
-        c.insertarTramitePlacasNuevo(persona, auto, placa, costo);
-        JOptionPane.showMessageDialog(null, "Se ha registrado el vehiculo:\n"
-                + "Placa: " + placa + "\n"
-                + "No. Serie: " + auto.getSerie() + "\n"
-                + "Marca: " + auto.getMarca() + "\n"
-                + "Linea: " + auto.getLinea() + "\n"
-                + "Color: " + auto.getColor() + "\n"
-                + "Modelo: " + auto.getModelo() + "", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        Aplicacion v = new Aplicacion();
-        v.setVisible(true);
-        dispose();
+        if (txtSerie.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado un número de serie al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaNumSerie(txtSerie.getText())) {
+            JOptionPane.showMessageDialog(null, "El número de serie ingresado no es valido\n"
+                    + "Ejemplo: [ABC-123]", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (txtMarca.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado una marca al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaCaracteristicasVehiculo(txtMarca.getText())) {
+            JOptionPane.showMessageDialog(null, "La marca ingresada al vehículo no es valida\n"
+                    + "Recordatorio: Debe contener solo letras y de longitud máxima de 100 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (txtLinea.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado una línea al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaCaracteristicasVehiculo(txtLinea.getText())) {
+            JOptionPane.showMessageDialog(null, "La línea ingresada al vehículo no es valida\n"
+                    + "Recordatorio: Debe contener solo letras y de longitud máxima de 100 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (txtColor.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado un color al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaCaracteristicasVehiculo(txtColor.getText())) {
+            JOptionPane.showMessageDialog(null, "El color ingresado al vehículo no es valida\n"
+                    + "Recordatorio: Debe contener solo letras y de longitud máxima de 100 carácteres", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (txtModelo.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "No ha ingresado un modelo al vehículo", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!validadores.validaModelo(txtModelo.getText())) {
+            JOptionPane.showMessageDialog(null, "El modelo ingresado al vehículo no es valido\n"
+                    + "Recordatorio: Debe contener solo números y de longitud máxima de 10 carácteres (19XX, 20XX)", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Persona persona = a.buscarPersonasRFC(rfc);
+            Automovil auto = this.extraerDatosFormulario();
+            Double costo = d.placaNuevo;
+            String placa = c.generarPlaca();
+            b.registrarVehiculoPersona(auto, persona);
+            c.insertarTramitePlacasNuevo(persona, auto, placa, costo);
+            JOptionPane.showMessageDialog(null, "Se ha registrado el vehiculo:\n"
+                    + "Placa: " + placa + "\n"
+                    + "No. Serie: " + auto.getSerie() + "\n"
+                    + "Marca: " + auto.getMarca() + "\n"
+                    + "Linea: " + auto.getLinea() + "\n"
+                    + "Color: " + auto.getColor() + "\n"
+                    + "Modelo: " + auto.getModelo() + "", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_botonRegristrarActionPerformed
 
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
@@ -280,6 +326,42 @@ public class RegistroAuto extends javax.swing.JFrame {
     private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSerieActionPerformed
+
+    private void txtMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetter(car) && txtMarca.getText().length() >= 100) {
+            evt.consume();
+        } else if (txtMarca.getText().length() >= 100 && !Character.isLetterOrDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMarcaKeyTyped
+
+    private void txtLineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLineaKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetter(car) && txtLinea.getText().length() >= 100) {
+            evt.consume();
+        } else if (txtLinea.getText().length() >= 100 && !Character.isLetterOrDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLineaKeyTyped
+
+    private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
+        char car = evt.getKeyChar();
+        if (!Character.isLetter(car) && txtColor.getText().length() >= 100) {
+            evt.consume();
+        } else if (txtColor.getText().length() >= 100 && !Character.isLetterOrDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtColorKeyTyped
+
+    private void txtModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloKeyTyped
+        char car = evt.getKeyChar();
+        if (Character.isDigit(car) && txtModelo.getText().length() >= 10) {
+            evt.consume();
+        } else if (txtModelo.getText().length() >= 10 && Character.isDigit(car)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtModeloKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
